@@ -1,0 +1,65 @@
+@import '~@nebular/theme/styles/theming';
+@import '~@nebular/theme/styles/themes/default';
+
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  width: calc(#{nb-theme(sidebar-width)} - #{nb-theme(header-padding)});
+}
+
+nb-action {
+  height: auto;
+  display: flex;
+  align-content: center;
+}
+
+nb-user {
+  cursor: pointer;
+}
+
+::ng-deep nb-search button {
+  padding: 0!important;
+}
+
+.header-container {
+  display: flex;
+  align-items: center;
+  flex-grow: 8 !important;
+
+.sidebar-toggle {
+  @include nb-ltr(padding-right, 1.25rem);
+  @include nb-rtl(padding-left, 1.25rem);
+  text-decoration: none;
+  color: nb-theme(text-hint-color);
+  nb-icon {
+    font-size: 1.75rem;
+  }
+}
+
+.logo {
+padding: 0 1.25rem;
+font-size: 1.75rem;
+@include nb-ltr(border-left, 1px solid nb-theme(divider-color));
+@include nb-rtl(border-right, 1px solid nb-theme(divider-color));
+white-space: nowrap;
+ text-decoration: none;
+}
+}
+
+
+$nb-themes: nb-register-theme((
+
+  // add your variables here like:
+ 
+  // color-primary-100: #f2f6ff,
+  // color-primary-200: #d9e4ff,
+  // color-primary-300: #a6c1ff,
+  // color-primary-400: #598bff,
+  // color-primary-500: #3366ff,
+  // color-primary-600: #274bdb,
+  // color-primary-700: #1a34b8,
+  // color-primary-800: #102694,
+  // color-primary-900: #091c7a,
+
+), default, default);
