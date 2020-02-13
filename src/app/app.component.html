@@ -1,10 +1,13 @@
 <nb-layout>
 
   <nb-layout-header fixed>
-    <app-header></app-header>
+    <app-header fixed class="test"></app-header>
   </nb-layout-header>
 
-  <nb-sidebar>Sidebar Content</nb-sidebar>
+  <nb-sidebar>
+    <nb-menu [items]="items">
+    </nb-menu>
+  </nb-sidebar>
 
   <nb-layout-column>
 

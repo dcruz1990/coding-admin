@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
 
+import { NbMenuItem } from '@nebular/theme';
+
+import { expand } from 'rxjs/operators';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -7,4 +11,63 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'coding-admin';
+
+  items: NbMenuItem[] = [
+    {
+      title: 'Home',
+      link: '/',
+      icon: 'home',
+
+    },
+    {
+      title: 'Posts',
+      icon: 'book',
+      expanded: false,
+      children: [
+        {
+          title: 'Post list',
+          url: 'post/list',
+          icon: 'list'
+        },
+
+        {
+          title: 'Write new Post',
+          url: 'post/new',
+          icon: 'plus-outline'
+        }
+      ]
+    },
+    {
+      title: 'Category',
+      icon: 'layers',
+      expanded: false,
+      children: [
+        {
+          title: 'Category list',
+          icon: 'list',
+          url: 'category'
+        },
+        {
+          title: 'Add new Category',
+          icon: 'plus',
+          url: 'category/new'
+        }
+      ]
+    },
+    {
+      title: 'Products',
+      icon: 'cube',
+      expanded: false,
+      children: [
+        {
+          title: 'Product list',
+          icon: 'list',
+        },
+        {
+          title: 'I have new product',
+          icon: 'plus'
+        }
+      ]
+    }
+  ];
 }

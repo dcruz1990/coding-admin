@@ -4,7 +4,10 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NbSidebarService, NbSidebarModule, NbThemeModule, NbLayoutModule, NbButtonModule } from '@nebular/theme';
+import {
+  NbSidebarService, NbSidebarModule, NbThemeModule,
+  NbLayoutModule, NbButtonModule, NbMenuService, NbMenuModule
+} from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 
 import { HeaderModule } from './header/header.module';
@@ -22,9 +25,10 @@ import { HeaderModule } from './header/header.module';
     NbEvaIconsModule,
     HeaderModule,
     NbSidebarModule,
-    NbButtonModule
+    NbButtonModule,
+    NbMenuModule.forRoot()
   ],
-  providers: [NbSidebarService],
+  providers: [NbSidebarService, NbMenuService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
