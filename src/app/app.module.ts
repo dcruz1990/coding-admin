@@ -12,6 +12,8 @@ import { NbEvaIconsModule } from '@nebular/eva-icons';
 
 import { HeaderModule } from './header/header.module';
 
+
+
 @NgModule({
   declarations: [
     AppComponent
@@ -24,9 +26,12 @@ import { HeaderModule } from './header/header.module';
     NbLayoutModule,
     NbEvaIconsModule,
     HeaderModule,
+
     NbSidebarModule,
     NbButtonModule,
-    NbMenuModule.forRoot()
+    NbMenuModule.forRoot(),
+
+
   ],
   providers: [NbSidebarService, NbMenuService],
   bootstrap: [AppComponent]

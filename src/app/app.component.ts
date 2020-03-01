@@ -26,13 +26,13 @@ export class AppComponent {
       children: [
         {
           title: 'Post list',
-          url: 'post/list',
+          url: 'posts/list',
           icon: 'list'
         },
 
         {
           title: 'Write new Post',
-          url: 'post/new',
+          url: 'posts/new',
           icon: 'plus-outline'
         }
       ]

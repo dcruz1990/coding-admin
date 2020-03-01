@@ -17,7 +17,7 @@ export class HeaderComponent implements OnInit {
   userPictureOnly: boolean = false;
   user: any;
 
-  userMenu = [{ title: 'Profile' }, { title: 'Log out' }];
+  userMenu = [{ title: 'Profile', icon: 'person' }, { title: 'Log out', icon: 'power-outline' }];
 
 
   constructor(private sidebarService: NbSidebarService,
