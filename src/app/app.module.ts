@@ -27,7 +27,7 @@ import { NbPasswordAuthStrategy, NbAuthModule } from '@nebular/auth';
         NbPasswordAuthStrategy.setup({
           name: 'email',
 
-          baseEndpoint: 'http://localhost:5000',
+          baseEndpoint: 'http://localhost:5050',
           login: {
             endpoint: '/api/auth/login',
           },
