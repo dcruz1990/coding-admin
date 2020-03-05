@@ -14,7 +14,8 @@ import { HeaderModule } from './header/header.module';
 
 import { HttpClientModule } from '@angular/common/http';
 
-import { NbPasswordAuthStrategy, NbAuthModule } from '@nebular/auth';
+import { NbPasswordAuthStrategy, NbAuthModule, NbAuthJWTToken, } from '@nebular/auth';
+
 
 
 @NgModule({
@@ -26,13 +27,13 @@ import { NbPasswordAuthStrategy, NbAuthModule } from '@nebular/auth';
       strategies: [
         NbPasswordAuthStrategy.setup({
           name: 'email',
-
           baseEndpoint: 'http://localhost:5050',
           login: {
             endpoint: '/api/auth/login',
           },
-          register: {
-            endpoint: '/api/auth/register',
+          token: {
+            class: NbAuthJWTToken,
+            key: 'token',
           },
         }),
 
