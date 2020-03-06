@@ -3,8 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { NbMediaBreakpointsService, NbMenuService, NbSidebarService, NbThemeService } from '@nebular/theme';
 
 
-import { NbAuthJWTToken, NbAuthService, NbTokenService } from '@nebular/auth';
-
 import { map, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
@@ -25,11 +23,10 @@ export class HeaderComponent implements OnInit {
   userMenu = [{ title: 'Profile', icon: 'person', }, { title: 'Log out', icon: 'power-outline' }];
 
 
-  constructor(private sidebarService: NbSidebarService, private authService: NbAuthService,
-    private menuService: NbMenuService,
+  constructor(private sidebarService: NbSidebarService, private menuService: NbMenuService,
     private themeService: NbThemeService,
     private breakpointService: NbMediaBreakpointsService,
-    private tservice: NbTokenService
+
   ) {
   }
 
@@ -64,20 +61,11 @@ export class HeaderComponent implements OnInit {
 
   }
 
-  logout() {
-    this.authService.logout('email').subscribe(() => {
-      this.tservice.clear();
-    });
-  }
-
-  loggedIn() {
-    return this.authService.isAuthenticated().subscribe();
-  }
 
   onItemSelection(title) {
     if (title === 'Log out') {
       // Do something on Log out
-      this.logout();
+
     } else if (title === 'Profile') {
       // Do something on Profile
       console.log('Profile Clicked ');

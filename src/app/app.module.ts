@@ -6,40 +6,25 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   NbSidebarService, NbSidebarModule, NbThemeModule,
-  NbLayoutModule, NbButtonModule, NbMenuService, NbMenuModule
+  NbLayoutModule, NbButtonModule, NbCheckboxModule, NbMenuService, NbMenuModule, NbCardModule, NbInputModule, NbAlertModule, NbIconModule,
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 
 import { HeaderModule } from './header/header.module';
 
 import { HttpClientModule } from '@angular/common/http';
+import { LoginComponent } from './login/login.component';
 
-import { NbPasswordAuthStrategy, NbAuthModule, NbAuthJWTToken, } from '@nebular/auth';
+
 
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoginComponent
   ],
   imports: [
-    NbAuthModule.forRoot({
-      strategies: [
-        NbPasswordAuthStrategy.setup({
-          name: 'email',
-          baseEndpoint: 'http://localhost:5050',
-          login: {
-            endpoint: '/api/auth/login',
-          },
-          token: {
-            class: NbAuthJWTToken,
-            key: 'token',
-          },
-        }),
-
-      ],
-      forms: {},
-    }),
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -47,12 +32,15 @@ import { NbPasswordAuthStrategy, NbAuthModule, NbAuthJWTToken, } from '@nebular/
     NbLayoutModule,
     NbEvaIconsModule,
     HeaderModule,
-
+    NbInputModule,
     NbSidebarModule,
     NbButtonModule,
     NbMenuModule.forRoot(),
     HttpClientModule,
-
+    NbCardModule,
+    NbIconModule,
+    NbAlertModule,
+    NbCheckboxModule
 
   ],
   providers: [NbSidebarService, NbMenuService],
