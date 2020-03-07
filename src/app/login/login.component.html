@@ -1,13 +1,19 @@
 <nb-layout-column>
-    <nb-card>
+    <nb-card center>
         <nb-card-header>
             <h1 id="title" class="title">Login</h1>
             <p class="sub-title">Hello! Log in with your email.</p>
         </nb-card-header>
         <nb-card-body>
-            <input type="text" nbInput fieldSize="large" placeholder="Email">
-            <br />
-            <input type="password" nbInput fieldSize="large" placeholder="Password">
+            <form>
+                <div>
+                    <input name="email" type="text" nbInput fullWidth status="primary" placeholder="Email"
+                        [(ngModel)]="model.email" required>
+                </div>
+                <div><input name="password" type="password" nbInput fullWidth status="primary" placeholder="Password"
+                        [(ngModel)]="model.password" required></div>
+                <div><button (click)="login()" nbButton>Login</button></div>
+            </form>
         </nb-card-body>
     </nb-card>
 </nb-layout-column>

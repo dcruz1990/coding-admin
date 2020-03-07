@@ -16,7 +16,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class AuthService {
 
-  baseUrl = 'http://localhost:5050/auth';
+  baseUrl = 'http://localhost:5050/api/Auth/';
   jwtHelper = new JwtHelperService();
   decodedToken: any;
   token: string;
@@ -58,10 +58,6 @@ export class AuthService {
           }
         })
       );
-  }
-
-  Register(user: User) {
-    return this.http.post(this.baseUrl + 'register', user);
   }
 
   LoggedIn() {
