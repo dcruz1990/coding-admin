@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { NbAuthJWTToken, NbAuthService } from '@nebular/auth';
 import { NbMediaBreakpointsService, NbMenuService, NbSidebarService, NbThemeService } from '@nebular/theme';
 
 
@@ -28,27 +28,29 @@ export class HeaderComponent implements OnInit {
   constructor(private sidebarService: NbSidebarService, private menuService: NbMenuService,
     private themeService: NbThemeService,
     private breakpointService: NbMediaBreakpointsService,
-    private auth: AuthService
+    private auth: AuthService, private authService: NbAuthService
 
   ) {
+
+    this.authService.onTokenChange()
+      .subscribe((token: NbAuthJWTToken) => {
+
+        if (token.isValid()) {
+          this.user = token.getPayload(); // here we receive a payload from the token and assigns it to our `user` variable 
+        }
+
+      });
   }
 
   ngOnInit() {
+
     let logedin;
 
     logedin = this.auth.LoggedIn();
 
-    // this.userService.getUsers()
-    //   .pipe(takeUntil(this.destroy$))
-    //   .subscribe((users: any) => this.user = users.nick);
-
     this.menuService.onItemClick().subscribe((event) => {
       this.onItemSelection(event.item.title);
     });
-
-
-
-
 
     const { xl } = this.breakpointService.getBreakpointsMap();
 
@@ -58,19 +60,7 @@ export class HeaderComponent implements OnInit {
         takeUntil(this.destroy$),
       )
       .subscribe((isLessThanXl: boolean) => this.userPictureOnly = isLessThanXl);
-
-    // this.authService.onTokenChange()
-    //   .subscribe((token: NbAuthJWTToken) => {
-    //     if (token.isValid()) {
-    //       this.user = token.getPayload();
-    //       console.log(token);
-    //     }
-    //   });
-
-
-
   }
-
 
   onItemSelection(title) {
     if (title === 'Log out') {

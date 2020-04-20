@@ -9,6 +9,7 @@ import {
   NbSidebarService, NbSidebarModule, NbThemeModule,
   NbLayoutModule, NbButtonModule, NbCheckboxModule, NbMenuService, NbMenuModule, NbCardModule, NbInputModule, NbAlertModule, NbIconModule,
 } from '@nebular/theme';
+
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 
 import { HeaderModule } from './header/header.module';
@@ -16,9 +17,7 @@ import { HeaderModule } from './header/header.module';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
 
-
-
-
+import { NbPasswordAuthStrategy, NbAuthModule, NbAuthJWTToken } from '@nebular/auth';
 
 @NgModule({
   declarations: [
@@ -42,7 +41,30 @@ import { LoginComponent } from './login/login.component';
     NbIconModule,
     NbAlertModule,
     NbCheckboxModule,
-    FormsModule
+    FormsModule,
+    NbAuthModule.forRoot({
+      strategies: [
+        NbPasswordAuthStrategy.setup({
+          name: 'email',
+
+          token: {
+            class: NbAuthJWTToken,
+            key: 'token',
+          },
+
+          baseEndpoint: 'http://localhost:5050',
+          login: {
+            endpoint: '/api/auth/login',
+            method: 'post',
+          },
+          register: {
+            endpoint: '/api/auth/register',
+            method: 'post',
+          },
+        }),
+      ],
+      forms: {},
+    }),
 
   ],
   providers: [NbSidebarService, NbMenuService],

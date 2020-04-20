@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './header.component';
 
-import { NbActionsModule, NbUserModule, NbIconModule, NbSearchModule, NbMenuModule, NbContextMenuModule } from '@nebular/theme';
+import { NbLayoutModule, NbActionsModule, NbUserModule, NbIconModule, NbSearchModule, NbMenuModule, NbContextMenuModule } from '@nebular/theme';
 
 @NgModule({
   imports: [
@@ -12,7 +12,9 @@ import { NbActionsModule, NbUserModule, NbIconModule, NbSearchModule, NbMenuModu
     NbIconModule,
     NbSearchModule,
     NbMenuModule,
-    NbContextMenuModule
+    NbContextMenuModule,
+    NbLayoutModule
+
   ],
   exports: [HeaderComponent],
   declarations: [HeaderComponent]
