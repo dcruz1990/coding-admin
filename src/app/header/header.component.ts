@@ -3,8 +3,10 @@ import { Component, OnInit } from '@angular/core';
 import { NbMediaBreakpointsService, NbMenuService, NbSidebarService, NbThemeService } from '@nebular/theme';
 
 
+
 import { map, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { AuthService } from '../services/Auth.service';
 
 @Component({
   selector: 'app-header',
@@ -26,11 +28,15 @@ export class HeaderComponent implements OnInit {
   constructor(private sidebarService: NbSidebarService, private menuService: NbMenuService,
     private themeService: NbThemeService,
     private breakpointService: NbMediaBreakpointsService,
+    private auth: AuthService
 
   ) {
   }
 
   ngOnInit() {
+    let logedin;
+
+    logedin = this.auth.LoggedIn();
 
     // this.userService.getUsers()
     //   .pipe(takeUntil(this.destroy$))
@@ -39,6 +45,10 @@ export class HeaderComponent implements OnInit {
     this.menuService.onItemClick().subscribe((event) => {
       this.onItemSelection(event.item.title);
     });
+
+
+
+
 
     const { xl } = this.breakpointService.getBreakpointsMap();
 
