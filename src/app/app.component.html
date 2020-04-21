@@ -4,16 +4,16 @@
     <app-header fixed class="test"></app-header>
   </nb-layout-header>
 
-  <nb-sidebar *ngIf="isLoggedIn">
+  <nb-sidebar>
     <nb-menu [items]="items">
     </nb-menu>
   </nb-sidebar>
 
+
   <nb-layout-column>
-
     <router-outlet></router-outlet>
-
   </nb-layout-column>
+
 
   <nb-layout-footer fixed>
 

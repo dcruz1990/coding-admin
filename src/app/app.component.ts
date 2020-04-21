@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 
-import { UserService } from './services/user.service'
+import { NbAuthService } from '@nebular/auth';
 import { NbMenuItem } from '@nebular/theme';
 
 import { expand } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-root',
@@ -13,18 +14,13 @@ import { expand } from 'rxjs/operators';
 export class AppComponent {
   title = 'coding-admin';
 
-  constructor(private userService: UserService) {
-
-  }
-
-  isLoggedIn = this.userService.isAuthenticated
+  isLoggedIn = false;
 
   items: NbMenuItem[] = [
     {
       title: 'Home',
       link: '/',
       icon: 'home',
-
     },
     {
       title: 'Posts',

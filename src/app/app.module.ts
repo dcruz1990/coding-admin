@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
+import { AuthGuardService } from './auth-guard.service';
+import { UserService } from './services/user.service'
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
@@ -30,32 +32,32 @@ import { ProfileComponent } from './profile/profile.component';
   imports: [
     BrowserModule,
     NbLayoutModule,
-    NbAuthModule.forRoot({
-      strategies: [
-        NbPasswordAuthStrategy.setup({
-          name: 'email',
-          token: {
-            class: NbAuthJWTToken,
-            key: 'token',
-          },
-          baseEndpoint: 'http://localhost:5050',
-          login: {
-            endpoint: '/api/auth/login',
-            method: 'post',
-            redirect: {
-              success: '/profile',
-              failure: null, // stay on the same page
-            }
-          },
-          register: {
-            endpoint: '/api/auth/register',
-            method: 'post',
-          },
+    // NbAuthModule.forRoot({
+    //   strategies: [
+    //     NbPasswordAuthStrategy.setup({
+    //       name: 'email',
+    //       token: {
+    //         class: NbAuthJWTToken,
+    //         key: 'token',
+    //       },
+    //       baseEndpoint: 'http://localhost:5050',
+    //       login: {
+    //         endpoint: '/api/auth/login',
+    //         method: 'post',
+    //         redirect: {
+    //           success: '/profile',
+    //           failure: null, // stay on the same page
+    //         }
+    //       },
+    //       register: {
+    //         endpoint: '/api/auth/register',
+    //         method: 'post',
+    //       },
 
-        }),
-      ],
-      forms: {},
-    }),
+    //     }),
+    //   ],
+    //   forms: {},
+    // }),
     AppRoutingModule,
     NbEvaIconsModule,
     HeaderModule,
@@ -72,7 +74,7 @@ import { ProfileComponent } from './profile/profile.component';
     BrowserAnimationsModule,
     NbThemeModule.forRoot({ name: 'default' }),
   ],
-  providers: [NbSidebarService, NbMenuService],
+  providers: [NbSidebarService, NbMenuService, AuthGuardService, UserService],
   bootstrap: [AppComponent]
 })
 

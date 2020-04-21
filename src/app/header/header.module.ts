@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './header.component';
 
 // tslint:disable-next-line: max-line-length
-import { NbLayoutModule, NbActionsModule, NbUserModule, NbIconModule, NbSearchModule, NbMenuModule, NbContextMenuModule } from '@nebular/theme';
+import { NbLayoutModule, NbActionsModule, NbUserModule, NbIconModule, NbSearchModule, NbMenuModule, NbContextMenuModule, NbContextMenuComponent } from '@nebular/theme';
 
 @NgModule({
   imports: [

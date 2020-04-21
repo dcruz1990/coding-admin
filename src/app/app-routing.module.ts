@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { LoginComponent } from './login/login.component';
+import { AuthGuardService } from './auth-guard.service';
+import { LoginComponent } from './login/login.component'
 
 import {
   NbAuthComponent,
@@ -13,34 +14,32 @@ import { ProfileComponent } from './profile/profile.component';
 
 
 const routes: Routes = [
-
-  // { path: '', component: LoginComponent },
-
-
   {
     path: '',
-    component: NbAuthComponent,
-    children: [
-      {
-        path: '',
-        component: NbLoginComponent,
-      },
-      {
-        path: 'login',
-        component: NbLoginComponent,
-      },
-
-      {
-        path: 'logout',
-        component: NbLogoutComponent,
-      }
-
-    ]
+    component: LoginComponent,
+    pathMatch: 'full'
   },
+  // {
+  //   path: 'auth',
+  //   component: NbAuthComponent,
+  //   children: [
+  //     {
+  //       path: 'login',
+  //       component: NbLoginComponent,
+  //     },
+  //     {
+  //       path: 'logout',
+  //       component: NbLogoutComponent,
+  //     }
+
+  //   ]
+  // },
   {
     path: 'profile',
-    component: ProfileComponent
-  }
+    component: ProfileComponent,
+    canActivate: [AuthGuardService]
+  },
+  { path: '**', redirectTo: 'auth/login' },
 
 ];
 
