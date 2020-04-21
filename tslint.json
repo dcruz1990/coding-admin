@@ -3,6 +3,7 @@
   "rules": {
     "array-type": false,
     "arrow-parens": false,
+    "ban-types": true,
     "deprecation": {
       "severity": "warn"
     },
@@ -32,6 +33,7 @@
       140
     ],
     "member-access": false,
+    "semicolon": false,
     "member-ordering": [
       true,
       {
@@ -84,7 +86,8 @@
     "template-banana-in-box": true,
     "template-no-negated-async": true,
     "use-lifecycle-interface": true,
-    "use-pipe-transform-interface": true
+    "use-pipe-transform-interface": true,
+    "align": false
   },
   "rulesDirectory": [
     "codelyzer"

@@ -7,6 +7,7 @@ import { NbMediaBreakpointsService, NbMenuService, NbSidebarService, NbThemeServ
 import { map, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { AuthService } from '../services/Auth.service';
+import { User } from '../models/User';
 
 @Component({
   selector: 'app-header',
@@ -19,11 +20,11 @@ export class HeaderComponent implements OnInit {
 
   userPictureOnly = false;
 
-  user: any;
-  test: any;
+  logedIn = false;
 
-  userMenu = [{ title: 'Profile', icon: 'person', }, { title: 'Log out', icon: 'power-outline' }];
+  user: User;
 
+  userMenu = [{ title: 'Profile', icon: 'person', link: 'pepe' }, { title: 'Log out', icon: 'power-outline' }];
 
   constructor(private sidebarService: NbSidebarService, private menuService: NbMenuService,
     private themeService: NbThemeService,
@@ -36,17 +37,25 @@ export class HeaderComponent implements OnInit {
       .subscribe((token: NbAuthJWTToken) => {
 
         if (token.isValid()) {
-          this.user = token.getPayload(); // here we receive a payload from the token and assigns it to our `user` variable 
+          this.user = token.getPayload(); // here we receive a payload from the token and assigns it to our `user` variable
+
         }
 
       });
+
+    this.authService.onAuthenticationChange().subscribe((result) => {
+      if (result) {
+        this.logedIn = true
+      } else {
+        this.logedIn = false;
+      }
+    })
+
+
+
   }
 
   ngOnInit() {
-
-    let logedin;
-
-    logedin = this.auth.LoggedIn();
 
     this.menuService.onItemClick().subscribe((event) => {
       this.onItemSelection(event.item.title);
@@ -73,14 +82,18 @@ export class HeaderComponent implements OnInit {
   }
 
   toggleSidebar(): boolean {
-    this.sidebarService.toggle(true, 'menu-sidebar');
+    this.sidebarService.toggle(true, 'menu-sidebar')
     // this.layoutService.changeLayoutSize();
     return false;
   }
 
   navigateHome() {
-    this.menuService.navigateHome();
+    this.menuService.navigateHome()
     return false;
+  }
+
+  logout() {
+    this.authService.logout('email')
   }
 
 }
