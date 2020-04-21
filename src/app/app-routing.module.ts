@@ -9,6 +9,7 @@ import {
   NbLogoutComponent,
 
 } from '@nebular/auth';
+import { ProfileComponent } from './profile/profile.component';
 
 
 const routes: Routes = [
@@ -32,10 +33,14 @@ const routes: Routes = [
       {
         path: 'logout',
         component: NbLogoutComponent,
-      },
+      }
 
-    ],
+    ]
   },
+  {
+    path: 'profile',
+    component: ProfileComponent
+  }
 
 ];
 
