@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 
 
 
-import { AuthService } from '../services/Auth.service';
+
 import { User } from '../models/User';
 import { Subject } from 'rxjs';
 @Component({
@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
   isAuthenticated = false;
   currentUser: User;
 
-  constructor(private auth: AuthService) {
+  constructor() {
 
   }
 
@@ -38,19 +38,10 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this.auth.Login(this.model).subscribe(
-      next => {
-        this.isAuthenticated = true;
-
-      },
-      error => {
-        console.log('error');
-      },
-    );
   }
 
   LoggedIn() {
-    return this.auth.LoggedIn();
+
   }
 
   announceUserLoged(u: User) {

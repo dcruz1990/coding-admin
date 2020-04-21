@@ -6,7 +6,7 @@ import { NbMediaBreakpointsService, NbMenuService, NbSidebarService, NbThemeServ
 
 import { map, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
-import { AuthService } from '../services/Auth.service';
+import { UserService } from '../services/user.service'
 import { User } from '../models/User';
 
 @Component({
@@ -22,14 +22,16 @@ export class HeaderComponent implements OnInit {
 
   logedIn = false;
 
-  user: User;
+  user: any = {}
+  userMainPhoto: any = {}
 
   userMenu = [{ title: 'Profile', icon: 'person', link: 'pepe' }, { title: 'Log out', icon: 'power-outline' }];
 
   constructor(private sidebarService: NbSidebarService, private menuService: NbMenuService,
     private themeService: NbThemeService,
     private breakpointService: NbMediaBreakpointsService,
-    private auth: AuthService, private authService: NbAuthService
+    private authService: NbAuthService,
+    private userService: UserService
 
   ) {
 
@@ -38,24 +40,22 @@ export class HeaderComponent implements OnInit {
 
         if (token.isValid()) {
           this.user = token.getPayload(); // here we receive a payload from the token and assigns it to our `user` variable
-
+          console.log(this.user)
+          this.logedIn = true
         }
-
       });
-
-    this.authService.onAuthenticationChange().subscribe((result) => {
-      if (result) {
-        this.logedIn = true
-      } else {
-        this.logedIn = false;
-      }
-    })
-
-
 
   }
 
   ngOnInit() {
+
+    this.userService.getUserMainPhoto(this.user.nameid).subscribe(result => {
+      this.userMainPhoto = result.photos.filter(photo => photo.isMain === true)[0]
+      console.log(this.userMainPhoto.url)
+    }, err => {
+      console.log(err)
+    })
+
 
     this.menuService.onItemClick().subscribe((event) => {
       this.onItemSelection(event.item.title);

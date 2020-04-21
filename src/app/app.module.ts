@@ -19,6 +19,7 @@ import { LoginComponent } from './login/login.component';
 
 import { NbPasswordAuthStrategy, NbAuthModule, NbAuthJWTToken } from '@nebular/auth';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,7 +47,6 @@ import { NbPasswordAuthStrategy, NbAuthModule, NbAuthJWTToken } from '@nebular/a
       strategies: [
         NbPasswordAuthStrategy.setup({
           name: 'email',
-
           token: {
             class: NbAuthJWTToken,
             key: 'token',
@@ -56,11 +56,16 @@ import { NbPasswordAuthStrategy, NbAuthModule, NbAuthJWTToken } from '@nebular/a
           login: {
             endpoint: '/api/auth/login',
             method: 'post',
+            redirect: {
+              success: '/dashboard/',
+              failure: null, // stay on the same page
+            }
           },
           register: {
             endpoint: '/api/auth/register',
             method: 'post',
           },
+
         }),
       ],
       forms: {},

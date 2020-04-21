@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 
+import { UserService } from './services/user.service'
 import { NbMenuItem } from '@nebular/theme';
 
 import { expand } from 'rxjs/operators';
@@ -11,6 +12,12 @@ import { expand } from 'rxjs/operators';
 })
 export class AppComponent {
   title = 'coding-admin';
+
+  constructor(private userService: UserService) {
+
+  }
+
+  isLoggedIn = this.userService.isAuthenticated
 
   items: NbMenuItem[] = [
     {
