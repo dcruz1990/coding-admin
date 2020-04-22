@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { UserService } from '../services/user.service'
 import { AuthService } from '../services/auth.service'
-import { FormControl } from '@angular/forms';
+import { AlertService } from '../services/alert.service'
+
 
 
 
@@ -13,26 +14,37 @@ import { FormControl } from '@angular/forms';
 })
 export class ProfileComponent implements OnInit {
 
+  updateSpinner = false
+  profileSpinner = false;
   userid: number
   myuser: any
 
-  constructor(private user: UserService, private auth: AuthService) { }
+  constructor(private user: UserService, private auth: AuthService, private alert: AlertService) { }
 
   ngOnInit() {
+    this.profileSpinner = true
     this.userid = this.auth.getUserId()
 
     this.user.getUser(this.userid).subscribe((result) => {
       this.myuser = result
+      this.profileSpinner = false
     })
 
 
   }
 
-  updateProfile(form: any) {
-    console.log(form)
-    this.user.updateUser(this.userid, form).subscribe(result => {
-      console.log(result)
-    })
+  updateProfile(userdata: any) {
+    this.updateSpinner = true;
+    this.user.updateUser(this.userid, userdata).subscribe(
+      value => {
+        this.updateSpinner = false;
+        this.alert.showToast('bottom-left', 'success', 'Profile Update!', 'Profile updated succefuly')
+      },
+      error => {
+        this.updateSpinner = false;
+        this.alert.showToast('top-right', 'danger', error, 'There was an error!')
+      }
+    );
   }
 
 

@@ -21,7 +21,7 @@ import { NbEvaIconsModule } from '@nebular/eva-icons';
 
 import { HeaderModule } from './header/header.module';
 
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
 
 
@@ -83,7 +83,10 @@ import { ProfileComponent } from './profile/profile.component';
     BrowserAnimationsModule,
     NbThemeModule.forRoot({ name: 'default' }),
   ],
-  providers: [NbSidebarService, NbMenuService, AuthGuardService, AuthService, UserService, ErrorInterceptorService],
+  providers:
+    [
+      // { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptorService, multi: true },
+      NbSidebarService, NbMenuService, AuthGuardService, AuthService, UserService],
   bootstrap: [AppComponent]
 })
 

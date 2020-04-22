@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-md-12">
-    <nb-card>
+    <nb-card [nbSpinner]="profileSpinner" nbSpinnerStatus="primary">
       <nb-card-header>Edit {{ myuser?.username }} profile</nb-card-header>
       <nb-card-body>
         <form #editProfileForm="ngForm" *ngIf="myuser" (submit)="updateProfile(editProfileForm.value)">
@@ -81,7 +81,7 @@
           <div class="col-sm-6">
             <div class="form-group">
               <label for="inputWebsite" class="label">Twitter Profile</label>
-              <input name="twitterProfile" [(ngModel)]="myuser.twiterProfile" type="text" nbInput fullWidth
+              <input name="twiterProfile" [(ngModel)]="myuser.twiterProfile" type="text" nbInput fullWidth
                 id="inputWebsite" placeholder="Twitter Profile">
             </div>
           </div>
@@ -106,8 +106,11 @@
                 id="inputWebsite" placeholder="Codepen profile">
             </div>
           </div>
-
-          <button [disabled]="!editProfileForm.valid" type="submit" nbButton>Update Profile</button>
+          <div>
+            <button [nbSpinner]="updateSpinner" nbSpinnerStatus="info" nbSpinnerSize="small" type="submit"
+              nbButton>Update
+              Profile</button>
+          </div>
         </form>
       </nb-card-body>
 
