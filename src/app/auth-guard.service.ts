@@ -1,15 +1,14 @@
 import { Injectable } from '@angular/core';
-import { NbAuthService } from '@nebular/auth';
+import { AuthService } from './services/auth.service'
 import { CanActivate } from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
 export class AuthGuardService implements CanActivate {
 
-  constructor(private authServices: NbAuthService) { }
+  constructor(private auth: AuthService) { }
 
   canActivate() {
-    // return this.authServices.isAuthenticated()
-    return true
+    return this.auth.loggedIn()
   }
 }

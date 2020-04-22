@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
-import { NbAuthService } from '@nebular/auth';
+import { AuthService } from './services/auth.service'
 import { NbMenuItem } from '@nebular/theme';
 
 import { expand } from 'rxjs/operators';
+
 
 
 @Component({
@@ -12,9 +13,11 @@ import { expand } from 'rxjs/operators';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+
+  constructor(private auth: AuthService) { }
   title = 'coding-admin';
 
-  isLoggedIn = false;
+  isLoggedIn: boolean;
 
   items: NbMenuItem[] = [
     {
@@ -73,4 +76,8 @@ export class AppComponent {
       ]
     }
   ];
+
+
+
+
 }

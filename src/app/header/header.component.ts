@@ -6,6 +6,9 @@ import { NbMediaBreakpointsService, NbMenuService, NbSidebarService, NbThemeServ
 import { map, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { UserService } from '../services/user.service'
+import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-header',
@@ -18,7 +21,7 @@ export class HeaderComponent implements OnInit {
 
   userPictureOnly = false;
 
-  logedIn = false;
+  isLoggedIn = false
 
   user: any = {}
   userMainPhoto: any = {}
@@ -29,21 +32,19 @@ export class HeaderComponent implements OnInit {
     private themeService: NbThemeService,
     private breakpointService: NbMediaBreakpointsService,
     private userService: UserService,
+    private auth: AuthService,
+    private router: Router
 
   ) {
 
-    // this.authService.onTokenChange()
-    //   .subscribe((token: NbAuthJWTToken) => {
-
-    //     if (token.isValid()) {
-    //       this.user = token.getPayload(); // here we receive a payload from the token and assigns it to our `user` variable
-    //     }
-    //   });
-
   }
+
 
   ngOnInit() {
 
+    this.auth.currentLoginStatus.subscribe(status => this.isLoggedIn = status)
+
+    this.isLoggedIn = this.auth.loggedIn()
 
     this.menuService.onItemClick().subscribe((event) => {
       this.onItemSelection(event.item.title);
@@ -61,7 +62,7 @@ export class HeaderComponent implements OnInit {
 
   onItemSelection(title) {
     if (title === 'Log out') {
-      // Do something on Log out
+      this.logout()
 
     } else if (title === 'Profile') {
       // Do something on Profile
@@ -80,8 +81,11 @@ export class HeaderComponent implements OnInit {
     return false;
   }
 
-  // logout() {
-  //   this.authService.logout('email')
-  // }
+
+  logout() {
+    this.auth.logout()
+    this.router.navigate(['/'])
+  }
 
 }
+

@@ -19,21 +19,6 @@ const routes: Routes = [
     component: LoginComponent,
     pathMatch: 'full'
   },
-  // {
-  //   path: 'auth',
-  //   component: NbAuthComponent,
-  //   children: [
-  //     {
-  //       path: 'login',
-  //       component: NbLoginComponent,
-  //     },
-  //     {
-  //       path: 'logout',
-  //       component: NbLogoutComponent,
-  //     }
-
-  //   ]
-  // },
   {
     path: 'profile',
     component: ProfileComponent,

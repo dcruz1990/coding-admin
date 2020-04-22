@@ -1,5 +1,6 @@
 import { Photo } from './Photo';
 import { Post } from './Post';
+import { Product } from './Product';
 
 export interface User {
     id: number;
@@ -7,8 +8,17 @@ export interface User {
     fullname: string;
     phone: number;
     email: string;
-    resume: string;
+    shortresume: string;
     fullresume: string;
     photos?: Photo[];
     posts?: Post[];
+    products?: Product[],
+    location: string,
+    githubUrl: string,
+    twiterProfile: string,
+    facebookProfile: string,
+    linkedInProfile: string,
+    stackOverflowProfile: string,
+    redditProfile: string
+    codepenProfile: string
 }

@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthGuardService } from './auth-guard.service';
 import { UserService } from './services/user.service'
+import { AuthService } from './services/auth.service'
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
@@ -19,7 +20,7 @@ import { HeaderModule } from './header/header.module';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
 
-import { NbPasswordAuthStrategy, NbAuthModule, NbAuthJWTToken } from '@nebular/auth';
+
 import { ProfileComponent } from './profile/profile.component';
 
 
@@ -74,7 +75,7 @@ import { ProfileComponent } from './profile/profile.component';
     BrowserAnimationsModule,
     NbThemeModule.forRoot({ name: 'default' }),
   ],
-  providers: [NbSidebarService, NbMenuService, AuthGuardService, UserService],
+  providers: [NbSidebarService, NbMenuService, AuthGuardService, AuthService, UserService],
   bootstrap: [AppComponent]
 })
 

@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Injectable } from '@angular/core';
 
 import { AuthService } from '../services/auth.service'
+import { Router } from '@angular/router';
 
 
 
@@ -16,18 +17,14 @@ import { Subject } from 'rxjs';
 export class LoginComponent implements OnInit {
 
   // Observable string sources
-  private user = new Subject<User>();
-
-  userLoggedin$ = this.user.asObservable();
-
   userdata: any = {
     username: '',
     password: ''
   };
-  isAuthenticated = false;
+
   currentUser: User;
 
-  constructor(private auth: AuthService) {
+  constructor(private auth: AuthService, private router: Router) {
 
   }
 
@@ -40,18 +37,17 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this.auth.Login(this.userdata).subscribe((result) => {
-      console.log(result)
-    })
-  }
+    this.auth.login(this.userdata).subscribe(
+      next => {
 
-  LoggedIn() {
-
-  }
-
-  announceUserLoged(u: User) {
-    console.log('Usuario anunciado', u);
-    this.user.next(u);
+      },
+      error => {
+        console.log(error)
+      },
+      () => {
+        this.router.navigate(['profile']);
+      }
+    );
   }
 
 }
