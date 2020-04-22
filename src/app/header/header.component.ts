@@ -9,6 +9,7 @@ import { UserService } from '../services/user.service'
 import { AuthService } from '../services/auth.service';
 import { AlertService } from '../services/alert.service'
 import { Router } from '@angular/router';
+import { User } from '../models/User';
 
 
 @Component({
@@ -22,10 +23,13 @@ export class HeaderComponent implements OnInit {
 
   userPictureOnly = false;
 
+  userPhotos: any
+
+  avatarUrl: any
+
   isLoggedIn = false
 
-  user: any = {}
-  userMainPhoto: any = {}
+  currentUser: any
 
   userMenu = [{ title: 'Profile', icon: 'person' }, { title: 'Log out', icon: 'power-outline' }];
 
@@ -45,6 +49,12 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
 
     this.auth.currentLoginStatus.subscribe(status => this.isLoggedIn = status)
+
+    this.currentUser = JSON.parse(localStorage.getItem('user'))
+
+    this.userPhotos = this.currentUser.photos
+
+    this.avatarUrl = this.userPhotos.filter(photo => photo.isMain === true)[0].url
 
     this.isLoggedIn = this.auth.loggedIn()
 
