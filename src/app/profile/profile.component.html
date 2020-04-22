@@ -3,13 +3,13 @@
     <nb-card>
       <nb-card-header>Edit {{ myuser?.username }} profile</nb-card-header>
       <nb-card-body>
-        <form #editProfileForm="ngForm" *ngIf="myuser" (submit)="updateProfile(editProfileForm)">
+        <form #editProfileForm="ngForm" *ngIf="myuser" (submit)="updateProfile(editProfileForm.value)">
           <div class="row">
             <div class="col-sm-6">
               <div class="form-group">
-                <label for="inputFirstName" class="label">Full Name</label>
-                <input name="fullname" type="text" [(ngModel)]="myuser.fullName" nbInput fullWidth id="inputFirstName"
-                  placeholder="First Name">
+                <label for="fullName" class="label">Full Name</label>
+                <input name="fullName" type="text" [(ngModel)]="myuser.fullName" nbInput fullWidth id="inputFirstName"
+                  placeholder="Full Name">
               </div>
             </div>
             <div class="col-sm-6">
@@ -23,7 +23,7 @@
           <div class="row">
             <div class="col-sm-6">
               <div class="form-group">
-                <label for="inputEmail" class="label">Email</label>
+                <label for="email" class="label">Email</label>
                 <input name="email" type="email" nbInput fullWidth id="inputEmail" placeholder="Email"
                   [(ngModel)]="myuser.email">
               </div>
@@ -37,9 +37,9 @@
             </div>
             <div class="col-sm-6">
               <div class="form-group">
-                <label for="inputWebsite" class="label">Sort Resume</label>
-                <textarea cols="30" name="fullResume" [(ngModel)]="myuser.shortResume" nbInput fullWidth
-                  placeholder="Full Resume"></textarea>
+                <label for="inputWebsite" class="label">Short Resume</label>
+                <textarea cols="30" name="shortResume" [(ngModel)]="myuser.shortResume" nbInput fullWidth
+                  placeholder="Short Resume"></textarea>
               </div>
             </div>
             <div class="col-sm-6">
@@ -60,50 +60,50 @@
           <div class="col-sm-6">
             <div class="form-group">
               <label for="inputWebsite" class="label">GitHub Profile</label>
-              <input name="github" [(ngModel)]="myuser.githubUrl" type="text" nbInput fullWidth id="inputWebsite"
-                placeholder="GitHub profile">
+              <input name="githubUrl" [(ngModel)]="myuser.githubUrl" type="text" nbInput fullWidth id="inputWebsite"
+                placeholder="GitHub Url">
             </div>
           </div>
           <div class="col-sm-6">
             <div class="form-group">
               <label for="inputWebsite" class="label">Stack Overflow Profile</label>
-              <input name="stackoverflow" [(ngModel)]="myuser.stackOverflowProfile" type="text" nbInput fullWidth
+              <input name="stackOverflowProfile" [(ngModel)]="myuser.stackOverflowProfile" type="text" nbInput fullWidth
                 id="inputWebsite" placeholder="Stack Overflow Profile">
             </div>
           </div>
           <div class="col-sm-6">
             <div class="form-group">
               <label for="inputWebsite" class="label">Facebook Profile</label>
-              <input name="facebook" [(ngModel)]="myuser.facebookProfile" type="text" nbInput fullWidth
+              <input name="facebookProfile" [(ngModel)]="myuser.facebookProfile" type="text" nbInput fullWidth
                 id="inputWebsite" placeholder="Facebook Profile">
             </div>
           </div>
           <div class="col-sm-6">
             <div class="form-group">
               <label for="inputWebsite" class="label">Twitter Profile</label>
-              <input name="twitter" [(ngModel)]="myuser.twiterProfile" type="text" nbInput fullWidth id="inputWebsite"
-                placeholder="Twitter Profile">
+              <input name="twitterProfile" [(ngModel)]="myuser.twiterProfile" type="text" nbInput fullWidth
+                id="inputWebsite" placeholder="Twitter Profile">
             </div>
           </div>
           <div class="col-sm-6">
             <div class="form-group">
               <label for="inputWebsite" class="label">Linkedin Profile</label>
-              <input name="Linkedin" [(ngModel)]="myuser.linkedInProfile" type="text" nbInput fullWidth
+              <input name="LinkedInProfile" [(ngModel)]="myuser.linkedInProfile" type="text" nbInput fullWidth
                 id="inputWebsite" placeholder="Linkedin profile">
             </div>
           </div>
           <div class="col-sm-6">
             <div class="form-group">
               <label for="inputWebsite" class="label">Reddit Profile</label>
-              <input name="Reddit" [(ngModel)]="myuser.redditProfile" type="text" nbInput fullWidth id="inputWebsite"
-                placeholder="Linkedin profile">
+              <input name="redditProfile" [(ngModel)]="myuser.redditProfile" type="text" nbInput fullWidth
+                id="inputWebsite" placeholder="Linkedin profile">
             </div>
           </div>
           <div class="col-sm-6">
             <div class="form-group">
               <label for="inputWebsite" class="label">Codepen Profile</label>
-              <input name="codepen" [(ngModel)]="myuser.codepenProfile" type="text" nbInput fullWidth id="inputWebsite"
-                placeholder="Codepen profile">
+              <input name="codepenProfile" [(ngModel)]="myuser.codepenProfile" type="text" nbInput fullWidth
+                id="inputWebsite" placeholder="Codepen profile">
             </div>
           </div>
 

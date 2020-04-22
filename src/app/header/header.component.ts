@@ -47,7 +47,9 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
 
-    this.user.getUser(1).subscribe((result) => {
+    const id = this.auth.getUserId()
+
+    this.user.getUser(id).subscribe((result) => {
       this.currentUser = result
       this.avatarUrl = this.currentUser.photos.filter(p => p.isMain === true)[0].url
       console.log(this.currentUser)

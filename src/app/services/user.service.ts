@@ -12,13 +12,18 @@ import { User } from '../models/User';
 
 export class UserService {
 
+
   httpOptions = {
     headers: new HttpHeaders({
-      Autorization: 'Bearer' + localStorage.getItem('token')
+      Autorization: 'Bearer ' + localStorage.getItem('token')
     })
   };
 
-  constructor(private http: HttpClient) { }
+
+
+  constructor(private http: HttpClient) {
+
+  }
 
   baseUrl = 'http://localhost:5050/api'
 
@@ -28,7 +33,10 @@ export class UserService {
     return this.http.get<User[]>(this.baseUrl + '/users/' + id);
   }
 
-
-
-
+  updateUser(id: number, userdata: any) {
+    return this.http.put(this.baseUrl + '/users/' + id, userdata, { headers: { 'authorization': 'Bearer ' + localStorage.getItem('token') } })
+  }
 }
+
+
+

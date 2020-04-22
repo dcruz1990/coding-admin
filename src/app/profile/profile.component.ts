@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { UserService } from '../services/user.service'
+import { AuthService } from '../services/auth.service'
 import { FormControl } from '@angular/forms';
 
 
@@ -12,15 +13,15 @@ import { FormControl } from '@angular/forms';
 })
 export class ProfileComponent implements OnInit {
 
-
+  userid: number
   myuser: any
 
-  usernameControl = new FormControl('');
-
-  constructor(private user: UserService) { }
+  constructor(private user: UserService, private auth: AuthService) { }
 
   ngOnInit() {
-    this.user.getUser(1).subscribe((result) => {
+    this.userid = this.auth.getUserId()
+
+    this.user.getUser(this.userid).subscribe((result) => {
       this.myuser = result
     })
 
@@ -28,8 +29,10 @@ export class ProfileComponent implements OnInit {
   }
 
   updateProfile(form: any) {
-    console.log("Updat profile")
-    console.log(form.form.value)
+    console.log(form)
+    this.user.updateUser(this.userid, form).subscribe(result => {
+      console.log(result)
+    })
   }
 
 

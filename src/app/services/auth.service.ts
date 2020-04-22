@@ -32,8 +32,8 @@ export class AuthService {
         const user = response;
         if (user) {
           localStorage.setItem('token', user.token);
-          // localStorage.setItem('user', JSON.stringify(user.user));
           this.decodedToken = this.jwtHelper.decodeToken(user.token);
+          localStorage.setItem('data', JSON.stringify(this.decodedToken));
           this.currentUser = user.user;
           this.changeCurrentLoginStatus(true)
           // this.changeMemberPhoto(this.currentUser.photoUrl);
@@ -54,6 +54,7 @@ export class AuthService {
 
   logout() {
     localStorage.removeItem('token')
+    localStorage.removeItem('data')
     this.changeCurrentLoginStatus(false)
   }
 
@@ -67,6 +68,10 @@ export class AuthService {
       errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
     }
     return throwError(errorMessage);
+  }
+
+  getUserId() {
+    return JSON.parse(localStorage.getItem('data')).nameid
   }
 
 
