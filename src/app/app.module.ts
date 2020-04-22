@@ -6,11 +6,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AuthGuardService } from './auth-guard.service';
 import { UserService } from './services/user.service'
 import { AuthService } from './services/auth.service'
+import { ErrorInterceptorService } from './services/error-interceptor.service'
+
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
-  NbSidebarService, NbSidebarModule, NbThemeModule,
-  NbLayoutModule, NbButtonModule, NbCheckboxModule, NbMenuService, NbMenuModule, NbCardModule, NbInputModule, NbAlertModule, NbIconModule,
+  NbSidebarService, NbSidebarModule, NbThemeModule, NbSpinnerModule,
+  NbLayoutModule, NbButtonModule, NbCheckboxModule, NbMenuService, NbMenuModule, NbCardModule, NbInputModule, NbAlertModule, NbIconModule, NbToastrModule,
 } from '@nebular/theme';
 
 import { NbEvaIconsModule } from '@nebular/eva-icons';
@@ -33,6 +35,7 @@ import { ProfileComponent } from './profile/profile.component';
   imports: [
     BrowserModule,
     NbLayoutModule,
+    NbToastrModule.forRoot(),
     // NbAuthModule.forRoot({
     //   strategies: [
     //     NbPasswordAuthStrategy.setup({
@@ -71,11 +74,12 @@ import { ProfileComponent } from './profile/profile.component';
     NbAlertModule,
     NbCheckboxModule,
     FormsModule,
+    NbSpinnerModule,
     NbMenuModule.forRoot(),
     BrowserAnimationsModule,
     NbThemeModule.forRoot({ name: 'default' }),
   ],
-  providers: [NbSidebarService, NbMenuService, AuthGuardService, AuthService, UserService],
+  providers: [NbSidebarService, NbMenuService, AuthGuardService, AuthService, UserService, ErrorInterceptorService],
   bootstrap: [AppComponent]
 })
 

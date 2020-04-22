@@ -3,6 +3,7 @@
         <nb-card-header>
             <h1 id="title" class="title">Login</h1>
             <p class="sub-title">Hello! Log in with your email.</p>
+            {{ error?.statusText }}
         </nb-card-header>
         <nb-card-body>
             <form>
@@ -12,7 +13,12 @@
                 </div>
                 <div><input name="password" type="password" nbInput fullWidth status="primary" placeholder="Password"
                         [(ngModel)]="userdata.password" required></div>
-                <div><button (click)="login()" nbButton>Login</button></div>
+                <div>
+                    <button nbButton status="info" size="medium" (click)="login()" [nbSpinner]="loginSpinner"
+                        nbSpinnerStatus="info" nbSpinnerSize="small">
+                        Login
+                    </button>
+                </div>
             </form>
         </nb-card-body>
     </nb-card>
