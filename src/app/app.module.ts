@@ -11,9 +11,11 @@ import { ErrorInterceptorService } from './services/error-interceptor.service'
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
-  NbSidebarService, NbSidebarModule, NbThemeModule, NbSpinnerModule,
+  NbSidebarService, NbSidebarModule, NbThemeModule, NbSpinnerModule, NbUserModule, NbRadioModule,
   NbLayoutModule, NbButtonModule, NbCheckboxModule, NbMenuService, NbMenuModule, NbCardModule, NbInputModule, NbAlertModule, NbIconModule, NbToastrModule,
 } from '@nebular/theme';
+
+
 
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 
@@ -34,6 +36,8 @@ import { ProfileComponent } from './profile/profile.component';
   ],
   imports: [
     BrowserModule,
+    NbRadioModule,
+    NbUserModule,
     NbLayoutModule,
     NbToastrModule.forRoot(),
     // NbAuthModule.forRoot({

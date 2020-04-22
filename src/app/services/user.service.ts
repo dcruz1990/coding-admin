@@ -24,8 +24,8 @@ export class UserService {
 
   isAuthenticated: boolean
 
-  getUsers(id: number): Observable<User[]> {
-    return this.http.get<User[]>(this.baseUrl + 'api/users' + id);
+  getUser(id: number): Observable<User[]> {
+    return this.http.get<User[]>(this.baseUrl + '/users/' + id);
   }
 
 

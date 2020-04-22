@@ -9,7 +9,6 @@ import { UserService } from '../services/user.service'
 import { AuthService } from '../services/auth.service';
 import { AlertService } from '../services/alert.service'
 import { Router } from '@angular/router';
-import { User } from '../models/User';
 
 
 @Component({
@@ -36,7 +35,7 @@ export class HeaderComponent implements OnInit {
   constructor(private sidebarService: NbSidebarService, private menuService: NbMenuService,
     private themeService: NbThemeService,
     private breakpointService: NbMediaBreakpointsService,
-    private userService: UserService,
+    private user: UserService,
     private auth: AuthService,
     private router: Router,
     private toast: AlertService
@@ -48,13 +47,14 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
 
+    this.user.getUser(1).subscribe((result) => {
+      this.currentUser = result
+      this.avatarUrl = this.currentUser.photos.filter(p => p.isMain === true)[0].url
+      console.log(this.currentUser)
+    })
+
+
     this.auth.currentLoginStatus.subscribe(status => this.isLoggedIn = status)
-
-    this.currentUser = JSON.parse(localStorage.getItem('user'))
-
-    this.userPhotos = this.currentUser.photos
-
-    this.avatarUrl = this.userPhotos.filter(photo => photo.isMain === true)[0].url
 
     this.isLoggedIn = this.auth.loggedIn()
 

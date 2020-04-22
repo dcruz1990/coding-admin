@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
+import { UserService } from '../services/user.service'
+import { FormControl } from '@angular/forms';
+
+
 
 @Component({
   selector: 'app-profile',
@@ -8,9 +12,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor() { }
+
+  myuser: any
+
+  usernameControl = new FormControl('');
+
+  constructor(private user: UserService) { }
 
   ngOnInit() {
+    this.user.getUser(1).subscribe((result) => {
+      this.myuser = result
+    })
+
+
   }
+
+  updateProfile(form: any) {
+    console.log("Updat profile")
+    console.log(form.form.value)
+  }
+
+
 
 }
