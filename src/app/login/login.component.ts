@@ -44,11 +44,11 @@ export class LoginComponent implements OnInit {
       next => { },
       error => {
         this.error = error
-        this.toast.showErrorToast('top-right', 'danger', this.error)
+        this.toast.showToast('top-right', 'danger', this.error, 'Im sorry :( ')
         this.loginSpinner = false
       },
       () => {
-        this.toast.showSuccessToast('top-right', 'success', 'You have sign in succefully!')
+        this.toast.showToast('bottom-left', 'success', 'You have sign in succefully!', 'Welcome back to your dashboard!')
         this.router.navigate(['profile']);
       }
     );

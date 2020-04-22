@@ -7,6 +7,7 @@ import { map, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { UserService } from '../services/user.service'
 import { AuthService } from '../services/auth.service';
+import { AlertService } from '../services/alert.service'
 import { Router } from '@angular/router';
 
 
@@ -33,7 +34,8 @@ export class HeaderComponent implements OnInit {
     private breakpointService: NbMediaBreakpointsService,
     private userService: UserService,
     private auth: AuthService,
-    private router: Router
+    private router: Router,
+    private toast: AlertService
 
   ) {
 
@@ -84,6 +86,7 @@ export class HeaderComponent implements OnInit {
 
   logout() {
     this.auth.logout()
+    this.toast.showToast('bottom-left', 'info', 'See you soon!', 'You have sucefully logout')
     this.router.navigate(['/'])
   }
 

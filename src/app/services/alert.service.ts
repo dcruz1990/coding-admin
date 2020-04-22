@@ -10,17 +10,14 @@ export class AlertService {
   index = 1
   constructor(private toast: NbToastrService) { }
 
-  showErrorToast(position, status, message) {
-    this.toast.show(message +
+  showToast(position, status, title, subtitle) {
+    this.toast.show(title +
       '',
-      `I'm Sorry :(`,
+      `` + subtitle,
       // `Error: ${++this.index}`,
       { position, status });
   }
 
-  showSuccessToast(position, status, message) {
-    this.toast.show('Welcome back to your dashboard!',
-      message,
-      { position, status });
-  }
+
+
 }
