@@ -1,14 +1,14 @@
 import { Photo } from './Photo';
+import { Post } from './Post';
 
 export interface User {
     id: number;
     username: string;
-    gender: string;
-    age: number;
-    knownAs: string;
-    created: Date;
-    lastActive: Date;
-    city: string;
-    country: string;
+    fullname: string;
+    phone: number;
+    email: string;
+    resume: string;
+    fullresume: string;
     photos?: Photo[];
+    posts?: Post[];
 }

@@ -8,10 +8,10 @@
             <form>
                 <div>
                     <input name="email" type="text" nbInput fullWidth status="primary" placeholder="Email"
-                        [(ngModel)]="model.email" required>
+                        [(ngModel)]="userdata.email" required>
                 </div>
                 <div><input name="password" type="password" nbInput fullWidth status="primary" placeholder="Password"
-                        [(ngModel)]="model.password" required></div>
+                        [(ngModel)]="userdata.password" required></div>
                 <div><button (click)="login()" nbButton>Login</button></div>
             </form>
         </nb-card-body>

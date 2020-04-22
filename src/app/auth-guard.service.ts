@@ -9,6 +9,7 @@ export class AuthGuardService implements CanActivate {
   constructor(private authServices: NbAuthService) { }
 
   canActivate() {
-    return this.authServices.isAuthenticated()
+    // return this.authServices.isAuthenticated()
+    return true
   }
 }

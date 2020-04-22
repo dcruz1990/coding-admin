@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Injectable } from '@angular/core';
 
+import { AuthService } from '../services/auth.service'
+
 
 
 
@@ -18,14 +20,14 @@ export class LoginComponent implements OnInit {
 
   userLoggedin$ = this.user.asObservable();
 
-  model: any = {
+  userdata: any = {
     username: '',
     password: ''
   };
   isAuthenticated = false;
   currentUser: User;
 
-  constructor() {
+  constructor(private auth: AuthService) {
 
   }
 
@@ -38,6 +40,9 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
+    this.auth.Login(this.userdata).subscribe((result) => {
+      console.log(result)
+    })
   }
 
   LoggedIn() {
