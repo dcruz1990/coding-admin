@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, HostListener, TemplateRef, AfterViewInit } from '@angular/core';
-import { NbDialogService, NbWindowService } from '@nebular/theme';
+import { NbDialogService } from '@nebular/theme';
 
 import { UserService } from '../services/user.service'
 import { AuthService } from '../services/auth.service'
@@ -22,7 +22,7 @@ export class ProfileComponent implements OnInit {
   profileSpinner = false;
   userid: number
   myuser: any
-  // @ViewChild('dialogRef', { static: true }) dialogRef: TemplateRef<any>;
+  @ViewChild('dialogRef', { static: true }) dialogRef: TemplateRef<any>;
 
   @ViewChild('editProfileForm', { static: false }) editProfileForm: NgForm;
 
@@ -36,7 +36,7 @@ export class ProfileComponent implements OnInit {
 
 
 
-  constructor(private windows: NbWindowService, private user: UserService, private auth: AuthService, private alert: AlertService, private dialogService: NbDialogService) { }
+  constructor(private user: UserService, private auth: AuthService, private alert: AlertService, private dialogService: NbDialogService) { }
 
   // open(dialog: TemplateRef<any>) {
   //   this.dialogService.open(dialog, { context: 'this is some additional data passed to dialog' });
@@ -62,6 +62,7 @@ export class ProfileComponent implements OnInit {
     this.user.updateUser(this.userid, userdata).subscribe(
       value => {
         this.updateSpinner = false;
+        this.auth.changeCurrentUser(userdata);
         this.alert.showToast('bottom-left', 'success', 'Profile Update!', 'Profile updated succefuly')
         this.editProfileForm.reset(this.myuser);
       },

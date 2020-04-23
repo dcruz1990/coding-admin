@@ -8,6 +8,11 @@ import { UserService } from './services/user.service'
 import { AuthService } from './services/auth.service'
 import { ErrorInterceptorService } from './services/error-interceptor.service'
 
+import { NgxUploaderModule } from 'ngx-uploader';
+// import { FileSelectDirective } from 'ng2-file-upload';
+
+import { FileUploadModule } from "ng2-file-upload";
+
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
@@ -34,11 +39,14 @@ import { PhotoaddComponent } from './profile/photoadd/photoadd.component';
     AppComponent,
     LoginComponent,
     ProfileComponent,
-    PhotoaddComponent
+    PhotoaddComponent,
+
   ],
   imports: [
     BrowserModule,
     NbRadioModule,
+    NgxUploaderModule,
+    FileUploadModule,
     NbUserModule,
     NbLayoutModule,
     NbWindowModule.forRoot(),

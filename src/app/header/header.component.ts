@@ -49,16 +49,16 @@ export class HeaderComponent implements OnInit {
 
     const id = this.auth.getUserId()
 
-    this.user.getUser(id).subscribe((result) => {
-      this.currentUser = result
-      this.avatarUrl = this.currentUser.photos.filter(p => p.isMain === true)[0].url
-      console.log(this.currentUser)
-    })
+    // this.user.getUser(id).subscribe((result) => {
+    //   this.currentUser = result
+    //   this.avatarUrl = this.currentUser.photos.filter(p => p.isMain === true)[0].url
+    //   console.log(this.currentUser)
+    // })
 
 
     this.auth.currentLoginStatus.subscribe(status => this.isLoggedIn = status)
 
-    this.isLoggedIn = this.auth.loggedIn()
+    this.auth.currentUser.subscribe(user => this.currentUser = user)
 
     this.menuService.onItemClick().subscribe((event) => {
       this.onItemSelection(event.item.title);

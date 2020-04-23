@@ -2,23 +2,9 @@
   <div class="col-md-12">
     <nb-card [nbSpinner]="profileSpinner" nbSpinnerStatus="primary">
       <nb-card-header>Edit {{ myuser?.username }} profile
-
         <button nbButton size="tiny" (click)="open()">New profile pic</button>
-
-        <ng-template #dialog let-data let-ref="dialogRef">
-          <nb-card>
-            <nb-card-header>Template Dialog</nb-card-header>
-            <nb-card-body>{{ data }}</nb-card-body>
-            <nb-card-footer>
-              <button nbButton (click)="ref.close()">Close Dialog</button>
-            </nb-card-footer>
-          </nb-card>
-        </ng-template>
-
-
       </nb-card-header>
       <nb-card-body>
-
         <form id=" editProfileForm" #editProfileForm="ngForm" *ngIf="myuser"
           (submit)="updateProfile(editProfileForm.value)">
           <div class="row">
@@ -74,59 +60,61 @@
               </div>
             </div>
           </div>
-          <div class="col-sm-6">
-            <div class="form-group">
-              <label for="inputWebsite" class="label">GitHub Profile</label>
-              <input name="githubUrl" [(ngModel)]="myuser.githubUrl" type="text" nbInput fullWidth id="inputWebsite"
-                placeholder="GitHub Url">
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="inputWebsite" class="label">GitHub Profile</label>
+                <input name="githubUrl" [(ngModel)]="myuser.githubUrl" type="text" nbInput fullWidth id="inputWebsite"
+                  placeholder="GitHub Url">
+              </div>
             </div>
-          </div>
-          <div class="col-sm-6">
-            <div class="form-group">
-              <label for="inputWebsite" class="label">Stack Overflow Profile</label>
-              <input name="stackOverflowProfile" [(ngModel)]="myuser.stackOverflowProfile" type="text" nbInput fullWidth
-                id="inputWebsite" placeholder="Stack Overflow Profile">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="inputWebsite" class="label">Stack Overflow Profile</label>
+                <input name="stackOverflowProfile" [(ngModel)]="myuser.stackOverflowProfile" type="text" nbInput
+                  fullWidth id="inputWebsite" placeholder="Stack Overflow Profile">
+              </div>
             </div>
-          </div>
-          <div class="col-sm-6">
-            <div class="form-group">
-              <label for="inputWebsite" class="label">Facebook Profile</label>
-              <input name="facebookProfile" [(ngModel)]="myuser.facebookProfile" type="text" nbInput fullWidth
-                id="inputWebsite" placeholder="Facebook Profile">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="inputWebsite" class="label">Facebook Profile</label>
+                <input name="facebookProfile" [(ngModel)]="myuser.facebookProfile" type="text" nbInput fullWidth
+                  id="inputWebsite" placeholder="Facebook Profile">
+              </div>
             </div>
-          </div>
-          <div class="col-sm-6">
-            <div class="form-group">
-              <label for="inputWebsite" class="label">Twitter Profile</label>
-              <input name="twiterProfile" [(ngModel)]="myuser.twiterProfile" type="text" nbInput fullWidth
-                id="inputWebsite" placeholder="Twitter Profile">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="inputWebsite" class="label">Twitter Profile</label>
+                <input name="twiterProfile" [(ngModel)]="myuser.twiterProfile" type="text" nbInput fullWidth
+                  id="inputWebsite" placeholder="Twitter Profile">
+              </div>
             </div>
-          </div>
-          <div class="col-sm-6">
-            <div class="form-group">
-              <label for="inputWebsite" class="label">Linkedin Profile</label>
-              <input name="linkedInProfile" [(ngModel)]="myuser.linkedInProfile" type="text" nbInput fullWidth
-                id="inputWebsite" placeholder="Linkedin profile">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="inputWebsite" class="label">Linkedin Profile</label>
+                <input name="linkedInProfile" [(ngModel)]="myuser.linkedInProfile" type="text" nbInput fullWidth
+                  id="inputWebsite" placeholder="Linkedin profile">
+              </div>
             </div>
-          </div>
-          <div class="col-sm-6">
-            <div class="form-group">
-              <label for="inputWebsite" class="label">Reddit Profile</label>
-              <input name="redditProfile" [(ngModel)]="myuser.redditProfile" type="text" nbInput fullWidth
-                id="inputWebsite" placeholder="Linkedin profile">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="inputWebsite" class="label">Reddit Profile</label>
+                <input name="redditProfile" [(ngModel)]="myuser.redditProfile" type="text" nbInput fullWidth
+                  id="inputWebsite" placeholder="Linkedin profile">
+              </div>
             </div>
-          </div>
-          <div class="col-sm-6">
-            <div class="form-group">
-              <label for="inputWebsite" class="label">Codepen Profile</label>
-              <input name="codepenProfile" [(ngModel)]="myuser.codepenProfile" type="text" nbInput fullWidth
-                id="inputWebsite" placeholder="Codepen profile">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="inputWebsite" class="label">Codepen Profile</label>
+                <input name="codepenProfile" [(ngModel)]="myuser.codepenProfile" type="text" nbInput fullWidth
+                  id="inputWebsite" placeholder="Codepen profile">
+              </div>
             </div>
-          </div>
-          <div>
-            <button [disabled]="!editProfileForm.dirty" [nbSpinner]="updateSpinner" nbSpinnerStatus="info"
-              nbSpinnerSize="small" type="submit" nbButton>Update
-              Profile</button>
+            <div>
+              <button [disabled]="!editProfileForm.dirty" [nbSpinner]="updateSpinner" nbSpinnerStatus="info"
+                nbSpinnerSize="small" type="submit" nbButton>Update
+                Profile</button>
+            </div>
           </div>
         </form>
       </nb-card-body>

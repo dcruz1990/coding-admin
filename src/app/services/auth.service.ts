@@ -15,14 +15,18 @@ export class AuthService {
 
   private isLogedIn = new BehaviorSubject(true);
 
+  private announceUser = new BehaviorSubject(Object)
+
   currentLoginStatus = this.isLogedIn.asObservable();
+
+  currentUser = this.announceUser.asObservable();
 
   jwtHelper = new JwtHelperService();
 
   apiUrl = 'http://localhost:5050/api/'
 
   decodedToken: any;
-  currentUser: User;
+
 
   constructor(private http: HttpClient) { }
 
@@ -35,6 +39,7 @@ export class AuthService {
           this.decodedToken = this.jwtHelper.decodeToken(user.token);
           localStorage.setItem('data', JSON.stringify(this.decodedToken));
           this.currentUser = user.user;
+          this.announceUser.next(user.user)
           this.changeCurrentLoginStatus(true)
           // this.changeMemberPhoto(this.currentUser.photoUrl);
         }
@@ -45,6 +50,10 @@ export class AuthService {
 
   changeCurrentLoginStatus(status: boolean) {
     this.isLogedIn.next(status)
+  }
+
+  changeCurrentUser(user: any) {
+    this.announceUser.next(user);
   }
 
   loggedIn(): boolean {

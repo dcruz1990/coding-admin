@@ -1,25 +1,29 @@
-<nb-layout-column>
-    <nb-card center size="small">
-        <nb-card-header>
+<nb-card>
+    <nb-card-header>
+        <div class="text-center">
             <h1 id="title" class="title">Login</h1>
-            <p class="sub-title">Hello! Log in with your email.</p>
-            {{ error?.statusText }}
-        </nb-card-header>
-        <nb-card-body>
-            <form>
-                <div>
-                    <input name="email" type="text" nbInput fullWidth status="primary" placeholder="Email"
-                        [(ngModel)]="userdata.email" required>
-                </div>
-                <div><input name="password" type="password" nbInput fullWidth status="primary" placeholder="Password"
-                        [(ngModel)]="userdata.password" required></div>
-                <div>
-                    <button nbButton status="info" size="medium" (click)="login()" [nbSpinner]="loginSpinner"
-                        nbSpinnerStatus="info" nbSpinnerSize="small">
-                        Login
-                    </button>
-                </div>
-            </form>
-        </nb-card-body>
-    </nb-card>
-</nb-layout-column>
+        </div>
+        <p class="sub-title">Hello! Log in with your email.</p>
+        {{ error?.statusText }}
+    </nb-card-header>
+    <nb-card-body>
+        <div class="row d-flex justify-content-center text-center">
+            <div class="col-md-6 col-lg-8">
+                <form>
+                    <div>
+                        <input name="email" type="text" nbInput fullWidth status="primary" placeholder="Email"
+                            [(ngModel)]="userdata.email" required>
+                    </div>
+                    <div><input name="password" type="password" nbInput fullWidth status="primary"
+                            placeholder="Password" [(ngModel)]="userdata.password" required></div>
+                    <div>
+                        <button nbButton status="info" size="medium" (click)="login()" [nbSpinner]="loginSpinner"
+                            nbSpinnerStatus="info" nbSpinnerSize="small">
+                            Login
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </nb-card-body>
+</nb-card>

@@ -5,6 +5,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { User } from '../models/User';
 import { map, catchError } from 'rxjs/operators';
+import { Photo } from '../models/Photo';
+
+import { AuthService } from '../services/auth.service'
 
 @Injectable({
   providedIn: 'root'
@@ -20,8 +23,6 @@ export class UserService {
     })
   };
 
-
-
   constructor(private http: HttpClient) {
 
   }
@@ -29,6 +30,8 @@ export class UserService {
   baseUrl = 'http://localhost:5050/api'
 
   isAuthenticated: boolean
+
+
 
   getUser(id: number): Observable<User[]> {
     return this.http.get<User[]>(this.baseUrl + '/users/' + id);
