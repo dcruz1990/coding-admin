@@ -11,7 +11,7 @@ import { ErrorInterceptorService } from './services/error-interceptor.service'
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
-  NbSidebarService, NbSidebarModule, NbThemeModule, NbSpinnerModule, NbUserModule, NbRadioModule,
+  NbSidebarService, NbWindowModule, NbSidebarModule, NbThemeModule, NbSpinnerModule, NbUserModule, NbRadioModule, NbDialogModule,
   NbLayoutModule, NbButtonModule, NbCheckboxModule, NbMenuService, NbMenuModule, NbCardModule, NbInputModule, NbAlertModule, NbIconModule, NbToastrModule,
 } from '@nebular/theme';
 
@@ -26,46 +26,24 @@ import { LoginComponent } from './login/login.component';
 
 
 import { ProfileComponent } from './profile/profile.component';
+import { PhotoaddComponent } from './profile/photoadd/photoadd.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    ProfileComponent
+    ProfileComponent,
+    PhotoaddComponent
   ],
   imports: [
     BrowserModule,
     NbRadioModule,
     NbUserModule,
     NbLayoutModule,
+    NbWindowModule.forRoot(),
+    NbDialogModule.forChild(),
     NbToastrModule.forRoot(),
-    // NbAuthModule.forRoot({
-    //   strategies: [
-    //     NbPasswordAuthStrategy.setup({
-    //       name: 'email',
-    //       token: {
-    //         class: NbAuthJWTToken,
-    //         key: 'token',
-    //       },
-    //       baseEndpoint: 'http://localhost:5050',
-    //       login: {
-    //         endpoint: '/api/auth/login',
-    //         method: 'post',
-    //         redirect: {
-    //           success: '/profile',
-    //           failure: null, // stay on the same page
-    //         }
-    //       },
-    //       register: {
-    //         endpoint: '/api/auth/register',
-    //         method: 'post',
-    //       },
-
-    //     }),
-    //   ],
-    //   forms: {},
-    // }),
     AppRoutingModule,
     NbEvaIconsModule,
     HeaderModule,
@@ -87,7 +65,8 @@ import { ProfileComponent } from './profile/profile.component';
     [
       // { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptorService, multi: true },
       NbSidebarService, NbMenuService, AuthGuardService, AuthService, UserService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [PhotoaddComponent, ProfileComponent]
 })
 
 export class AppModule { }

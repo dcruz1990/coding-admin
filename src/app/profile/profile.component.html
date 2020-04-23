@@ -1,9 +1,26 @@
 <div class="row">
   <div class="col-md-12">
     <nb-card [nbSpinner]="profileSpinner" nbSpinnerStatus="primary">
-      <nb-card-header>Edit {{ myuser?.username }} profile</nb-card-header>
+      <nb-card-header>Edit {{ myuser?.username }} profile
+
+        <button nbButton size="tiny" (click)="open()">New profile pic</button>
+
+        <ng-template #dialog let-data let-ref="dialogRef">
+          <nb-card>
+            <nb-card-header>Template Dialog</nb-card-header>
+            <nb-card-body>{{ data }}</nb-card-body>
+            <nb-card-footer>
+              <button nbButton (click)="ref.close()">Close Dialog</button>
+            </nb-card-footer>
+          </nb-card>
+        </ng-template>
+
+
+      </nb-card-header>
       <nb-card-body>
-        <form #editProfileForm="ngForm" *ngIf="myuser" (submit)="updateProfile(editProfileForm.value)">
+
+        <form id=" editProfileForm" #editProfileForm="ngForm" *ngIf="myuser"
+          (submit)="updateProfile(editProfileForm.value)">
           <div class="row">
             <div class="col-sm-6">
               <div class="form-group">
@@ -88,7 +105,7 @@
           <div class="col-sm-6">
             <div class="form-group">
               <label for="inputWebsite" class="label">Linkedin Profile</label>
-              <input name="LinkedInProfile" [(ngModel)]="myuser.linkedInProfile" type="text" nbInput fullWidth
+              <input name="linkedInProfile" [(ngModel)]="myuser.linkedInProfile" type="text" nbInput fullWidth
                 id="inputWebsite" placeholder="Linkedin profile">
             </div>
           </div>
@@ -107,8 +124,8 @@
             </div>
           </div>
           <div>
-            <button [nbSpinner]="updateSpinner" nbSpinnerStatus="info" nbSpinnerSize="small" type="submit"
-              nbButton>Update
+            <button [disabled]="!editProfileForm.dirty" [nbSpinner]="updateSpinner" nbSpinnerStatus="info"
+              nbSpinnerSize="small" type="submit" nbButton>Update
               Profile</button>
           </div>
         </form>
