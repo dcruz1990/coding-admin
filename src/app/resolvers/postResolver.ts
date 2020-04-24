@@ -13,7 +13,7 @@ export class PostResolver implements Resolve<any> {
 
     resolve() {
         if (this.auth.loggedIn()) {
-            this.user.getUserPosts(this.auth.getUserId()).subscribe(data => this.userposts === data)
+            this.user.getUserPosts(this.user.getCurrentUserId()).subscribe(data => this.userposts === data)
             console.log(this.userposts)
             return this.userposts
         }

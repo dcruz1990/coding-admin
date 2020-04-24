@@ -8,6 +8,7 @@ import { LoginComponent } from './login/login.component'
 import { ProfileComponent } from './profile/profile.component';
 import { LoginResolver } from './resolvers/loginResolver';
 import { PostlistComponent } from './post/postlist/postlist.component';
+import { AddpostComponent } from './post/addpost/addpost.component'
 
 
 
@@ -29,7 +30,12 @@ const routes: Routes = [
     component: PostlistComponent,
     pathMatch: 'full',
     canActivate: [AuthGuardService],
-
+  },
+  {
+    path: 'posts/new',
+    component: AddpostComponent,
+    pathMatch: 'full',
+    canActivate: [AuthGuardService],
   },
   { path: '**', redirectTo: 'login' },
 

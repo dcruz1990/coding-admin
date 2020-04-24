@@ -31,7 +31,7 @@ export class PhotoaddComponent implements OnInit {
   constructor(private user: UserService, private auth: AuthService) { }
 
   ngOnInit() {
-    this.user.getUser(this.auth.getUserId()).subscribe((result) => {
+    this.user.getUser(this.user.getCurrentUserId()).subscribe((result) => {
       this.userdata = result
       this.photos = this.userdata.photos
       console.log(this.photos)
@@ -47,7 +47,7 @@ export class PhotoaddComponent implements OnInit {
       url:
         URL +
         'photo/' +
-        this.auth.getUserId(),
+        this.user.getCurrentUserId(),
       authToken: "Bearer " + localStorage.getItem("token"),
       isHTML5: true,
       allowedFileType: ["image"],

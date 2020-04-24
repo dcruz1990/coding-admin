@@ -1,1 +1,35 @@
-<p>addpost works!</p>
+<div class="row">
+    <div class="col-md-12">
+        <nb-card>
+            <nb-card-header>
+                I have a new idea to share:
+            </nb-card-header>
+            <nb-card-body>
+                <form #newPostForm="ngForm" (submit)="newPost(editProfileForm.value)">
+                    <div class="row d-flex ">
+                        <div class="col-md-6">
+                            <input fullWidth name="title" id="title" type="text" nbInput status="primary"
+                                placeholder="Post title" required [(ngModel)]="postBody.title">
+                        </div>
+                        <div class="col-md-6">
+                            <input name="description" id="descrip" type="text" nbInput status="primary"
+                                placeholder="Description" fullWidth required [(ngModel)]="postBody.description">
+                            <input type="hidden" name="userid" [(ngModel)]="postBody.userid">
+
+                        </div>
+                    </div>
+                    <br>
+
+                    <div class="row ">
+                        <ckeditor #mytext name="text" data="<p>Hello, world!</p>" [(ngModel)]="postBody.text">
+                        </ckeditor>
+                        <!-- <ckeditor [config]="{ extraPlugins: 'divarea', height: '320' }"></ckeditor> -->
+                    </div>
+                </form>
+            </nb-card-body>
+            <nb-card-footer>
+                <button nbButton (click)="test()">Post now!</button>
+            </nb-card-footer>
+        </nb-card>
+    </div>
+</div>
