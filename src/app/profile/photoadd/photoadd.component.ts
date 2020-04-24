@@ -10,7 +10,7 @@ import { UserService } from '../../services/user.service'
 import { AuthService } from '../../services/auth.service'
 import { Photo } from 'src/app/models/Photo';
 
-const URL = 'http://localhost:5050/api/';
+const URL = 'http://localhost:5050/api/photo/6';
 
 
 @Component({
@@ -36,6 +36,10 @@ export class PhotoaddComponent implements OnInit {
       this.photos = this.userdata.photos
       console.log(this.photos)
     })
+
+    this.uploader.onBeforeUploadItem = (item) => {
+      item.withCredentials = false;
+    }
   }
 
   initializeUploader() {

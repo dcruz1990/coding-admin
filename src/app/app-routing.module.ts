@@ -4,13 +4,11 @@ import { Routes, RouterModule } from '@angular/router';
 import { AuthGuardService } from './auth-guard.service';
 import { LoginComponent } from './login/login.component'
 
-import {
-  NbAuthComponent,
-  NbLoginComponent,
-  NbLogoutComponent,
 
-} from '@nebular/auth';
 import { ProfileComponent } from './profile/profile.component';
+import { LoginResolver } from './resolvers/loginResolver';
+import { PostlistComponent } from './post/postlist/postlist.component';
+
 
 
 const routes: Routes = [
@@ -18,6 +16,7 @@ const routes: Routes = [
     path: 'login',
     component: LoginComponent,
     pathMatch: 'full',
+    resolve: { loginStatus: LoginResolver }
 
   },
   {
@@ -25,12 +24,20 @@ const routes: Routes = [
     component: ProfileComponent,
     canActivate: [AuthGuardService]
   },
+  {
+    path: 'posts/list',
+    component: PostlistComponent,
+    pathMatch: 'full',
+    canActivate: [AuthGuardService],
+
+  },
   { path: '**', redirectTo: 'login' },
 
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [LoginResolver]
 })
 export class AppRoutingModule { }

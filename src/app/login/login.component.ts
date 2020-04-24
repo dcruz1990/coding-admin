@@ -1,6 +1,8 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Injectable } from '@angular/core';
 
+import { ActivatedRoute } from '@angular/router';
+
 import { AuthService } from '../services/auth.service'
 import { AlertService } from '../services/alert.service'
 import { Router } from '@angular/router';
@@ -14,9 +16,6 @@ import { Subject } from 'rxjs';
 })
 export class LoginComponent implements OnInit {
 
-  private index = 0;
-
-  // Observable string sources
   userdata: any = {
     username: '',
     password: ''
@@ -26,15 +25,21 @@ export class LoginComponent implements OnInit {
   error: any
 
   loginSpinner = false;
+  loginStatus: any
 
 
-  constructor(private auth: AuthService, private router: Router, private toast: AlertService) { }
+  constructor(private auth: AuthService, private router: Router, private toast: AlertService, private activatedRouter: ActivatedRoute) { }
 
   test() {
     console.log('Click works');
   }
 
   ngOnInit() {
+    this.loginStatus = this.activatedRouter.snapshot.data;
+
+    if (this.loginStatus) {
+      this.router.navigate(['/profile'])
+    }
 
   }
 

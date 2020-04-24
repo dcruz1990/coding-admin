@@ -25,6 +25,7 @@ import {
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 
 import { HeaderModule } from './header/header.module';
+import { PostModule } from './post/post.module'
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
@@ -45,6 +46,7 @@ import { PhotoaddComponent } from './profile/photoadd/photoadd.component';
   imports: [
     BrowserModule,
     NbRadioModule,
+    PostModule,
     NgxUploaderModule,
     FileUploadModule,
     NbUserModule,
@@ -72,7 +74,7 @@ import { PhotoaddComponent } from './profile/photoadd/photoadd.component';
   providers:
     [
       // { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptorService, multi: true },
-      NbSidebarService, NbMenuService, AuthGuardService, AuthService, UserService],
+      NbSidebarService, NbMenuService, AuthGuardService, AuthService, UserService, HeaderModule],
   bootstrap: [AppComponent],
   entryComponents: [PhotoaddComponent, ProfileComponent]
 })

@@ -19,5 +19,6 @@ import { NbLayoutModule, NbActionsModule, NbUserModule, NbIconModule, NbSearchMo
   ],
   exports: [HeaderComponent],
   declarations: [HeaderComponent]
+
 })
 export class HeaderModule { }

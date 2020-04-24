@@ -37,8 +37,8 @@ export class AuthService {
         if (user) {
           localStorage.setItem('token', user.token);
           this.decodedToken = this.jwtHelper.decodeToken(user.token);
-          localStorage.setItem('data', JSON.stringify(this.decodedToken));
           this.currentUser = user.user;
+          localStorage.setItem('data', JSON.stringify(this.currentUser));
           this.announceUser.next(user.user)
           this.changeCurrentLoginStatus(true)
           // this.changeMemberPhoto(this.currentUser.photoUrl);
@@ -78,11 +78,6 @@ export class AuthService {
     }
     return throwError(errorMessage);
   }
-
-  getUserId() {
-    return JSON.parse(localStorage.getItem('data')).nameid
-  }
-
 
 }
 

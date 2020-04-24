@@ -49,9 +49,8 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this.profileSpinner = true
-    this.userid = this.auth.getUserId()
 
-    this.user.getUser(this.userid).subscribe((result) => {
+    this.user.getUser(this.user.getCurrentUserId()).subscribe((result) => {
       this.myuser = result
       this.profileSpinner = false
     })
@@ -59,10 +58,11 @@ export class ProfileComponent implements OnInit {
 
   updateProfile(userdata: any) {
     this.updateSpinner = true;
-    this.user.updateUser(this.userid, userdata).subscribe(
+    this.user.updateUser(this.user.getCurrentUserId(), userdata).subscribe(
       value => {
         this.updateSpinner = false;
         this.auth.changeCurrentUser(userdata);
+        localStorage.setItem('data', JSON.stringify(this.myuser))
         this.alert.showToast('bottom-left', 'success', 'Profile Update!', 'Profile updated succefuly')
         this.editProfileForm.reset(this.myuser);
       },

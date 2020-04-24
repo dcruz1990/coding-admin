@@ -22,8 +22,6 @@ export class HeaderComponent implements OnInit {
 
   userPictureOnly = false;
 
-  userPhotos: any
-
   avatarUrl: any
 
   isLoggedIn = false
@@ -47,19 +45,18 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
 
-    const id = this.auth.getUserId()
+    this.avatarUrl = this.user.getCurrentUserPohotos().filter(p => p.isMain === true)[0].url
 
-    // this.user.getUser(id).subscribe((result) => {
-    //   this.currentUser = result
-    //   this.avatarUrl = this.currentUser.photos.filter(p => p.isMain === true)[0].url
-    //   console.log(this.currentUser)
-    // })
-
-
+    // Subscribe to login status
     this.auth.currentLoginStatus.subscribe(status => this.isLoggedIn = status)
 
+    // Read current user form localstorage
+    // this.currentUserName = this.user.getCurrentUser().fullName
+
+    // Subscribe to changes when update user 
     this.auth.currentUser.subscribe(user => this.currentUser = user)
 
+    this.currentUser = JSON.parse(localStorage.getItem('data'))
     this.menuService.onItemClick().subscribe((event) => {
       this.onItemSelection(event.item.title);
     });
