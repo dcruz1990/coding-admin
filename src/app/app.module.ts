@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AuthGuardService } from './auth-guard.service';
 import { UserService } from './services/user.service'
 import { AuthService } from './services/auth.service'
+import { PostService } from './services/post.service'
 import { ErrorInterceptorService } from './services/error-interceptor.service'
 
 import { NgxUploaderModule } from 'ngx-uploader';
@@ -74,7 +75,7 @@ import { PhotoaddComponent } from './profile/photoadd/photoadd.component';
   providers:
     [
       // { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptorService, multi: true },
-      NbSidebarService, NbMenuService, AuthGuardService, AuthService, UserService, HeaderModule],
+      NbSidebarService, NbMenuService, AuthGuardService, AuthService, UserService, PostService],
   bootstrap: [AppComponent],
   entryComponents: [PhotoaddComponent, ProfileComponent]
 })

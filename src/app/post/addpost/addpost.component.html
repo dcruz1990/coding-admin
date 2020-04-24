@@ -1,11 +1,11 @@
 <div class="row">
     <div class="col-md-12">
-        <nb-card>
+        <nb-card [nbSpinner]="postSpinner" nbSpinnerStatus="primary">
             <nb-card-header>
                 I have a new idea to share:
             </nb-card-header>
             <nb-card-body>
-                <form #newPostForm="ngForm" (submit)="newPost(editProfileForm.value)">
+                <form #newPostForm="ngForm" (submit)="postNow(newPostForm.value)">
                     <div class="row d-flex ">
                         <div class="col-md-6">
                             <input fullWidth name="title" id="title" type="text" nbInput status="primary"
@@ -25,11 +25,15 @@
                         </ckeditor>
                         <!-- <ckeditor [config]="{ extraPlugins: 'divarea', height: '320' }"></ckeditor> -->
                     </div>
+                    <br>
+                    <div class="row">
+                        <button type="submit" nbButton (click)="test()">Post now!</button>
+                    </div>
                 </form>
             </nb-card-body>
-            <nb-card-footer>
-                <button nbButton (click)="test()">Post now!</button>
-            </nb-card-footer>
+
+
+
         </nb-card>
     </div>
 </div>

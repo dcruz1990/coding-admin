@@ -59,8 +59,8 @@ export class UserService {
         return result;
       }), catchError(error => {
         console.log(error)
-        // return throwError('Something went wrong!');
-        return error
+        return throwError('Something went wrong!');
+        // return error
 
       })
     )

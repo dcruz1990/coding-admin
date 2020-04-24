@@ -8,7 +8,7 @@ import { FormsModule } from '@angular/forms'
 // import { CKEditorModule } from 'ng2-ckeditor';
 import { CKEditorModule } from 'ckeditor4-angular';
 
-import { NbTreeGridModule, NbCardModule, NbInputModule, NbButtonModule } from '@nebular/theme'
+import { NbTreeGridModule, NbCardModule, NbInputModule, NbButtonModule, NbSpinnerModule } from '@nebular/theme'
 
 @NgModule({
   declarations: [PostlistComponent, AddpostComponent],
@@ -19,7 +19,8 @@ import { NbTreeGridModule, NbCardModule, NbInputModule, NbButtonModule } from '@
     CKEditorModule,
     FormsModule,
     NbInputModule,
-    NbButtonModule
+    NbButtonModule,
+    NbSpinnerModule
   ],
   exports: [PostlistComponent]
 })
