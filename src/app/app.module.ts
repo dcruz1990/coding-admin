@@ -27,6 +27,7 @@ import { NbEvaIconsModule } from '@nebular/eva-icons';
 
 import { HeaderModule } from './header/header.module';
 import { PostModule } from './post/post.module'
+import { ProductsModule } from './products/products.module'
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
@@ -47,6 +48,7 @@ import { PhotoaddComponent } from './profile/photoadd/photoadd.component';
   imports: [
     BrowserModule,
     NbRadioModule,
+    ProductsModule,
     PostModule,
     NgxUploaderModule,
     FileUploadModule,

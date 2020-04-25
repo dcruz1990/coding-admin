@@ -1,0 +1,55 @@
+<div class="row">
+    <div class="col-md-12">
+        <nb-card [nbSpinner]="profileSpinner" nbSpinnerStatus="primary">
+            <nb-card-header>Add a new product
+
+            </nb-card-header>
+            <nb-card-body>
+                <form id="addProductForm" #productForm="ngForm" (submit)="newProduct(addProductForm.value)">
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="name" class="label">Product Name</label>
+                                <input name="name" type="text" nbInput fullWidth id="productname"
+                                    placeholder="Product Name">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <nb-select name="type" [(selected)]="selected" placeholder="Select Product Type">
+                                    <nb-option value="desktop">Desktop</nb-option>
+                                    <nb-option value="mobile">Mobile</nb-option>
+                                    <nb-option value="backend">Backend</nb-option>
+                                    <nb-option value="frontend">Frontend</nb-option>
+                                </nb-select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="description" class="label">Description</label>
+                                <input name="description" type="text" nbInput fullWidth id="inputLastName"
+                                    placeholder="Describe the product">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="url" class="label">Url</label>
+                                <input name="url" type="email" nbInput fullWidth id="url" placeholder="Url">
+                            </div>
+                        </div>
+
+
+                        <div>
+                            <button [nbSpinner]="productSpinner" nbSpinnerStatus="info" nbSpinnerSize="small"
+                                type="submit" nbButton>Add Product to my Portfolio</button>
+                        </div>
+                    </div>
+                </form>
+            </nb-card-body>
+
+        </nb-card>
+    </div>
+</div>

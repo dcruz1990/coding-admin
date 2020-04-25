@@ -68,10 +68,12 @@ export class AppComponent {
         {
           title: 'Product list',
           icon: 'list',
+          url: 'product/list'
         },
         {
           title: 'I have new product',
-          icon: 'plus'
+          icon: 'plus',
+          url: 'product/new'
         }
       ]
     }

@@ -9,6 +9,8 @@ import { ProfileComponent } from './profile/profile.component';
 import { LoginResolver } from './resolvers/loginResolver';
 import { PostlistComponent } from './post/postlist/postlist.component';
 import { AddpostComponent } from './post/addpost/addpost.component'
+import { ProductAddComponent } from './products/product-add/product-add.component';
+import { ProductListComponent } from './products/product-list/product-list.component';
 
 
 
@@ -36,6 +38,18 @@ const routes: Routes = [
     component: AddpostComponent,
     pathMatch: 'full',
     canActivate: [AuthGuardService],
+  },
+  {
+    path: 'product/list',
+    component: ProductListComponent,
+    pathMatch: 'full',
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'product/new',
+    component: ProductAddComponent,
+    pathMatch: 'full',
+    canActivate: [AuthGuardService]
   },
   { path: '**', redirectTo: 'login' },
 

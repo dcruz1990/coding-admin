@@ -35,4 +35,8 @@ export class PostService {
       })
     )
   }
+
+  // getUserPosts(id) {
+  //   return this.http.get(this.baseUrl + '/post')
+  // }
 }
