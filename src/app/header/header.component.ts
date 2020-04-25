@@ -45,7 +45,8 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
 
-    this.avatarUrl = this.user.getCurrentUserPohotos().filter(p => p.isMain === true)[0].url
+    this.currentUser = JSON.parse(localStorage.getItem('data'))
+
 
     // Subscribe to login status
     this.auth.currentLoginStatus.subscribe(status => this.isLoggedIn = status)
@@ -56,7 +57,7 @@ export class HeaderComponent implements OnInit {
     // Subscribe to changes when update user 
     this.auth.currentUser.subscribe(user => this.currentUser = user)
 
-    this.currentUser = JSON.parse(localStorage.getItem('data'))
+
     this.menuService.onItemClick().subscribe((event) => {
       this.onItemSelection(event.item.title);
     });
