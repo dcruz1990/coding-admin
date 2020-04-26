@@ -18,6 +18,7 @@ export class ProductService {
   }
 
   addProduct(data: Product): Observable<Product> {
+    // tslint:disable-next-line: object-literal-key-quotes
     return this.http.post<Product>(this.baseUrl + '/product/create', data, { headers: { 'authorization': 'Bearer ' + localStorage.getItem('token') } }).pipe(
       map((result: any) => {
         return result;

@@ -1,35 +1,37 @@
-<nb-card [nbSpinner]="profileSpinner" nbSpinnerStatus="primary">
+<nb-card [nbSpinner]="spinner" nbSpinnerStatus="primary" nbSpinnerMessage="Loading your products">
     <nb-card-header>My products
-
     </nb-card-header>
     <nb-card-body>
         <table class="table">
             <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">First</th>
-                    <th scope="col">Last</th>
-                    <th scope="col">Handle</th>
+                    <th scope="col">Product Name</th>
+                    <th scope="col">Product Type</th>
+                    <th scope="col">Product Description</th>
+                    <th scope="col">Options</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>@twitter</td>
+                <tr *ngFor="let product of products" name="product">
+                    <th>{{ product.id }}</th>
+                    <td>{{ product.name }}</td>
+                    <td>{{ product.type }}</td>
+                    <td>{{ product.productDescription}}</td>
+                    <td>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <button nbTooltip="Edit this product" nbTooltipStatus="success" nbButton size="tiny"
+                                    type="button" status="success">
+                                    <nb-icon icon="edit"></nb-icon>
+                                </button>
+                            </div>
+                            <button nbTooltip="Delete this product!" nbTooltipStatus="danger" nbButton size="tiny"
+                                type="button" status="danger">
+                                <nb-icon icon="trash"></nb-icon>
+                            </button>
+                        </div>
+                    </td>
                 </tr>
             </tbody>
         </table>

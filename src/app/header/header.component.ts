@@ -54,7 +54,7 @@ export class HeaderComponent implements OnInit {
     // Read current user form localstorage
     // this.currentUserName = this.user.getCurrentUser().fullName
 
-    // Subscribe to changes when update user 
+    // Subscribe to changes when update user
     this.auth.currentUser.subscribe(user => this.currentUser = user)
 
 
