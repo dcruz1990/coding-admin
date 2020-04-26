@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ProductListComponent } from './product-list/product-list.component';
 import { ProductAddComponent } from './product-add/product-add.component';
 import { FormsModule } from '@angular/forms'
-import { NbTooltipModule, NbIconModule, NbSelectModule, NbTreeGridModule, NbCardModule, NbInputModule, NbButtonModule, NbSpinnerModule } from '@nebular/theme';
+import { NbDialogService, NbTooltipModule, NbIconModule, NbSelectModule, NbTreeGridModule, NbCardModule, NbInputModule, NbButtonModule, NbSpinnerModule } from '@nebular/theme';
 import { ProductDeleteComponent } from './product-list/product-delete/product-delete.component';
 import { ProductEditComponent } from './product-list/product-edit/product-edit.component'
 @NgModule({
@@ -20,6 +20,8 @@ import { ProductEditComponent } from './product-list/product-edit/product-edit.c
     NbSelectModule,
     FormsModule
   ],
-  exports: [ProductAddComponent, ProductListComponent]
+  exports: [ProductAddComponent, ProductListComponent],
+  entryComponents: [ProductDeleteComponent]
+
 })
 export class ProductsModule { }

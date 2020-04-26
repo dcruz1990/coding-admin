@@ -1,3 +1,21 @@
+<ng-template #dialog let-data let-ref="dialogRef">
+    <nb-card status="danger">
+        <nb-card-header>Do you really want to delete: </nb-card-header>
+        <nb-card-body>
+            <b> Name: {{ data.name }} </b><br>
+            <b> Type: {{ data.type }} </b><br>
+        </nb-card-body>
+        <nb-card-footer>
+            <button [nbSpinner]="deleteSpinner" nbSpinnerStatus="danger" nbSpinnerSize="small" nbButton status="danger"
+                (click)="deleteItem(data)">
+                <!-- <button nbButton status="danger" (click)="ref.close()"> -->
+                <nb-icon icon="trash"></nb-icon>Delete!
+            </button>
+
+        </nb-card-footer>
+    </nb-card>
+</ng-template>
+
 <nb-card [nbSpinner]="spinner" nbSpinnerStatus="primary" nbSpinnerMessage="Loading your products">
     <nb-card-header>My products
     </nb-card-header>
@@ -26,10 +44,12 @@
                                     <nb-icon icon="edit"></nb-icon>
                                 </button>
                             </div>
-                            <button nbTooltip="Delete this product!" nbTooltipStatus="danger" nbButton size="tiny"
-                                type="button" status="danger">
-                                <nb-icon icon="trash"></nb-icon>
-                            </button>
+                            <div class="col-md6">
+                                <button (click)="openDeleteDialog(dialog, product)" nbTooltip="Delete this product!"
+                                    nbTooltipStatus="danger" nbButton size="tiny" type="button" status="danger">
+                                    <nb-icon icon="trash"></nb-icon>
+                                </button>
+                            </div>
                         </div>
                     </td>
                 </tr>
