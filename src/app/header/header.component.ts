@@ -9,6 +9,7 @@ import { UserService } from '../services/user.service'
 import { AuthService } from '../services/auth.service';
 import { AlertService } from '../services/alert.service'
 import { Router } from '@angular/router';
+import { User } from '../models/User';
 
 
 @Component({
@@ -45,8 +46,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
 
-    this.currentUser = JSON.parse(localStorage.getItem('data'))
-
+    this.user.getUser(this.user.getCurrentUserId()).pipe(takeUntil(this.destroy$)).subscribe((user: any) => this.currentUser = user)
 
     // Subscribe to login status
     this.auth.currentLoginStatus.subscribe(status => this.isLoggedIn = status)

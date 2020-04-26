@@ -5,9 +5,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { User } from '../models/User';
 import { map, catchError } from 'rxjs/operators';
-import { Photo } from '../models/Photo';
 
-import { AuthService } from '../services/auth.service'
 import { Post } from '../models/Post';
 
 @Injectable({
@@ -16,13 +14,6 @@ import { Post } from '../models/Post';
 
 
 export class UserService {
-
-
-  httpOptions = {
-    headers: new HttpHeaders({
-      Autorization: 'Bearer ' + localStorage.getItem('token')
-    })
-  };
 
   constructor(private http: HttpClient) {
 
