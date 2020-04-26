@@ -1,10 +1,11 @@
 import { Photo } from './Photo';
 
 export interface Product {
-    id: number,
+    id?: number,
     name: string,
     type: string,
     url: string,
-    productPhoto: Photo
+    productPhoto?: Photo
     productDescription: string,
+    userId: number
 }

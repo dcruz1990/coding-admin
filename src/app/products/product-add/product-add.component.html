@@ -5,19 +5,20 @@
 
             </nb-card-header>
             <nb-card-body>
-                <form id="addProductForm" (submit)="newProduct(addProductForm.value)">
+                <form id="addProductForm" (submit)="newProduct()">
 
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="name" class="label">Product Name</label>
-                                <input name="name" type="text" nbInput fullWidth id="productname"
-                                    placeholder="Product Name">
+                                <input required [(ngModel)]="product.name" name="name" type="text" nbInput fullWidth
+                                    id="productname" placeholder="Product Name">
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <nb-select name="type" [(selected)]="selected" placeholder="Select Product Type">
+                                <nb-select required name="type" [(ngModel)]="product.type" [(selected)]="selected"
+                                    placeholder="Select Product Type">
                                     <nb-option value="desktop">Desktop</nb-option>
                                     <nb-option value="mobile">Mobile</nb-option>
                                     <nb-option value="backend">Backend</nb-option>
@@ -28,8 +29,8 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="description" class="label">Description</label>
-                                <input name="description" type="text" nbInput fullWidth id="inputLastName"
-                                    placeholder="Describe the product">
+                                <input [(ngModel)]="product.productDescription" name="description" type="text" nbInput
+                                    fullWidth id="inputLastName" placeholder="Describe the product">
                             </div>
                         </div>
                     </div>
@@ -37,17 +38,16 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="url" class="label">Url</label>
-                                <input name="url" type="email" nbInput fullWidth id="url" placeholder="Url">
+                                <input [(ngModel)]="product.url" name="url" type="text" nbInput fullWidth id="url"
+                                    placeholder="Url">
                             </div>
-                        </div>
-
-
-                        <div>
-                            <button [nbSpinner]="productSpinner" nbSpinnerStatus="info" nbSpinnerSize="small"
-                                type="submit" nbButton>Add Product to my Portfolio</button>
                         </div>
                     </div>
                 </form>
+                <div>
+                    <button (click)="newProduct()" [nbSpinner]="spinner" nbSpinnerStatus="info" nbSpinnerSize="small"
+                        type="submit" nbButton>Add Product to my Portfolio</button>
+                </div>
             </nb-card-body>
 
         </nb-card>

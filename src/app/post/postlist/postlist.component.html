@@ -1,23 +1,39 @@
 <nb-card>
+    <nb-card-header>
+        My post list:
+    </nb-card-header>
+
     <nb-card-body>
-        <nb-card-header>
-            My post list:
-        </nb-card-header>
 
-        <table [nbTreeGrid]="data" equalColumnsWidth>
-
-            <tr nbTreeGridRow *nbTreeGridRowDef="let row; columns: allColumns"></tr>
-
-            <ng-container [nbTreeGridColumnDef]="customColumn">
-                <td nbTreeGridCell *nbTreeGridCellDef="let row">
-                    {{row.data.id}}
-                </td>
-            </ng-container>
-
-            <ng-container *ngFor="let column of defaultColumns" [nbTreeGridColumnDef]="column">
-                <td nbTreeGridCell *nbTreeGridCellDef="let row">{{row.data[column]}}</td>
-            </ng-container>
-
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">First</th>
+                    <th scope="col">Last</th>
+                    <th scope="col">Handle</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>Larry</td>
+                    <td>the Bird</td>
+                    <td>@twitter</td>
+                </tr>
+            </tbody>
         </table>
 
     </nb-card-body>
