@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 
 import { Observable, throwError } from 'rxjs';
@@ -33,6 +33,10 @@ export class UserService {
 
   getCurrentUser() {
     return JSON.parse(localStorage.getItem('data'))
+  }
+
+  getUserPosts(id: number): Observable<Post[]> {
+    return this.http.get<Post[]>(this.baseUrl + /post/ + id)
   }
 
   getCurrentUserPohotos() {
