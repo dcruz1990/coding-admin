@@ -1,1 +1,17 @@
-<p>product-delete works!</p>
+<nb-card status="danger">
+    <nb-card-header>Do you really want to delete: </nb-card-header>
+    <nb-card-body>
+        <b>Name: </b>{{ product.name }} <br>
+        <b>Description: </b>{{ product.productDescription }} <br>
+        <b>Type: </b>{{ product.type }} <br>
+        This action cant be undone!
+    </nb-card-body>
+    <nb-card-footer>
+        <button [nbSpinner]="deleteSpinner" nbSpinnerStatus="danger" nbSpinnerSize="small" nbButton status="danger"
+            (click)="deleteItem(product.id)">
+            <!-- <button nbButton status="danger" (click)="ref.close()"> -->
+            <nb-icon icon="trash"></nb-icon>Delete!
+        </button>
+
+    </nb-card-footer>
+</nb-card>
