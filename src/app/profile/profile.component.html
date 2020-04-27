@@ -5,7 +5,7 @@
         <button nbButton size="tiny" (click)="open()">New profile pic</button>
       </nb-card-header>
       <nb-card-body>
-        <form id=" editProfileForm" #editProfileForm="ngForm" *ngIf="myuser"
+        <form id="editProfileForm" #editProfileForm="ngForm" *ngIf="myuser"
           (submit)="updateProfile(editProfileForm.value)">
           <div class="row">
             <div class="col-sm-6">
@@ -56,7 +56,7 @@
               <div class="form-group">
                 <label for="inputWebsite" class="label">Phone Number</label>
                 <input name="phone" [(ngModel)]="myuser.phone" type="text" nbInput fullWidth id="inputWebsite"
-                  placeholder="Website">
+                  placeholder="Phone number">
               </div>
             </div>
           </div>

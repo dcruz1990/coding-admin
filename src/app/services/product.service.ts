@@ -33,6 +33,7 @@ export class ProductService {
     // tslint:disable-next-line: object-literal-key-quotes
     return this.http.delete<boolean>(this.baseUrl + '/product/' + productid + '/delete', { headers: { 'authorization': 'Bearer ' + localStorage.getItem('token') } }).pipe(
       map((result: boolean) => {
+        // tslint:disable-next-line: no-shadowed-variable
         this.getProducts(this.user.getCurrentUserId()).subscribe((result) => {
           this.currentProduct.next(result)
         })
@@ -48,6 +49,7 @@ export class ProductService {
     return this.http.put<boolean>(this.baseUrl + '/product/' + productid + '/update', newdata, {
       headers: {
         'Content-Type': 'application/json',
+        // tslint:disable-next-line: object-literal-key-quotes
         'authorization': 'Bearer ' + localStorage.getItem('token')
       }
     })
