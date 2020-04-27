@@ -1,1 +1,47 @@
-<p>product-edit works!</p>
+<nb-card status="success">
+    <nb-card-header>Edit product: {{ product.name }}</nb-card-header>
+    <nb-card-body>
+        <form>
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="productname" class="label">Product Name:</label>
+                    <input [(ngModel)]="product.name" nbInput name="productname" type="text" placeholder="Product Name">
+                </div>
+                <div class="col-md-6">
+                    <label for="product" class="label">Product Descrption:</label>
+                    <input [(ngModel)]="product.productDescription" nbInput name="productdescription" type="text"
+                        placeholder="Product Descrption">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="type" class="label">Type:</label>
+                    <div class="form-group">
+                        <nb-select required name="type" [(ngModel)]="product.type" placeholder="Select Product Type">
+                            <nb-option value="desktop">Desktop</nb-option>
+                            <nb-option value="mobile">Mobile</nb-option>
+                            <nb-option value="backend">Backend</nb-option>
+                            <nb-option value="frontend">Frontend</nb-option>
+                        </nb-select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="url" class="label">Product Url:</label>
+                        <input [(ngModel)]="product.url" nbInput name="producturl" type="text"
+                            placeholder="Product Url">
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </nb-card-body>
+    <nb-card-footer>
+        <button [nbSpinner]="deleteSpinner" nbSpinnerStatus="success" nbSpinnerSize="small" nbButton status="success"
+            (click)="editItem(product.id, product)">
+            <!-- <button nbButton status="danger" (click)="ref.close()"> -->
+            <nb-icon icon="edit"></nb-icon>Edit!
+        </button>
+
+    </nb-card-footer>
+</nb-card>

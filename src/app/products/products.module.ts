@@ -21,7 +21,7 @@ import { ProductEditComponent } from './product-list/product-edit/product-edit.c
     FormsModule
   ],
   exports: [ProductAddComponent, ProductListComponent],
-  entryComponents: [ProductDeleteComponent]
+  entryComponents: [ProductDeleteComponent, ProductEditComponent]
 
 })
 export class ProductsModule { }

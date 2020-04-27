@@ -7,6 +7,7 @@ import { NbDialogService } from '@nebular/theme'
 import { ProductDeleteComponent } from './product-delete/product-delete.component';
 import { AlertService } from 'src/app/services/alert.service';
 import { Router } from '@angular/router';
+import { ProductEditComponent } from './product-edit/product-edit.component';
 
 
 @Component({
@@ -65,7 +66,7 @@ export class ProductListComponent implements OnInit {
           this.products = []
           this.toast.showToast('top-right', 'info', 'Theres no products here :(', 'Cant find any product')
         } else {
-          this.productService.updatedPost.subscribe((result) => {
+          this.productService.updatedProduct.subscribe((result) => {
             if (result) {
 
               this.products = result
@@ -75,6 +76,16 @@ export class ProductListComponent implements OnInit {
         }
       }
     });
+  }
+
+  openEditDialog(productToEdit: Object) {
+    this.dialog.open(ProductEditComponent, {
+      context: {
+        product: productToEdit
+      }, closeOnBackdropClick: false
+    })
+    // .onClose.subscribe((data) => {
+    // });
   }
 
 }
