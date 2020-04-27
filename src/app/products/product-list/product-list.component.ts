@@ -33,14 +33,13 @@ export class ProductListComponent implements OnInit {
   constructor(private route: Router, private toast: AlertService, private dialog: NbDialogService, private productService: ProductService, private user: UserService) { }
 
   ngOnInit() {
-    console.log("me inicio")
     this.spinner = true
     this.productService.getProducts(this.user.getCurrentUserId()).subscribe((data) => {
       if (data.length > 0) {
         this.products = data
         this.spinner = false
       } else {
-        console.log("vacio")
+        this.toast.showToast('top-right', 'info', 'Theres no products here :(', 'Cant find any product')
       }
     }, error => {
       this.spinner = false
@@ -68,7 +67,7 @@ export class ProductListComponent implements OnInit {
         } else {
           this.productService.updatedPost.subscribe((result) => {
             if (result) {
-              console.log(result)
+
               this.products = result
               this.spinner = false;
             }

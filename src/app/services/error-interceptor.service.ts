@@ -38,7 +38,7 @@ export class ErrorInterceptorService implements HttpInterceptor {
     return next.handle(request).pipe(
       map((event: HttpEvent<any>) => {
         if (event instanceof HttpResponse) {
-          console.log('event--->>>', event);
+
           switch (event.status) {
             case 204:
               this.alert.showToast('top-right', 'success', 'Update Success', ' Ok')

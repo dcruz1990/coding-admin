@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
   constructor(private auth: AuthService, private router: Router, private toast: AlertService, private activatedRouter: ActivatedRoute) { }
 
   test() {
-    console.log('Click works');
+
   }
 
   ngOnInit() {

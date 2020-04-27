@@ -34,9 +34,6 @@ export class AddpostComponent implements OnInit {
   constructor(private user: UserService, private toPost: PostService, private toast: AlertService) { }
 
   ngOnInit() {
-    console.log(this.postBody)
-
-    console.log(this.getReadingTime('asdasdsa'))
 
   }
 
@@ -50,14 +47,8 @@ export class AddpostComponent implements OnInit {
   }
 
   test() {
-    console.log(this.newPostForm)
-    console.log("test clicked")
-    console.log(this.newPostForm)
-
     this.postBody.readingTime = this.getReadingTime(this.mytext._data)
 
-    console.log(this.postBody.readingTime)
-    console.log(this.mytext._data)
   }
 
   postNow(data: any) {

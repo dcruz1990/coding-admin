@@ -34,7 +34,7 @@ export class PhotoaddComponent implements OnInit {
     this.user.getUser(this.user.getCurrentUserId()).subscribe((result) => {
       this.userdata = result
       this.photos = this.userdata.photos
-      console.log(this.photos)
+
     })
 
     this.uploader.onBeforeUploadItem = (item) => {

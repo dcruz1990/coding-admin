@@ -49,10 +49,7 @@ export class UserService {
       map((result: any) => {
         return result;
       }), catchError(error => {
-        console.log(error)
         return throwError('Something went wrong!');
-        // return error
-
       })
     )
   }

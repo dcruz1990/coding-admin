@@ -20,7 +20,7 @@ export class ProductDeleteComponent implements OnInit {
   constructor(private user: UserService, protected dialogRef: NbDialogRef<any>, private productService: ProductService, private toast: AlertService) { }
 
   ngOnInit() {
-    // console.log(this.product)
+
   }
 
   close() {

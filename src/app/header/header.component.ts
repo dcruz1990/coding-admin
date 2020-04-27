@@ -77,8 +77,7 @@ export class HeaderComponent implements OnInit {
       this.logout()
 
     } else if (title === 'Profile') {
-      // Do something on Profile
-      console.log('Profile Clicked ');
+
     }
   }
 

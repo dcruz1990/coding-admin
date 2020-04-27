@@ -34,12 +34,6 @@ export class ProductService {
       map((result: boolean) => {
         this.getProducts(this.user.getCurrentUserId()).subscribe((result) => {
           this.currentPosts.next(result)
-          console.log(result)
-          // }, err => {
-          //   const myerr = []
-          //   myerr.push(err)
-          //   this.currentPosts.next(myerr)
-          // })
         })
         return result
       }, catchError(error => {
@@ -54,7 +48,6 @@ export class ProductService {
       map((result: any) => {
         return result;
       }), catchError(error => {
-        console.log(error)
         return throwError(error);
         // return error
 

@@ -42,7 +42,6 @@ export class ProductAddComponent implements OnInit {
   newProduct() {
     this.spinner = true
     if (this.product.type === '') {
-      console.log("error")
       this.spinner = false
       this.toast.showToast('top-right', 'danger', "You have to provide a type for your product", 'Please select a product type')
     } else {

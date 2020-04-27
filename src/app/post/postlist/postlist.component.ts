@@ -47,14 +47,6 @@ export class PostlistComponent implements OnInit {
   constructor(private user: UserService, private auth: AuthService) { }
 
   ngOnInit() {
-    // this.data = this.user.getUserPosts(this.auth.getUserId()).subscribe(request => {
-    //   console.log(request)
-    // }, data => {
-    //   this.userposts = data
-    // })
-
-    console.log(this.userposts)
-
   }
 
 }

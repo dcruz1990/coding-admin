@@ -14,7 +14,7 @@ export class PostResolver implements Resolve<any> {
     resolve() {
         if (this.auth.loggedIn()) {
             this.user.getUserPosts(this.user.getCurrentUserId()).subscribe(data => this.userposts === data)
-            console.log(this.userposts)
+
             return this.userposts
         }
 
