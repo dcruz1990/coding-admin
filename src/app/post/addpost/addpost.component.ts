@@ -55,6 +55,7 @@ export class AddpostComponent implements OnInit {
 
   test() {
     this.postBody.readingTime = this.getReadingTime(this.mytext._data)
+    console.log(this.newPostForm.value)
 
   }
 
