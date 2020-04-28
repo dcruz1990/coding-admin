@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+
 import { CommonModule } from '@angular/common';
 import { PostlistComponent } from './postlist/postlist.component';
 import { AddpostComponent } from './addpost/addpost.component';
@@ -8,13 +9,17 @@ import { FormsModule } from '@angular/forms'
 // import { CKEditorModule } from 'ng2-ckeditor';
 import { CKEditorModule } from 'ckeditor4-angular';
 
-import { NbTreeGridModule, NbCardModule, NbInputModule, NbButtonModule, NbSpinnerModule } from '@nebular/theme'
+import { NbBadgeModule, NbIconModule, NbTreeGridModule, NbCardModule, NbInputModule, NbButtonModule, NbSpinnerModule } from '@nebular/theme';
+import { EditPostComponent } from './postlist/edit-post/edit-post.component';
+import { DeletePostComponent } from './postlist/delete-post/delete-post.component'
 
 @NgModule({
-  declarations: [PostlistComponent, AddpostComponent],
+  declarations: [PostlistComponent, AddpostComponent, EditPostComponent, DeletePostComponent],
   imports: [
     CommonModule,
+    NbBadgeModule,
     NbTreeGridModule,
+    NbIconModule,
     NbCardModule,
     CKEditorModule,
     FormsModule,
@@ -22,6 +27,7 @@ import { NbTreeGridModule, NbCardModule, NbInputModule, NbButtonModule, NbSpinne
     NbButtonModule,
     NbSpinnerModule
   ],
-  exports: [PostlistComponent]
+  exports: [PostlistComponent],
+  entryComponents: [EditPostComponent, DeletePostComponent]
 })
 export class PostModule { }

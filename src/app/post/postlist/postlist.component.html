@@ -1,40 +1,55 @@
-<nb-card>
-    <nb-card-header>
-        My post list:
+<nb-card [nbSpinner]="spinner" nbSpinnerStatus="primary" nbSpinnerMessage="Loading your posts">
+    <nb-card-header>My posts
+        <button (click)="goToAddProduct()" nbTooltip="Add new post" nbTooltipStatus="success" nbButton size="tiny"
+            type="button" status="success">
+            <nb-icon icon="plus"></nb-icon>
+        </button>
     </nb-card-header>
-
     <nb-card-body>
-
-        <table class="table">
+        <table class="table" *ngIf="userposts">
             <thead>
                 <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">First</th>
-                    <th scope="col">Last</th>
-                    <th scope="col">Handle</th>
+                    <th scope="col">Post Title</th>
+                    <th scope="col">Post Description</th>
+                    <th scope="col">Published Date</th>
+                    <th scope="col">Post Tags</th>
+                    <th scope="col">Options</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>@twitter</td>
+                <tr *ngFor="let post of userposts" name="posts">
+                    <td>{{ post.title }}</td>
+                    <td>{{ post.description }}</td>
+                    <td>{{ post.publishedAt | date: 'medium' }} </td>
+                    <td>
+                        <span class="subtitle" *ngFor="let tag of post.postTags ">
+                            <div *ngIf="!tag.tag.title">
+                                There is no tags :(
+                            </div>
+                            {{ tag.tag.title }},
+                        </span>
+                    </td>
+
+                    <td>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <button (click)="openEditDialog(post)" nbTooltip="Edit this product"
+                                    nbTooltipStatus="success" nbButton size="tiny" type="button" status="success">
+                                    <nb-icon icon="edit"></nb-icon>
+                                </button>
+                            </div>
+                            <div class="col-md6">
+                                <button (click)="openDeleteDialog(post)" nbTooltip="Delete this product!"
+                                    nbTooltipStatus="danger" nbButton size="tiny" type="button" status="danger">
+                                    <nb-icon icon="trash"></nb-icon>
+                                </button>
+                            </div>
+                        </div>
+                    </td>
                 </tr>
             </tbody>
         </table>
 
     </nb-card-body>
+
 </nb-card>
