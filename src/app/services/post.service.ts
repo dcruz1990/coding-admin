@@ -5,6 +5,7 @@ import { map, catchError } from 'rxjs/operators';
 import { AlertService } from './alert.service';
 import { UserService } from './user.service';
 import { Post } from '../models/Post';
+import { Tag } from '../models/Tag';
 
 @Injectable({
   providedIn: 'root'
@@ -67,7 +68,7 @@ export class PostService {
     )
   }
 
-  editProduct(postid: number, newdata: any): Observable<boolean> {
+  editPost(postid: number, newdata: any): Observable<boolean> {
     // tslint:disable-next-line: object-literal-key-quotes
     return this.http.put<boolean>(this.baseUrl + '/post/' + postid + '/update', newdata, {
       headers: {
@@ -86,6 +87,16 @@ export class PostService {
           return err
         }))
       )
+  }
+
+  getAlTags(): Observable<Tag[]> {
+    return this.http.get<Tag[]>(this.baseUrl + '/tag/').pipe(
+      map((result) => {
+        return result
+      }, catchError(err => {
+        return throwError("There is no tags!")
+      }))
+    )
   }
 
 }

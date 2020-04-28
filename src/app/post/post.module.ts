@@ -9,7 +9,7 @@ import { FormsModule } from '@angular/forms'
 // import { CKEditorModule } from 'ng2-ckeditor';
 import { CKEditorModule } from 'ckeditor4-angular';
 
-import { NbBadgeModule, NbIconModule, NbTreeGridModule, NbCardModule, NbInputModule, NbButtonModule, NbSpinnerModule } from '@nebular/theme';
+import { NbSelectModule, NbBadgeModule, NbIconModule, NbTreeGridModule, NbCardModule, NbInputModule, NbButtonModule, NbSpinnerModule } from '@nebular/theme';
 import { EditPostComponent } from './postlist/edit-post/edit-post.component';
 import { DeletePostComponent } from './postlist/delete-post/delete-post.component'
 
@@ -25,7 +25,8 @@ import { DeletePostComponent } from './postlist/delete-post/delete-post.componen
     FormsModule,
     NbInputModule,
     NbButtonModule,
-    NbSpinnerModule
+    NbSpinnerModule,
+    NbSelectModule
   ],
   exports: [PostlistComponent],
   entryComponents: [EditPostComponent, DeletePostComponent]

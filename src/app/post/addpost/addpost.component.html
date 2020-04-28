@@ -18,6 +18,12 @@
 
                         </div>
                     </div>
+                    <div class="row">
+                        <nb-select multiple required name="tags" [(ngModel)]="postBody.tagId" placeholder="Select Tags">
+                            <nb-option *ngFor="let tag of tags" value="tag.id">{{ tag.title }}</nb-option>
+
+                        </nb-select>
+                    </div>
                     <br>
 
                     <div class="row ">

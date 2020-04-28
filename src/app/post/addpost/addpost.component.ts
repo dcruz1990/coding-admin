@@ -7,6 +7,7 @@ import { Post } from 'src/app/models/Post';
 import { UserService } from 'src/app/services/user.service';
 import { PostService } from 'src/app/services/post.service';
 import { AlertService } from 'src/app/services/alert.service';
+import { Tag } from 'src/app/models/Tag';
 // import 'ckeditor';
 
 @Component({
@@ -15,6 +16,8 @@ import { AlertService } from 'src/app/services/alert.service';
   styleUrls: ['./addpost.component.scss']
 })
 export class AddpostComponent implements OnInit {
+
+  tags: Tag[]
 
   postSpinner = false
 
@@ -26,7 +29,8 @@ export class AddpostComponent implements OnInit {
     description: '',
     post: '<p>Hello, world!</p>',
     userid: this.user.getCurrentUserId(),
-    readingTime: 0
+    readingTime: 0,
+    tagId: this.tags
   };
 
 
@@ -34,14 +38,17 @@ export class AddpostComponent implements OnInit {
   constructor(private user: UserService, private toPost: PostService, private toast: AlertService) { }
 
   ngOnInit() {
+    this.toPost.getAlTags().subscribe((result) => {
+      this.tags = result
+    })
 
   }
 
   getReadingTime(postbody: string) {
-    let wordCount = postbody.replace(/[^\w ]/g, "").split(/\s+/).length;
+    const wordCount = postbody.replace(/[^\w ]/g, "").split(/\s+/).length;
 
-    let readingTimeInMinutes = Math.floor(wordCount / 228) + 1;
-    let readingTimeAsString = readingTimeInMinutes + " min";
+    const readingTimeInMinutes = Math.floor(wordCount / 228) + 1;
+    const readingTimeAsString = readingTimeInMinutes + " min";
 
     return readingTimeInMinutes
   }

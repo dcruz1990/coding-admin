@@ -26,7 +26,7 @@ export class EditPostComponent implements OnInit {
 
   editItem(id: number, post: any) {
     this.editSpinner = true
-    this.postService.editProduct(id, post).subscribe(result => {
+    this.postService.editPost(id, post).subscribe(result => {
       this.editSpinner = false
       this.toast.showToast('bottom-left', 'info', 'Update ok', 'Your post has been updated!')
       this.postService.getUserPosts(this.user.getCurrentUserId()).subscribe((data) => {
