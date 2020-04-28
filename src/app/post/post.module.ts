@@ -4,6 +4,8 @@ import { CommonModule } from '@angular/common';
 import { PostlistComponent } from './postlist/postlist.component';
 import { AddpostComponent } from './addpost/addpost.component';
 
+import { JwPaginationComponent } from 'jw-angular-pagination';
+
 import { FormsModule } from '@angular/forms'
 
 // import { CKEditorModule } from 'ng2-ckeditor';
@@ -14,7 +16,7 @@ import { EditPostComponent } from './postlist/edit-post/edit-post.component';
 import { DeletePostComponent } from './postlist/delete-post/delete-post.component'
 
 @NgModule({
-  declarations: [PostlistComponent, AddpostComponent, EditPostComponent, DeletePostComponent],
+  declarations: [PostlistComponent, AddpostComponent, EditPostComponent, DeletePostComponent, JwPaginationComponent],
   imports: [
     CommonModule,
     NbBadgeModule,

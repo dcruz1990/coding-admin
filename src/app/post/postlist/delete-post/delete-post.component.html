@@ -1,9 +1,7 @@
 <nb-card status="danger">
-    <nb-card-header>Do you really want to delete: </nb-card-header>
+    <nb-card-header>Do you really want to delete the post: </nb-card-header>
     <nb-card-body>
         <b>Name: </b>{{ post.title }} <br>
-        {{ post.id }}
-
         This action cant be undone!
     </nb-card-body>
     <nb-card-footer>
@@ -11,6 +9,10 @@
             (click)="deletePost(post.id)">
             <!-- <button nbButton status="danger" (click)="ref.close()"> -->
             <nb-icon icon="trash"></nb-icon>Delete!
+        </button>
+        <button id="backnormal" nbButton status="success" (click)="close('closed')">
+            <!-- <button nbButton status="danger" (click)="ref.close()"> -->
+            No, take me back!
         </button>
 
     </nb-card-footer>

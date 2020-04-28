@@ -6,6 +6,7 @@ import { AlertService } from './alert.service';
 import { UserService } from './user.service';
 import { Post } from '../models/Post';
 import { Tag } from '../models/Tag';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +25,7 @@ export class PostService {
 
   baseUrl = 'http://localhost:5050/api'
 
-  constructor(private http: HttpClient, private toast: AlertService, private user: UserService) { }
+  constructor(private route: Router, private http: HttpClient, private toast: AlertService, private user: UserService) { }
 
   newPost(postdata) {
     // tslint:disable-next-line: object-literal-key-quotes
@@ -32,6 +33,7 @@ export class PostService {
       map((result: any) => {
         if (result) {
           this.toast.showToast('bottom-left', 'success', 'Post uploaded!', 'Your post was uploaded succesfully')
+          this.route.navigate(['/posts/list'])
         }
         return result;
       }), catchError(error => {

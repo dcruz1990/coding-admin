@@ -21,7 +21,7 @@
                     <div class="row">
                         <nb-select multiple required name="tagId" [(ngModel)]="postBody.tagId"
                             placeholder="Select Tags">
-                            <nb-option *ngFor="let tag of tags" value="{{  1 * tag.id + 1 }}">
+                            <nb-option *ngFor="let tag of tags" value="{{ tag.id }}">
                                 {{ tag.title }}
                                 {{ tag.id }}
                             </nb-option>

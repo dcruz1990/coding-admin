@@ -28,6 +28,8 @@
     "bootstrap": "^4.4.1",
     "ckeditor4-angular": "^1.1.0",
     "eva-icons": "^1.1.2",
+    "jw-angular-pagination": "^1.1.0",
+    "moment": "^2.24.0",
     "ng2-ckeditor": "^1.2.7",
     "ng2-file-upload": "^1.4.0",
     "ngx-uploader": "^8.0.0",

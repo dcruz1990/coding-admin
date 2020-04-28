@@ -23,8 +23,8 @@ export class DeletePostComponent implements OnInit {
 
   }
 
-  close() {
-    this.dialogRef.close(this.post);
+  close(result: any) {
+    this.dialogRef.close(result);
   }
 
   deletePost(postid: number) {
