@@ -44,19 +44,14 @@ export class AppComponent {
       ]
     },
     {
-      title: 'Category',
+      title: 'Tags',
       icon: 'layers',
       expanded: false,
       children: [
         {
-          title: 'Category list',
+          title: 'Tag list',
           icon: 'list',
           url: 'category'
-        },
-        {
-          title: 'Add new Category',
-          icon: 'plus',
-          url: 'category/new'
         }
       ]
     },
@@ -76,7 +71,15 @@ export class AppComponent {
           url: 'product/new'
         }
       ]
+    },
+    {
+      title: 'Resume',
+      icon: 'book-open-outline',
+      expanded: false,
+      url: '/resume'
+
     }
+
   ];
 
 

@@ -71,7 +71,7 @@ export class PostlistComponent implements OnInit {
     this.dialog.open(EditPostComponent, {
       context: {
         post: postToEdit
-      }, closeOnBackdropClick: false
+      }, closeOnBackdropClick: true
     })
     // .onClose.subscribe((data) => {
     // });

@@ -35,6 +35,7 @@ import { LoginComponent } from './login/login.component';
 
 import { ProfileComponent } from './profile/profile.component';
 import { PhotoaddComponent } from './profile/photoadd/photoadd.component';
+import { ResumeComponent } from './resume/resume.component';
 
 
 @NgModule({
@@ -43,6 +44,7 @@ import { PhotoaddComponent } from './profile/photoadd/photoadd.component';
     LoginComponent,
     ProfileComponent,
     PhotoaddComponent,
+    ResumeComponent,
 
   ],
   imports: [

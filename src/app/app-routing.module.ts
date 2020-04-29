@@ -12,6 +12,8 @@ import { AddpostComponent } from './post/addpost/addpost.component'
 import { ProductAddComponent } from './products/product-add/product-add.component';
 import { ProductListComponent } from './products/product-list/product-list.component';
 
+import { ResumeComponent } from './resume/resume.component'
+
 
 
 const routes: Routes = [
@@ -48,6 +50,12 @@ const routes: Routes = [
   {
     path: 'product/new',
     component: ProductAddComponent,
+    pathMatch: 'full',
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'resume',
+    component: ResumeComponent,
     pathMatch: 'full',
     canActivate: [AuthGuardService]
   },
