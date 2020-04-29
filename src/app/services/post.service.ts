@@ -102,4 +102,20 @@ export class PostService {
     )
   }
 
+  addNewTag(newtag: Tag): Observable<Tag> {
+    return this.http.post<Tag>(this.baseUrl + '/tag/create', newtag, {
+      headers: {
+        'Content-Type': 'application/json',
+        // tslint:disable-next-line: object-literal-key-quotes
+        'authorization': 'Bearer ' + localStorage.getItem('token')
+      }
+    }).pipe(
+      map((result) => {
+        return result
+      }, catchError(error => {
+        return error
+      }))
+    )
+  }
+
 }

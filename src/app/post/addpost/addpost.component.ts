@@ -1,7 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { CKEditorModule } from 'ng2-ckeditor';
 
+import { AddtagComponent } from './addtag/addtag.component'
+
 import * as moment from 'moment';
+
+import { NbDialogService } from '@nebular/theme'
 
 import './ckeditor-loader'
 import { NgForm } from '@angular/forms';
@@ -40,13 +44,17 @@ export class AddpostComponent implements OnInit {
 
 
 
-  constructor(private router: Router, private user: UserService, private toPost: PostService, private toast: AlertService) { }
+  constructor(private dialog: NbDialogService, private router: Router, private user: UserService, private toPost: PostService, private toast: AlertService) { }
 
   ngOnInit() {
     this.toPost.getAlTags().subscribe((result) => {
       this.tags = result
     })
+  }
 
+  recibeNewTag($event) {
+    console.log($event)
+    this.tags.push($event)
   }
 
   getReadingTime(postbody: string) {
@@ -76,4 +84,13 @@ export class AddpostComponent implements OnInit {
       this.postSpinner = false;
     })
   }
+
+  openAddTagDialog() {
+    this.dialog.open(AddtagComponent, { closeOnBackdropClick: false }).onClose.subscribe(
+      (data) => {
+        this.tags.push(data)
+      }
+    )
+  }
+
 }
