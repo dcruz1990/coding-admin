@@ -1,1 +1,45 @@
-<p>edit-post works!</p>
+<div class="row">
+    <div class="col-md-12">
+        <nb-card status="success">
+            <nb-card-header>
+                Edit post:
+            </nb-card-header>
+            <nb-card-body>
+                <form #newPostForm="ngForm" (submit)="postNow(newPostForm.value)">
+                    <div class="row d-flex ">
+                        <div class="col-md-6">
+                            <label for="title" class="label">Title:</label>
+
+                            <input fullWidth name="title" id="title" type="text" nbInput status="primary"
+                                placeholder="Post title" required [(ngModel)]="post.title">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="description" class="label">Description:</label>
+                            <input name="description" id="descrip" type="text" nbInput status="primary"
+                                placeholder="Description" fullWidth required [(ngModel)]="post.description">
+                            <input type="hidden" name="userid" [(ngModel)]="post.userid">
+
+                        </div>
+                    </div>
+
+                    <br>
+
+                    <div class="row ">
+                        <ckeditor #mytext name="text" data="<p>Hello, world!</p>" [(ngModel)]="post.text">
+                        </ckeditor>
+                        <!-- <ckeditor [config]="{ extraPlugins: 'divarea', height: '320' }"></ckeditor> -->
+                    </div>
+                </form>
+                <br>
+                <div class="row">
+                    <button status="success" nbButton (click)="editItem(post.id, post)">Update
+                        post!</button>
+                </div>
+
+            </nb-card-body>
+
+
+
+        </nb-card>
+    </div>
+</div>

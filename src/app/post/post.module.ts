@@ -13,10 +13,11 @@ import { CKEditorModule } from 'ckeditor4-angular';
 
 import { NbSelectModule, NbBadgeModule, NbIconModule, NbTreeGridModule, NbCardModule, NbInputModule, NbButtonModule, NbSpinnerModule } from '@nebular/theme';
 import { EditPostComponent } from './postlist/edit-post/edit-post.component';
-import { DeletePostComponent } from './postlist/delete-post/delete-post.component'
+import { DeletePostComponent } from './postlist/delete-post/delete-post.component';
+import { AddtagComponent } from './addpost/addtag/addtag.component'
 
 @NgModule({
-  declarations: [PostlistComponent, AddpostComponent, EditPostComponent, DeletePostComponent, JwPaginationComponent],
+  declarations: [PostlistComponent, AddpostComponent, EditPostComponent, DeletePostComponent, JwPaginationComponent, AddtagComponent],
   imports: [
     CommonModule,
     NbBadgeModule,
@@ -31,6 +32,6 @@ import { DeletePostComponent } from './postlist/delete-post/delete-post.componen
     NbSelectModule
   ],
   exports: [PostlistComponent],
-  entryComponents: [EditPostComponent, DeletePostComponent]
+  entryComponents: [EditPostComponent, DeletePostComponent, AddtagComponent]
 })
 export class PostModule { }

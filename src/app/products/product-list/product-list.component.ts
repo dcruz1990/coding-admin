@@ -74,6 +74,12 @@ export class ProductListComponent implements OnInit {
             }
           })
         }
+        if (data === 'closed') {
+          this.productService.getProducts(this.user.getCurrentUserId()).subscribe((result) => {
+            this.products = result
+          }
+          )
+        }
       }
     });
   }

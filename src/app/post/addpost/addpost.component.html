@@ -7,43 +7,45 @@
             <nb-card-body>
                 <form #newPostForm="ngForm" (submit)="postNow(newPostForm.value)">
                     <div class="row d-flex ">
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <input fullWidth name="title" id="title" type="text" nbInput status="primary"
                                 placeholder="Post title" required [(ngModel)]="postBody.title">
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <input name="description" id="descrip" type="text" nbInput status="primary"
                                 placeholder="Description" fullWidth required [(ngModel)]="postBody.description">
                             <input type="hidden" name="userid" [(ngModel)]="postBody.userid">
 
                         </div>
-                    </div>
-                    <div class="row">
+
                         <nb-select multiple required name="tagId" [(ngModel)]="postBody.tagId"
                             placeholder="Select Tags">
                             <nb-option *ngFor="let tag of tags" value="{{ tag.id }}">
                                 {{ tag.title }}
                                 {{ tag.id }}
                             </nb-option>
-
                         </nb-select>
+                        <button nbButton type="button" size="tiny" status="success">
+                            <nb-icon icon="plus"></nb-icon>
+                        </button>
+
                     </div>
                     <br>
-
                     <div class="row ">
-                        <ckeditor #mytext name="text" data="<p>Hello, world!</p>" [(ngModel)]="postBody.text">
-                        </ckeditor>
-                        <!-- <ckeditor [config]="{ extraPlugins: 'divarea', height: '320' }"></ckeditor> -->
+                        <div class="col-lg-12 col-md-12">
+                            <ckeditor #mytext name="text" data="<p>Hello, world!</p>" [(ngModel)]="postBody.text">
+                            </ckeditor>
+                            <!-- <ckeditor [config]="{ extraPlugins: 'divarea', height: '320' }"></ckeditor> -->
+                        </div>
                     </div>
                     <br>
                     <div class="row">
-                        <button type="submit" nbButton (click)="test()">Post now!</button>
+                        <div class="col-md-2">
+                            <button type="submit" nbButton (click)="test()">Post now!</button>
+                        </div>
                     </div>
                 </form>
             </nb-card-body>
-
-
-
         </nb-card>
     </div>
 </div>

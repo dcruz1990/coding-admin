@@ -23,8 +23,8 @@ export class ProductDeleteComponent implements OnInit {
 
   }
 
-  close() {
-    this.dialogRef.close(this.product);
+  close(status: any) {
+    this.dialogRef.close(status);
   }
 
   deleteItem(id: number) {
