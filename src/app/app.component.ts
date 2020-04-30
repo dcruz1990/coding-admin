@@ -31,30 +31,25 @@ export class AppComponent {
       expanded: false,
       children: [
         {
+          title: 'Tags list',
+          icon: 'layers',
+          url: 'tag/list'
+
+        },
+        {
           title: 'Post list',
           url: 'posts/list',
           icon: 'list'
         },
-
         {
           title: 'Write new Post',
           url: 'posts/new',
           icon: 'plus-outline'
         }
+
       ]
     },
-    {
-      title: 'Tags',
-      icon: 'layers',
-      expanded: false,
-      children: [
-        {
-          title: 'Tag list',
-          icon: 'list',
-          url: 'category'
-        }
-      ]
-    },
+
     {
       title: 'Products',
       icon: 'cube',

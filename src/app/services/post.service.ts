@@ -14,8 +14,10 @@ import { Router } from '@angular/router';
 export class PostService {
 
   private currentPosts = new BehaviorSubject<Post[]>([])
+  private currentTags = new BehaviorSubject<Tag[]>([])
 
   updatedPosts = this.currentPosts.asObservable();
+  updatedTags = this.currentTags.asObservable();
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -116,6 +118,46 @@ export class PostService {
         return error
       }))
     )
+  }
+
+  deleteTag(tagid: number) {
+    return this.http.delete(this.baseUrl + '/tag/' + tagid + '/delete', {
+      headers: {
+        'Content-Type': 'application/json',
+        // tslint:disable-next-line: object-literal-key-quotes
+        'authorization': 'Bearer ' + localStorage.getItem('token')
+      }
+    }).pipe(
+      map((result) => {
+        this.getAlTags().subscribe((tags) => {
+          this.currentTags.next(tags)
+        })
+        return result
+      }, catchError(error => {
+        return error
+      }))
+    )
+  }
+
+  editTag(tagid: number, newdata: any): Observable<boolean> {
+    // tslint:disable-next-line: object-literal-key-quotes
+    return this.http.put<boolean>(this.baseUrl + '/tag/' + tagid + '/update', newdata, {
+      headers: {
+        'Content-Type': 'application/json',
+        // tslint:disable-next-line: object-literal-key-quotes
+        'authorization': 'Bearer ' + localStorage.getItem('token')
+      }
+    })
+      .pipe(
+        map((response: boolean) => {
+          this.getAlTags().subscribe((result) => {
+            this.currentTags.next(result)
+          })
+          return response
+        }, catchError(err => {
+          return err
+        }))
+      )
   }
 
 }

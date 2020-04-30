@@ -13,6 +13,7 @@ import { ProductAddComponent } from './products/product-add/product-add.componen
 import { ProductListComponent } from './products/product-list/product-list.component';
 
 import { ResumeComponent } from './resume/resume.component'
+import { TaglistComponent } from './post/taglist/taglist.component';
 
 
 
@@ -44,6 +45,12 @@ const routes: Routes = [
   {
     path: 'product/list',
     component: ProductListComponent,
+    pathMatch: 'full',
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'tag/list',
+    component: TaglistComponent,
     pathMatch: 'full',
     canActivate: [AuthGuardService]
   },
