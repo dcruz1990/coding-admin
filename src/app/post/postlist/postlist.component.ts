@@ -33,6 +33,7 @@ export class PostlistComponent implements OnInit {
   ngOnInit() {
     this.postService.getUserPosts(this.user.getCurrentUserId()).subscribe((result) => {
       this.userposts = result
+
     }
     )
   }

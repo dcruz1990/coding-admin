@@ -22,7 +22,6 @@
                             placeholder="Select Tags">
                             <nb-option *ngFor="let tag of tags" value="{{ tag.id }}">
                                 {{ tag.title }}
-                                {{ tag.id }}
                             </nb-option>
                         </nb-select>
                         <button (click)="openAddTagDialog()" nbButton type="button" size="tiny" status="success">

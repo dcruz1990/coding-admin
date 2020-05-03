@@ -5,7 +5,22 @@
                 Edit Resume:
             </nb-card-header>
             <nb-card-body>
-
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="language">Your languages:</label>
+                        <nb-list>
+                            <nb-list-item *ngFor="let lang of langs">
+                                <div class="col-md-8">{{ lang.name }}</div>
+                                <div class="col-md-4">
+                                    <button nbButton status="danger" size="tiny"> - </button>
+                                </div>
+                            </nb-list-item>
+                        </nb-list>
+                    </div>
+                    <div class="col-md-6">
+                        Your education
+                    </div>
+                </div>
 
             </nb-card-body>
 

@@ -17,6 +17,7 @@ import { FileUploadModule } from "ng2-file-upload";
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
+  NbListModule,
   NbSidebarService, NbWindowModule, NbSidebarModule, NbThemeModule, NbSpinnerModule, NbUserModule, NbRadioModule, NbDialogModule,
   NbLayoutModule, NbButtonModule, NbCheckboxModule, NbMenuService, NbMenuModule, NbCardModule, NbInputModule, NbAlertModule, NbIconModule, NbToastrModule,
 } from '@nebular/theme';
@@ -36,6 +37,7 @@ import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './profile/profile.component';
 import { PhotoaddComponent } from './profile/photoadd/photoadd.component';
 import { ResumeComponent } from './resume/resume.component';
+import { ResumeService } from './services/resume.service';
 
 
 @NgModule({
@@ -50,6 +52,7 @@ import { ResumeComponent } from './resume/resume.component';
   imports: [
     BrowserModule,
     NbRadioModule,
+    NbListModule,
     ProductsModule,
     PostModule,
     NgxUploaderModule,
@@ -79,7 +82,7 @@ import { ResumeComponent } from './resume/resume.component';
   providers:
     [
       // { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptorService, multi: true },
-      NbSidebarService, NbMenuService, AuthGuardService, AuthService, UserService, PostService],
+      NbSidebarService, NbMenuService, AuthGuardService, AuthService, UserService, PostService, ResumeService],
   bootstrap: [AppComponent],
   entryComponents: [PhotoaddComponent, ProfileComponent]
 })

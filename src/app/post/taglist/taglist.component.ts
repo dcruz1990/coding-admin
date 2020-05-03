@@ -59,6 +59,10 @@ export class TaglistComponent implements OnInit {
     )
   }
 
+  test(data) {
+    console.log(data)
+  }
+
   openEditDialog(dialog: TemplateRef<any>, mycontext: any) {
     this.dialogService.open(dialog, {
       context: mycontext

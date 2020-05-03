@@ -3,7 +3,7 @@ import { Post } from './Post';
 import { Product } from './Product';
 
 export interface User {
-    id: number;
+    id: string;
     username: string;
     fullname: string;
     phone: number;

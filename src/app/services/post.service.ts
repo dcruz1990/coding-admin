@@ -39,6 +39,7 @@ export class PostService {
         }
         return result;
       }), catchError(error => {
+        console.log(error)
         this.toast.showToast('top-right', 'danger', 'Error `$error.statusText`', 'There was a problem trying to upload the post')
         // return throwError('Something went wrong!');
         return throwError('Something went wrong!');
@@ -95,7 +96,13 @@ export class PostService {
   }
 
   getAlTags(): Observable<Tag[]> {
-    return this.http.get<Tag[]>(this.baseUrl + '/tag/').pipe(
+    return this.http.get<Tag[]>(this.baseUrl + '/tag/all', {
+      headers: {
+        'Content-Type': 'application/json',
+        // tslint:disable-next-line: object-literal-key-quotes
+        'authorization': 'Bearer ' + localStorage.getItem('token')
+      }
+    }).pipe(
       map((result) => {
         return result
       }, catchError(err => {

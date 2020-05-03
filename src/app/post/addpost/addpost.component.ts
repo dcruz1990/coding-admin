@@ -39,7 +39,7 @@ export class AddpostComponent implements OnInit {
     post: '<p>Hello, world!</p>',
     userid: 0,
     readingTime: 0,
-    tagId: 0
+    tagId: ''
   };
 
 
@@ -49,6 +49,7 @@ export class AddpostComponent implements OnInit {
   ngOnInit() {
     this.toPost.getAlTags().subscribe((result) => {
       this.tags = result
+      console.log(result)
     })
   }
 
@@ -73,7 +74,7 @@ export class AddpostComponent implements OnInit {
   }
 
   postNow(data: any) {
-    data.publishedAt = this.now
+
     data.readingTime = this.getReadingTime(data.text)
     data.userid = this.user.getCurrentUserId()
     this.postSpinner = true

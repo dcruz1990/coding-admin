@@ -18,16 +18,18 @@
             <div class="row">
                 <div class="col">
                     <label for="title" class="label">Title:</label>
-                    <input nbInput type="text" value="{{ data.title }}" name="title">
+                    <input nbInput type="text" value="{{ data.title }}" [(ngModel)]="data.title" name="title">
                 </div>
                 <div class="col">
                     <label for="description" class="label">Description:</label>
-                    <input nbInput type="text" value="{{ data.description }}" name="description">
+                    <input nbInput type="text" value="{{ data.description }}" [(ngModel)]="data.description"
+                        name="description">
                 </div>
             </div>
         </nb-card-body>
         <nb-card-footer>
             <button nbButton (click)="ref.close(data)" status="success">Update tag</button>
+
         </nb-card-footer>
     </nb-card>
 </ng-template>
@@ -36,10 +38,7 @@
 
 <nb-card [nbSpinner]="spinner" nbSpinnerStatus="primary" nbSpinnerMessage="Loading your tags">
     <nb-card-header>My tags
-        <button (click)="goToAddPost()" nbTooltip="Add new post" nbTooltipStatus="success" nbButton size="tiny"
-            type="button" status="success">
-            <nb-icon icon="plus"></nb-icon>
-        </button>
+
     </nb-card-header>
     <nb-card-body>
         <table class="table" *ngIf="tags">
@@ -51,9 +50,10 @@
                 </tr>
             </thead>
             <tbody>
+
                 <tr *ngFor="let tag of pageOfItems" name="tags">
-                    <td>{{ tag.title }}</td>
-                    <td>{{ tag.description }}</td>
+                    <td>{{ tag?.title }}</td>
+                    <td>{{ tag?.description }}</td>
                     <td>
                         <div class="row">
                             <div class="col-md-6">
@@ -71,12 +71,13 @@
                         </div>
                     </td>
                 </tr>
+
             </tbody>
         </table>
 
     </nb-card-body>
     <nb-card-footer>
-        <jw-pagination [items]="tags" (changePage)="onChangePage($event)"></jw-pagination>
+        <jw-pagination *ngIf="tags" [items]="tags" (changePage)="onChangePage($event)"></jw-pagination>
     </nb-card-footer>
 
 </nb-card>
