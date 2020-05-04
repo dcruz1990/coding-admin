@@ -1,19 +1,41 @@
 <!-- Generic Dialog -->
 <ng-template #addGeneric let-data let-ref="dialogRef">
-    <nb-card status="primary">
-        <nb-card-header>{{ data }}</nb-card-header>
+    <nb-card status="success">
+        <nb-card-header>Create new {{ data.type }}</nb-card-header>
         <nb-card-body>
+            <form #newForm="ngForm" name="newForm">
+                <div class="row">
+                    <div class="col-md-6" *ngFor="let item of data.props">
+                        <label for="{{ item.key }}" class="label">{{ item.key  }} </label><br>
+                        <input required minlength="4" #test="ngModel" nbInput [(ngModel)]="item.value"
+                            name="{{ item.key }}" id="item.key">
 
+                        <div *ngIf="test.invalid && (test.dirty || test.touched) " class="alert alert-danger">
+
+                            <div *ngIf="test.errors.required">
+                                Field is required.
+                            </div>
+                            <div *ngIf="test.errors.minlength">
+                                Field must be at least 4 characters long.
+                            </div>
+                        </div>
+
+                    </div>
+                    <input type="hidden" [(ngModel)]="data.object.userId" value="{{ data.object.userId }}"
+                        name="userId">
+                </div>
+            </form>
         </nb-card-body>
         <nb-card-footer>
-            <button nbButton (click)="ref.close('delete')" status="danger">Delete!</button>
+            <button [disabled]="!newForm.valid && !newForm.touched" nbButton
+                (click)="ref.close({ body: newForm.value,type: data.type})" status="success">Add!</button>
         </nb-card-footer>
     </nb-card>
 </ng-template>
 
 
 
-<!-- Delete Dialog -->
+<!-- Generic Delete Dialog -->
 <ng-template #dialogDelete let-data let-ref="dialogRef">
     <nb-card status="danger">
         <nb-card-header>Do you want to delete this {{ data.type }}</nb-card-header>
@@ -49,7 +71,7 @@
     </nb-card>
 </ng-template>
 
-<!-- Edit Dialog -->
+<!-- Generic Edit Dialog -->
 <ng-template #dialogEdit let-data let-ref="dialogRef">
     <nb-card status="success">
         <nb-card-header>Edit {{ data.type }}</nb-card-header>
@@ -89,11 +111,9 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="col-md-6">
-
-                            <label for="language">Your languages:</label>
-
-                            <button nbButton status="success" (click)="openAddDialog(dialogAdd)" size="tiny">+</button>
-
+                            <label for="language"><b>Your languages:</b></label>
+                            <button nbButton status="success"
+                                (click)="createDialogGeneric(addGeneric, newlang, 'language')" size="tiny">+</button>
                         </div>
                         <div class="col-md-6">
                             <nb-list>
@@ -116,12 +136,14 @@
                         </div>
                     </div>
                     <div class="col-md-6">
-                        Your education
+                        <b>Your education:</b>
+                        <button nbButton status="success"
+                            (click)="createDialogGeneric(addGeneric, newEducation, 'education')" size="tiny">+</button>
                         <nb-list>
                             <nb-list-item *ngFor="let education of educations">
-                                <div class="col-md-8">{{ education.title }}<br>
-                                    {{ education.schoolName }}<br>
-                                    {{ education.dateRange }}</div>
+                                <div class="col-md-8">Title: {{ education?.title }}<br>
+                                    School Name: {{ education?.schoolName }}<br>
+                                    Years: {{ education?.dateRange }}</div>
                                 <div class="col-md-4">
                                     <div class="row">
                                         <button (click)="openDeleteDialog(dialogDelete, education, 'education')"
@@ -141,7 +163,9 @@
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                        Your Skills:
+                        <b>Your Skills:</b>
+                        <button nbButton status="success" (click)="createDialogGeneric(addGeneric, newSkill, 'skill')"
+                            size="tiny">+</button>
                         <nb-list>
                             <nb-list-item *ngFor="let skill of skills">
                                 <div class="col-md-8">{{ skill.title }}<br>
@@ -162,12 +186,14 @@
                         </nb-list>
                     </div>
                     <div class="col-md-6">
-                        Your Projects:
+                        <b> Your Projects:</b>
+                        <button nbButton status="success"
+                            (click)="createDialogGeneric(addGeneric, newProject, 'project')" size="tiny">+</button>
                         <nb-list>
                             <nb-list-item *ngFor="let project of projects">
-                                <div class="col-md-8">{{ project.title }}<br>
-                                    {{ project.resume }}<br>
-                                    {{ project.type }}<br>
+                                <div class="col-md-8">Title: {{ project.title }}<br>
+                                    Resume: {{ project.resume }}<br>
+                                    Type: {{ project.type }}<br>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="row">
@@ -187,12 +213,14 @@
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                        Your Awards:
+                        <b> Your Awards:</b>
+                        <button nbButton status="success" (click)="createDialogGeneric(addGeneric, newAward, 'award')"
+                            size="tiny">+</button>
                         <nb-list>
                             <nb-list-item *ngFor="let award of awards">
-                                <div class="col-md-8">{{ award.title }}<br>
-                                    {{ award.company }}<br>
-                                    {{ award.year }}<br>
+                                <div class="col-md-8">Title: {{ award.title }}<br>
+                                    Company: {{ award.company }}<br>
+                                    Year: {{ award.year }}<br>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="row">
@@ -210,14 +238,13 @@
                         </nb-list>
                     </div>
                     <div class="col-md-6">
-                        Your Work Experiences:
+                        <b> Your Work Experiences:</b>
                         <nb-list>
                             <nb-list-item *ngFor="let we of workExperiences">
-                                <div class="col-md-8">{{ we.title }}<br>
-                                    {{ we.company }}<br>
-                                    {{ we.resume }}<br>
-                                    {{ we.dateRange }}<br>
-
+                                <div class="col-md-8">Position: {{ we.title }}<br>
+                                    Company: {{ we.company }}<br>
+                                    Resume: {{ we.resume }}<br>
+                                    Date Range: {{ we.dateRange }}<br>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="row">

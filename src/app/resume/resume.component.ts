@@ -6,6 +6,9 @@ import { AlertService } from '../services/alert.service';
 import { Language } from '../models/Language';
 import resolvePropsSimple from '../helpers/resolveProps'
 import { Skill } from '../models/Skill';
+import { Education } from '../models/Education';
+import { Award } from '../models/Award';
+import { Project } from '../models/Project';
 // import resolvePropsSimple from '../helpers/resolveProps'
 
 
@@ -23,9 +26,36 @@ export class ResumeComponent implements OnInit {
   projects: any
   workExperiences: any
 
+  newEducation: Education = {
+    title: '',
+    schoolName: '',
+    dateRange: '',
+    userId: this.user.getCurrentUserId()
+  }
+
+  newProject: Project = {
+    title: '',
+    resume: '',
+    type: '',
+    userId: this.user.getCurrentUserId()
+  }
+
+  newAward: Award = {
+    title: '',
+    year: 0,
+    company: '',
+    userId: this.user.getCurrentUserId()
+  }
+
   newlang = {
     name: '',
     userid: this.user.getCurrentUserId()
+  }
+
+
+  newSkill: Skill = {
+    title: '',
+    userId: this.user.getCurrentUserId()
   }
 
   spinner = false
@@ -40,6 +70,12 @@ export class ResumeComponent implements OnInit {
     return Object.keys(obj).map((key) => {
       return { key: key, value: obj[key] }
     }).filter((field: any) => field.key !== 'id' && field.key !== 'userId' && field.key !== 'dateCreated' && field.key !== 'dateModified')
+  }
+
+  generateArrayToCreate(obj) {
+    return Object.keys(obj).map((key) => {
+      return { key: key, value: obj[key] }
+    }).filter((field: any) => field.key !== 'userid' && field.key !== 'userId' && field.key !== 'dateCreated' && field.key !== 'dateModified')
   }
 
   getData() {
@@ -61,6 +97,7 @@ export class ResumeComponent implements OnInit {
     this.resume.getWe(this.user.getCurrentUserId()).subscribe((data) => {
       this.workExperiences = data;
     })
+
 
   }
 
@@ -212,30 +249,55 @@ export class ResumeComponent implements OnInit {
     })
   }
 
-  openAddDialog(dialog: TemplateRef<any>) {
-    this.dialogService.open(dialog, {
-      context: this.newlang
-    }).onClose.subscribe(result => {
-      console.log(result)
-      if (this.newlang.name !== '') {
-        this.resume.addLanguage(this.newlang).subscribe(
-          (done) => {
-            this.alert.showToast('top-right', 'success', 'Success', 'Language: ' + this.newlang.name + ' Added!')
-            this.langs.push(done)
-            this.newlang = {
-              name: '',
-              userid: this.user.getCurrentUserId()
-            }
-          }
-        )
-      }
-    })
-  }
-
-  createDialogGeneric(dialog: TemplateRef<any>, data: any) {
+  createDialogGeneric(dialog: TemplateRef<any>, data: any, type: string) {
     this.dialogService.open(dialog, {
       context: {
-        data: this.skills
+        object: data,
+        props: this.generateArrayToCreate(data),
+        type: type
+      }
+    }).onClose.subscribe((result) => {
+      console.log(result)
+      switch (result.type) {
+        case 'education':
+          this.resume.addEducation(result.body).subscribe(
+            result => {
+              this.alert.showToast('top-right', 'success', 'Created', 'Education added!')
+              this.educations.push(result)
+            }
+          )
+          break;
+        case 'language':
+          this.resume.addLanguage(result.body).subscribe(
+            result => {
+              this.alert.showToast('top-right', 'success', 'Created', 'Language added!')
+              this.langs.push(result)
+            }
+          )
+          break;
+
+        case 'skill':
+          this.resume.addSkill(result.body).subscribe(
+            result => {
+              this.alert.showToast('top-right', 'success', 'Created', 'Skill added!')
+              this.skills.push(result)
+            }
+          )
+          break;
+
+        case 'award':
+          this.resume.addAward(result.body).subscribe(
+            result => {
+              this.alert.showToast('top-right', 'success', 'Created', 'Award added!')
+              this.awards.push(result)
+            }
+          )
+          break;
+
+
+
+        default:
+          break;
       }
     })
   }
