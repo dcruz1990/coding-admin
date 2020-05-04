@@ -1,16 +1,33 @@
 <nb-card status="success">
     <nb-card-header>Edit product: {{ product.name }}</nb-card-header>
     <nb-card-body>
-        <form>
+        <form #editProduct="ngForm" name="editProduct">
             <div class="row">
                 <div class="col-md-6">
                     <label for="productname" class="label">Product Name:</label>
-                    <input [(ngModel)]="product.name" nbInput name="productname" type="text" placeholder="Product Name">
+                    <input #prodName="ngModel" required minlength="4" [(ngModel)]="product.name" nbInput
+                        name="productname" type="text" placeholder="Product Name">
+
+                    <div *ngIf="prodName.invalid && (prodName.dirty || prodName.touched)">
+                        <nb-alert *ngIf="prodName.errors.required" status="warning">Name is required.
+                        </nb-alert>
+                        <nb-alert *ngIf="prodName.errors.minlength" status="warning">Name must be at
+                            least 4
+                            characters long.</nb-alert>
+                    </div>
                 </div>
                 <div class="col-md-6">
                     <label for="product" class="label">Product Descrption:</label>
-                    <input [(ngModel)]="product.productDescription" nbInput name="productdescription" type="text"
-                        placeholder="Product Descrption">
+                    <input #prodD="ngModel" required minlength="4" [(ngModel)]="product.productDescription" nbInput
+                        name="productdescription" type="text" placeholder="Product Descrption">
+
+                    <div *ngIf="prodD.invalid && (prodD.dirty || prodD.touched)">
+                        <nb-alert *ngIf="prodD.errors.required" status="warning">Description is required.
+                        </nb-alert>
+                        <nb-alert *ngIf="prodD.errors.minlength" status="warning">Description must be at
+                            least 4
+                            characters long.</nb-alert>
+                    </div>
                 </div>
             </div>
             <div class="row">
@@ -28,7 +45,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="url" class="label">Product Url:</label>
-                        <input [(ngModel)]="product.url" nbInput name="producturl" type="text"
+                        <input required [(ngModel)]="product.url" nbInput name="producturl" type="text"
                             placeholder="Product Url">
                     </div>
                 </div>
@@ -37,7 +54,8 @@
         </form>
     </nb-card-body>
     <nb-card-footer>
-        <button [nbSpinner]="deleteSpinner" nbSpinnerStatus="success" nbSpinnerSize="small" nbButton status="success"
+        <button [disabled]="!editProduct.dirty || !editProduct.valid" [nbSpinner]="deleteSpinner"
+            nbSpinnerStatus="success" nbSpinnerSize="small" nbButton status="success"
             (click)="editItem(product.id, product)">
             <!-- <button nbButton status="danger" (click)="ref.close()"> -->
             <nb-icon icon="edit"></nb-icon>Edit!
