@@ -36,6 +36,7 @@ export class PostService {
         if (result) {
           this.toast.showToast('bottom-left', 'success', 'Post uploaded!', 'Your post was uploaded succesfully')
           this.route.navigate(['/posts/list'])
+          this.currentPosts.next(result)
         }
         return result;
       }), catchError(error => {
@@ -120,6 +121,9 @@ export class PostService {
       }
     }).pipe(
       map((result) => {
+        this.getAlTags().subscribe((result) => {
+          this.currentTags.next(result)
+        })
         return result
       }, catchError(error => {
         return error

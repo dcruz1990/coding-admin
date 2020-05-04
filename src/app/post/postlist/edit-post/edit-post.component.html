@@ -10,13 +10,31 @@
                         <div class="col-md-6">
                             <label for="title" class="label">Title:</label>
 
-                            <input fullWidth name="title" id="title" type="text" nbInput status="primary"
-                                placeholder="Post title" required [(ngModel)]="post.title">
+                            <input required minlength="4" #postTitle="ngModel" fullWidth name="title" id="title"
+                                type="text" nbInput status="primary" placeholder="Post title" required
+                                [(ngModel)]="post.title">
+
+                            <div *ngIf="postTitle.invalid && (postTitle.dirty || postTitle.touched)">
+                                <nb-alert *ngIf="postTitle.errors.required" status="warning">Title is required.
+                                </nb-alert>
+                                <nb-alert *ngIf="postTitle.errors.minlength" status="warning">Title must be at
+                                    least 4
+                                    characters long.</nb-alert>
+                            </div>
                         </div>
                         <div class="col-md-6">
                             <label for="description" class="label">Description:</label>
-                            <input name="description" id="descrip" type="text" nbInput status="primary"
-                                placeholder="Description" fullWidth required [(ngModel)]="post.description">
+                            <input #postDesc="ngModel" required minlength="4" name="description" id="descrip"
+                                type="text" nbInput status="primary" placeholder="Description" fullWidth required
+                                [(ngModel)]="post.description">
+
+                            <div *ngIf="postDesc.invalid && (postDesc.dirty || postDesc.touched)">
+                                <nb-alert *ngIf="postDesc.errors.required" status="warning">Description is required.
+                                </nb-alert>
+                                <nb-alert *ngIf="postDesc.errors.minlength" status="warning">Description must be at
+                                    least 4
+                                    characters long.</nb-alert>
+                            </div>
                             <input type="hidden" name="userid" [(ngModel)]="post.userid">
 
                         </div>
@@ -32,7 +50,8 @@
                 </form>
                 <br>
                 <div class="row">
-                    <button status="success" nbButton (click)="editItem(post.id, post)">Update
+                    <button [disabled]="!newPostForm.dirty || !newPostForm.valid" status="success" nbButton
+                        (click)="editItem(post.id, post)">Update
                         post!</button>
                 </div>
 

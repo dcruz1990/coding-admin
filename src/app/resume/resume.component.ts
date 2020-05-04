@@ -3,13 +3,12 @@ import { ResumeService } from '../services/resume.service';
 import { UserService } from '../services/user.service';
 import { NbDialogService } from '@nebular/theme';
 import { AlertService } from '../services/alert.service';
-import { Language } from '../models/Language';
 import resolvePropsSimple from '../helpers/resolveProps'
 import { Skill } from '../models/Skill';
 import { Education } from '../models/Education';
 import { Award } from '../models/Award';
 import { Project } from '../models/Project';
-// import resolvePropsSimple from '../helpers/resolveProps'
+import { WorkExperience } from '../models/WorkExperience';
 
 
 @Component({
@@ -25,6 +24,14 @@ export class ResumeComponent implements OnInit {
   skills: Skill[]
   projects: any
   workExperiences: any
+
+  newWe: WorkExperience = {
+    title: '',
+    company: '',
+    dateRange: '',
+    resume: '',
+    userId: this.user.getCurrentUserId()
+  }
 
   newEducation: Education = {
     title: '',
@@ -169,7 +176,7 @@ export class ResumeComponent implements OnInit {
         props: this.generateArray(data)
       }
     }).onClose.subscribe((info) => {
-      console.log(info)
+
       switch (info.type) {
         case 'education':
           this.resume.updateEducation(info.body.id, info.body).subscribe(
@@ -246,6 +253,7 @@ export class ResumeComponent implements OnInit {
         default:
           break;
       }
+
     })
   }
 
@@ -294,7 +302,23 @@ export class ResumeComponent implements OnInit {
           )
           break;
 
+        case 'project':
+          this.resume.addProject(result.body).subscribe(
+            result => {
+              this.alert.showToast('top-right', 'success', 'Created', 'Project added!')
+              this.projects.push(result)
+            }
+          )
+          break;
 
+        case 'we':
+          this.resume.addWe(result.body).subscribe(
+            result => {
+              this.alert.showToast('top-right', 'success', 'Created', 'Work experience added!')
+              this.workExperiences.push(result)
+            }
+          )
+          break;
 
         default:
           break;

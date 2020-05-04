@@ -4,6 +4,7 @@ import { PostService } from 'src/app/services/post.service';
 
 
 import { NbDialogRef } from '@nebular/theme';
+import { AlertService } from 'src/app/services/alert.service';
 
 @Component({
   selector: 'app-addtag',
@@ -19,7 +20,7 @@ export class AddtagComponent implements OnInit {
 
   // @Output() newTagAdded = new EventEmitter();
 
-  constructor(private post: PostService, protected dialogRef: NbDialogRef<any>) { }
+  constructor(private alert: AlertService, private post: PostService, protected dialogRef: NbDialogRef<any>) { }
 
   ngOnInit() {
 
@@ -30,6 +31,7 @@ export class AddtagComponent implements OnInit {
     console.log(this.newtag)
     this.post.addNewTag(this.newtag).subscribe((result) => {
       this.dialogRef.close(result)
+      this.alert.showToast('top-right', 'success', 'Done', 'Your tag was added!')
     }, error => {
       console.log(error)
     })

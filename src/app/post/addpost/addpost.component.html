@@ -8,25 +8,46 @@
                 <form #newPostForm="ngForm" (submit)="postNow(newPostForm.value)">
                     <div class="row d-flex ">
                         <div class="col-md-4">
-                            <input fullWidth name="title" id="title" type="text" nbInput status="primary"
-                                placeholder="Post title" required [(ngModel)]="postBody.title">
+                            <input required minlength="10" #postTitle="ngModel" fullWidth name="title" id="title"
+                                type="text" nbInput status="primary" placeholder="Post title" required
+                                [(ngModel)]="postBody.title">
+
+
+                            <div *ngIf="postTitle.invalid && (postTitle.dirty || postTitle.touched)">
+                                <nb-alert *ngIf="postTitle.errors.required" status="warning">Title is required.
+                                </nb-alert>
+                                <nb-alert *ngIf="postTitle.errors.minlength" status="warning">Title must be at
+                                    least 10
+                                    characters long.</nb-alert>
+                            </div>
                         </div>
                         <div class="col-md-4">
-                            <input name="description" id="descrip" type="text" nbInput status="primary"
-                                placeholder="Description" fullWidth required [(ngModel)]="postBody.description">
+                            <input required minlength="10" #postDescription="ngModel" name="description" id="descrip"
+                                type="text" nbInput status="primary" placeholder="Description" fullWidth required
+                                [(ngModel)]="postBody.description">
+
+                            <div *ngIf="postDescription.invalid && (postDescription.dirty || postDescription.touched)">
+                                <nb-alert *ngIf="postDescription.errors.required" status="warning">Title is required.
+                                </nb-alert>
+                                <nb-alert *ngIf="postDescription.errors.minlength" status="warning">Title must be at
+                                    least 10
+                                    characters long.</nb-alert>
+                            </div>
                             <input type="hidden" name="userid" [(ngModel)]="postBody.userid">
 
                         </div>
-
-                        <nb-select multiple required name="tagId" [(ngModel)]="postBody.tagId"
+                        <br>
+                        <nb-select required multiple required name="tagId" [(ngModel)]="postBody.tagId"
                             placeholder="Select Tags">
                             <nb-option *ngFor="let tag of tags" value="{{ tag.id }}">
                                 {{ tag.title }}
                             </nb-option>
                         </nb-select>
+
                         <button (click)="openAddTagDialog()" nbButton type="button" size="tiny" status="success">
                             <nb-icon icon="plus"></nb-icon>
                         </button>
+
 
                     </div>
                     <br>

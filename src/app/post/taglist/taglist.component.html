@@ -1,3 +1,48 @@
+<!-- Add Dialog -->
+<ng-template #dialogAdd let-data let-ref="dialogRef">
+    <nb-card status="success">
+        <nb-card-header>Add new tag</nb-card-header>
+        <nb-card-body>
+            <div class="row">
+                <form #addTag="ngForm" name="addTag">
+                    <div class="col-md-6">
+                        <label for="title" class="label">Title:</label><br>
+                        <input [(ngModel)]="data.title" #titleInput="ngModel" required minlength="4" nbInput type="text"
+                            name="title" id="name">
+                        <div *ngIf="titleInput.invalid && (titleInput.dirty || titleInput.touched)">
+                            <nb-alert *ngIf="titleInput.errors.required" status="warning">Title field is required
+                            </nb-alert>
+                            <nb-alert *ngIf="titleInput.errors.minlength" status="warning">Title must be at
+                                least 4
+                                characters long.</nb-alert>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="description" class="label">Description:</label>
+                        <input #descriptionInput="ngModel" [(ngModel)]="data.description" required minlength="4" nbInput
+                            type="text" name="description" id="description">
+                        <div *ngIf="descriptionInput.invalid && (descriptionInput.dirty || descriptionInput.touched)">
+                            <nb-alert *ngIf="descriptionInput.errors.required" status="warning">Description is required.
+                            </nb-alert>
+                            <nb-alert *ngIf="descriptionInput.errors.minlength" status="warning">Description must be at
+                                least 4
+                                characters long.</nb-alert>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </nb-card-body>
+        <nb-card-footer>
+            <button [disabled]="!addTag.dirty || !addTag.valid" nbButton (click)="ref.close(addTag.value)"
+                status="success">Add
+                Tag</button>
+
+        </nb-card-footer>
+    </nb-card>
+</ng-template>
+<!-- End Add Dialog -->
+
 <!-- Delete Dialog -->
 <ng-template #dialogDelete let-data let-ref="dialogRef">
     <nb-card status="danger">
@@ -10,34 +55,60 @@
         </nb-card-footer>
     </nb-card>
 </ng-template>
+<!-- End Delete Dialog -->
+
 <!-- Edit Dialog -->
 <ng-template #dialogEdit let-data let-ref="dialogRef">
     <nb-card status="success">
-        <nb-card-header>Template Dialog</nb-card-header>
+        <nb-card-header>Edit your tag</nb-card-header>
         <nb-card-body>
             <div class="row">
-                <div class="col">
-                    <label for="title" class="label">Title:</label>
-                    <input nbInput type="text" value="{{ data.title }}" [(ngModel)]="data.title" name="title">
-                </div>
-                <div class="col">
-                    <label for="description" class="label">Description:</label>
-                    <input nbInput type="text" value="{{ data.description }}" [(ngModel)]="data.description"
-                        name="description">
-                </div>
+                <form #editTagForm="ngForm" name="editTagForm">
+                    <div class="col-md-6">
+                        <label for="title" class="label">Title:</label><br>
+                        <input #titleInput="ngModel" required minlength="4" nbInput type="text" value="{{ data.title }}"
+                            [(ngModel)]="data.title" name="title">
+                        <div *ngIf="titleInput.invalid && (titleInput.dirty || titleInput.touched)">
+                            <nb-alert *ngIf="titleInput.errors.required" status="warning">Title field is required
+                            </nb-alert>
+                            <nb-alert *ngIf="titleInput.errors.minlength" status="warning">Title must be at
+                                least 4
+                                characters long.</nb-alert>
+                        </div>
+
+                    </div>
+                    <div class="col-md-6">
+                        <label for="description" class="label">Description:</label>
+                        <input #descriptionInput="ngModel" required minlength="4" nbInput type="text"
+                            value="{{ data.description }}" [(ngModel)]="data.description" name="description">
+                        <div *ngIf="descriptionInput.invalid && (descriptionInput.dirty || descriptionInput.touched)">
+                            <nb-alert *ngIf="descriptionInput.errors.required" status="warning">Description is required.
+                            </nb-alert>
+                            <nb-alert *ngIf="descriptionInput.errors.minlength" status="warning">Description must be at
+                                least 4
+                                characters long.</nb-alert>
+                        </div>
+                    </div>
+                </form>
             </div>
         </nb-card-body>
         <nb-card-footer>
-            <button nbButton (click)="ref.close(data)" status="success">Update tag</button>
+            <button [disabled]="!editTagForm.dirty || !editTagForm.valid" nbButton (click)="ref.close(data)"
+                status="success">Update
+                tag</button>
 
         </nb-card-footer>
     </nb-card>
 </ng-template>
+<!-- End Edit Dialog -->
 
-
-
+<!-- Main body -->
 <nb-card [nbSpinner]="spinner" nbSpinnerStatus="primary" nbSpinnerMessage="Loading your tags">
     <nb-card-header>My tags
+        <button (click)="openAddDialog(dialogAdd, newTag)" nbTooltip="Add new tag" nbTooltipStatus="success" nbButton
+            size="tiny" type="button" status="success">
+            <nb-icon icon="plus"></nb-icon>
+        </button>
 
     </nb-card-header>
     <nb-card-body>

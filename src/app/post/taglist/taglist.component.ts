@@ -1,10 +1,12 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 
+
 import { NbDialogService } from '@nebular/theme'
 import { Tag } from 'src/app/models/Tag';
 import { PostService } from 'src/app/services/post.service';
 
 import { AlertService } from 'src/app/services/alert.service';
+import { UserService } from 'src/app/services/user.service';
 
 
 @Component({
@@ -18,12 +20,19 @@ export class TaglistComponent implements OnInit {
 
   pageOfItems: Array<any>;
 
-  tags: Tag[]
+  tags: any
 
-  constructor(private alert: AlertService, private postService: PostService, private dialogService: NbDialogService) { }
+  newTag: Tag = {
+    title: '',
+    description: '',
+
+  }
+
+  constructor(private user: UserService, private alert: AlertService, private postService: PostService, private dialogService: NbDialogService) { }
 
   ngOnInit() {
     this.postService.getAlTags().subscribe((result) => {
+      console.log(result)
       this.tags = result
     })
   }
@@ -74,8 +83,7 @@ export class TaglistComponent implements OnInit {
             title: result.title,
             description: result.description
           }
-          console.log(tagid)
-          console.log(tagbody)
+          this.alert.showToast('top-right', 'success', 'Update', 'Your tag was updated')
           this.postService.editTag(tagid, tagbody).subscribe((ok) => {
             console.log(ok)
           })
@@ -91,5 +99,28 @@ export class TaglistComponent implements OnInit {
     )
   }
 
+  openAddDialog(dialog: TemplateRef<any>, data: any) {
 
+    this.dialogService.open(dialog, {
+      context: data
+    }).onClose.subscribe(
+      (result) => {
+        this.postService.addNewTag(result).subscribe((data) => {
+          this.alert.showToast('top-right', 'success', 'Created', 'Your tag was created!')
+          this.postService.updatedTags.subscribe((result) => {
+            this.tags = result
+            this.newTag = {
+              title: '',
+              description: '',
+
+            }
+          })
+
+        })
+
+      }
+    )
+
+
+  }
 }

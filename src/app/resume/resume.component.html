@@ -1,4 +1,4 @@
-<!-- Generic Dialog -->
+<!-- Generic Add Dialog -->
 <ng-template #addGeneric let-data let-ref="dialogRef">
     <nb-card status="success">
         <nb-card-header>Create new {{ data.type }}</nb-card-header>
@@ -7,17 +7,14 @@
                 <div class="row">
                     <div class="col-md-6" *ngFor="let item of data.props">
                         <label for="{{ item.key }}" class="label">{{ item.key  }} </label><br>
-                        <input required minlength="4" #test="ngModel" nbInput [(ngModel)]="item.value"
+                        <input fullWidth required minlength="4" #field="ngModel" nbInput [(ngModel)]="item.value"
                             name="{{ item.key }}" id="item.key">
 
-                        <div *ngIf="test.invalid && (test.dirty || test.touched) " class="alert alert-danger">
-
-                            <div *ngIf="test.errors.required">
-                                Field is required.
-                            </div>
-                            <div *ngIf="test.errors.minlength">
-                                Field must be at least 4 characters long.
-                            </div>
+                        <div *ngIf="field.invalid && (field.dirty || field.touched)">
+                            <nb-alert *ngIf="field.errors.required" status="warning">{{ item.key }} is required.
+                            </nb-alert>
+                            <nb-alert *ngIf="field.errors.minlength" status="warning">{{ item.key }} must be at least 4
+                                characters long.</nb-alert>
                         </div>
 
                     </div>
@@ -34,7 +31,6 @@
 </ng-template>
 
 
-
 <!-- Generic Delete Dialog -->
 <ng-template #dialogDelete let-data let-ref="dialogRef">
     <nb-card status="danger">
@@ -44,29 +40,6 @@
         </nb-card-body>
         <nb-card-footer>
             <button nbButton (click)="ref.close('delete' + data.type)" status="danger">Delete!</button>
-        </nb-card-footer>
-    </nb-card>
-</ng-template>
-<!-- Add Dialog -->
-<ng-template #dialogAdd let-data let-ref="dialogRef">
-    <nb-card status="success">
-        <nb-card-header>Add Language</nb-card-header>
-        <nb-card-body>
-            <form #newLanguageForm="ngForm">
-                <div class="row">
-                    <div class="col">
-                        <label for="title" class="label">Language Name:</label><br>
-                        <input required class="form-control" nbInput type="text" [(ngModel)]="data.name" #name="ngModel"
-                            name="name" id="name">
-                    </div>
-                </div>
-            </form>
-        </nb-card-body>
-        <nb-card-footer>
-            <button type="button" nbButton [disabled]="newLanguageForm.invalid" (click)="ref.close(data)"
-                status="success">Add
-                Language</button>
-
         </nb-card-footer>
     </nb-card>
 </ng-template>
@@ -80,8 +53,18 @@
                 <div class="row">
                     <div class="col-md-6" *ngFor="let item of data.props">
                         <label for="{{ item.key }}" class="label">{{ item.key  }} </label><br>
-                        <input nbInput [(ngModel)]="item.value" name="{{ item.key }}" id="{{ item.key }}">
+                        <input fullWidth minlength="4" required #editField="ngModel" nbInput [(ngModel)]="item.value"
+                            name="{{ item.key }}" id="{{ item.key }}">
+
                         <input type="hidden" [(ngModel)]="data.object.id" value="{{ data.object.id }}" name="id">
+
+                        <div *ngIf="editField.invalid && (editField.dirty || editField.touched)">
+                            <nb-alert *ngIf="editField.errors.required" status="warning">{{ item.key }} is required.
+                            </nb-alert>
+                            <nb-alert *ngIf="editField.errors.minlength" status="warning">{{ item.key }} must be at
+                                least 4
+                                characters long.</nb-alert>
+                        </div>
                     </div>
                 </div>
             </form>
@@ -90,8 +73,8 @@
             <!-- <button type="button" nbButton
                 (click)="ref.close({ dt: data.object.id, body: editForm.value,type: data.type})" status="success">Edit
                 {{ data.type }}</button> -->
-            <button type="button" nbButton (click)="ref.close({ body: editForm.value,type: data.type})"
-                status="success">Edit
+            <button [disabled]="!editForm.dirty || !editForm.valid" type="button" nbButton
+                (click)="ref.close({ body: editForm.value,type: data.type})" status="success">Edit
                 {{ data.type }}</button>
 
         </nb-card-footer>
@@ -110,30 +93,31 @@
             <nb-card-body>
                 <div class="row">
                     <div class="col-md-6">
-                        <div class="col-md-6">
-                            <label for="language"><b>Your languages:</b></label>
-                            <button nbButton status="success"
-                                (click)="createDialogGeneric(addGeneric, newlang, 'language')" size="tiny">+</button>
-                        </div>
-                        <div class="col-md-6">
-                            <nb-list>
-                                <nb-list-item *ngFor="let lang of langs">
-                                    <div class="col-md-8">{{ lang.name }}</div>
-                                    <div class="col-md-4">
-                                        <div class="row">
-                                            <button (click)="openDeleteDialog(dialogDelete, lang, 'language')" nbButton
-                                                status="danger" size="tiny">
-                                                <nb-icon icon="trash"></nb-icon>
-                                            </button>
-                                            <button (click)="openEditDialog(dialogEdit, lang, 'language')" nbButton
-                                                status="success" size="tiny">
-                                                <nb-icon icon="edit"></nb-icon>
-                                            </button>
-                                        </div>
+
+                        <label for="language"><b>Your languages:</b></label>
+                        <button nbButton status="success" (click)="createDialogGeneric(addGeneric, newlang, 'language')"
+                            size="tiny">+</button>
+
+
+                        <nb-list>
+                            <nb-list-item *ngFor="let lang of langs">
+                                <div class="col-md-8">{{ lang.name }}</div>
+                                <div class="col-md-4">
+                                    <div class="row">
+                                        <button (click)="openDeleteDialog(dialogDelete, lang, 'language')" nbButton
+                                            status="danger" size="tiny">
+                                            <nb-icon icon="trash"></nb-icon>
+                                        </button>
+                                        <button (click)="openEditDialog(dialogEdit, lang, 'language')" nbButton
+                                            status="success" size="tiny">
+                                            <nb-icon icon="edit"></nb-icon>
+                                        </button>
+
                                     </div>
-                                </nb-list-item>
-                            </nb-list>
-                        </div>
+                                </div>
+                            </nb-list-item>
+                        </nb-list>
+
                     </div>
                     <div class="col-md-6">
                         <b>Your education:</b>
@@ -239,6 +223,8 @@
                     </div>
                     <div class="col-md-6">
                         <b> Your Work Experiences:</b>
+                        <button nbButton status="success" (click)="createDialogGeneric(addGeneric, newWe, 'we')"
+                            size="tiny">+</button>
                         <nb-list>
                             <nb-list-item *ngFor="let we of workExperiences">
                                 <div class="col-md-8">Position: {{ we.title }}<br>
