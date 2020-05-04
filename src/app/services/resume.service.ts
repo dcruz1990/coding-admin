@@ -5,6 +5,7 @@ import { Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { UserService } from './user.service';
 import { Language } from '../models/Language';
+import { Skill } from '../models/Skill';
 
 
 
@@ -135,6 +136,241 @@ export class ResumeService {
     )
   }
 
+  getSkills(userid: number): Observable<Skill[]> {
+    return this.http.get<Skill[]>(this.baseUrl + '/skill/foruser/' + userid).pipe(
+      map((skills) => {
+        return skills
+      }, catchError(err => {
+        return err
+      }))
+    )
+  }
+
+  addSkill(data: any): Observable<Skill> {
+    return this.http.post<Skill>(this.baseUrl + '/skill/create', data, {
+      headers: {
+        'Content-Type': 'application/json',
+        // tslint:disable-next-line: object-literal-key-quotes
+        'authorization': 'Bearer ' + localStorage.getItem('token')
+      }
+    }).pipe(
+      map(
+        (result) => {
+          return result
+        }
+      ))
+  }
+
+  deleteSkill(id: string) {
+    return this.http.delete(this.baseUrl + '/skill/' + id + '/delete', {
+      headers: {
+        'Content-Type': 'application/json',
+        // tslint:disable-next-line: object-literal-key-quotes
+        'authorization': 'Bearer ' + localStorage.getItem('token')
+      }
+    }).pipe(map(
+      (result) => {
+        return result
+      }, catchError(err => {
+        return err
+      })
+    ))
+  }
+
+  updateSkill(id: any, data: string) {
+    return this.http.put(this.baseUrl + '/skill/' + id + '/update', data, {
+      headers: {
+        'Content-Type': 'application/json-patch+json',
+        // tslint:disable-next-line: object-literal-key-quotes
+        'authorization': 'Bearer ' + localStorage.getItem('token')
+      }
+    }).pipe(
+      map(
+        (result) => {
+          return result
+        }, catchError(err => {
+          return err
+        })
+      )
+    )
+  }
+
+  getProjects(userid: number): Observable<any> {
+    return this.http.get<any>(this.baseUrl + '/project/foruser/' + userid).pipe(
+      map((projects) => {
+        return projects
+      }, catchError(err => {
+        return err
+      }))
+    )
+  }
+
+  addProject(data: any): Observable<any> {
+    return this.http.post<any>(this.baseUrl + '/project/create', data, {
+      headers: {
+        'Content-Type': 'application/json',
+        // tslint:disable-next-line: object-literal-key-quotes
+        'authorization': 'Bearer ' + localStorage.getItem('token')
+      }
+    }).pipe(
+      map(
+        (result) => {
+          return result
+        }
+      ))
+  }
+
+  deleteProject(id: string) {
+    return this.http.delete(this.baseUrl + '/project/' + id + '/delete', {
+      headers: {
+        'Content-Type': 'application/json',
+        // tslint:disable-next-line: object-literal-key-quotes
+        'authorization': 'Bearer ' + localStorage.getItem('token')
+      }
+    }).pipe(map(
+      (result) => {
+        return result
+      }, catchError(err => {
+        return err
+      })
+    ))
+  }
+
+  updateProject(id: any, data: string) {
+    return this.http.put(this.baseUrl + '/project/' + id + '/update', data, {
+      headers: {
+        'Content-Type': 'application/json-patch+json',
+        // tslint:disable-next-line: object-literal-key-quotes
+        'authorization': 'Bearer ' + localStorage.getItem('token')
+      }
+    }).pipe(
+      map(
+        (result) => {
+          return result
+        }, catchError(err => {
+          return err
+        })
+      )
+    )
+  }
+
+  getAwards(userid: number): Observable<any> {
+    return this.http.get<any>(this.baseUrl + '/award/foruser/' + userid).pipe(
+      map((awards) => {
+        return awards
+      }, catchError(err => {
+        return err
+      }))
+    )
+  }
+
+  addAward(data: any): Observable<any> {
+    return this.http.post<any>(this.baseUrl + '/award/create', data, {
+      headers: {
+        'Content-Type': 'application/json',
+        // tslint:disable-next-line: object-literal-key-quotes
+        'authorization': 'Bearer ' + localStorage.getItem('token')
+      }
+    }).pipe(
+      map(
+        (result) => {
+          return result
+        }
+      ))
+  }
+
+  deleteAward(id: string) {
+    return this.http.delete(this.baseUrl + '/award/' + id + '/delete', {
+      headers: {
+        'Content-Type': 'application/json',
+        // tslint:disable-next-line: object-literal-key-quotes
+        'authorization': 'Bearer ' + localStorage.getItem('token')
+      }
+    }).pipe(map(
+      (result) => {
+        return result
+      }, catchError(err => {
+        return err
+      })
+    ))
+  }
+
+  updateAward(id: any, data: string) {
+    return this.http.put(this.baseUrl + '/award/' + id + '/update', data, {
+      headers: {
+        'Content-Type': 'application/json-patch+json',
+        // tslint:disable-next-line: object-literal-key-quotes
+        'authorization': 'Bearer ' + localStorage.getItem('token')
+      }
+    }).pipe(
+      map(
+        (result) => {
+          return result
+        }, catchError(err => {
+          return err
+        })
+      )
+    )
+  }
+
+  getWe(userid: number): Observable<any> {
+    return this.http.get<any>(this.baseUrl + '/workexperience/foruser/' + userid).pipe(
+      map((awards) => {
+        return awards
+      }, catchError(err => {
+        return err
+      }))
+    )
+  }
+
+  addWe(data: any): Observable<any> {
+    return this.http.post<any>(this.baseUrl + '/workexperience/create', data, {
+      headers: {
+        'Content-Type': 'application/json',
+        // tslint:disable-next-line: object-literal-key-quotes
+        'authorization': 'Bearer ' + localStorage.getItem('token')
+      }
+    }).pipe(
+      map(
+        (result) => {
+          return result
+        }
+      ))
+  }
+
+  deleteWe(id: string) {
+    return this.http.delete(this.baseUrl + '/workexperience/' + id + '/delete', {
+      headers: {
+        'Content-Type': 'application/json',
+        // tslint:disable-next-line: object-literal-key-quotes
+        'authorization': 'Bearer ' + localStorage.getItem('token')
+      }
+    }).pipe(map(
+      (result) => {
+        return result
+      }, catchError(err => {
+        return err
+      })
+    ))
+  }
+
+  updateWe(id: any, data: string) {
+    return this.http.put(this.baseUrl + '/workexperience/' + id + '/update', data, {
+      headers: {
+        'Content-Type': 'application/json-patch+json',
+        // tslint:disable-next-line: object-literal-key-quotes
+        'authorization': 'Bearer ' + localStorage.getItem('token')
+      }
+    }).pipe(
+      map(
+        (result) => {
+          return result
+        }, catchError(err => {
+          return err
+        })
+      )
+    )
+  }
 
 
 

@@ -5,6 +5,7 @@ import { NbDialogService } from '@nebular/theme';
 import { AlertService } from '../services/alert.service';
 import { Language } from '../models/Language';
 import resolvePropsSimple from '../helpers/resolveProps'
+import { Skill } from '../models/Skill';
 // import resolvePropsSimple from '../helpers/resolveProps'
 
 
@@ -17,10 +18,10 @@ export class ResumeComponent implements OnInit {
 
   langs: any
   educations: any
-  awards: []
-  skills: []
-  projects: []
-  workExperiences: []
+  awards: any
+  skills: Skill[]
+  projects: any
+  workExperiences: any
 
   newlang = {
     name: '',
@@ -35,25 +36,6 @@ export class ResumeComponent implements OnInit {
     this.getData()
   }
 
-  updateItem(itemid: any, itemdata: any, type: any) {
-    console.log(itemdata)
-    console.log(itemid)
-    console.log(type)
-    switch (type) {
-      case 'education':
-        this.resume.updateEducation(itemid, itemdata).subscribe(
-          result => {
-            this.alert.showToast('top-right', 'success', 'Update', 'Language Updated')
-          }
-        )
-        break;
-
-      default:
-        break;
-    }
-
-  }
-
   generateArray(obj) {
     return Object.keys(obj).map((key) => {
       return { key: key, value: obj[key] }
@@ -66,6 +48,18 @@ export class ResumeComponent implements OnInit {
     })
     this.resume.getEducation(this.user.getCurrentUserId()).subscribe((data) => {
       this.educations = data;
+    })
+    this.resume.getSkills(this.user.getCurrentUserId()).subscribe((data) => {
+      this.skills = data;
+    })
+    this.resume.getProjects(this.user.getCurrentUserId()).subscribe((data) => {
+      this.projects = data;
+    })
+    this.resume.getAwards(this.user.getCurrentUserId()).subscribe((data) => {
+      this.awards = data;
+    })
+    this.resume.getWe(this.user.getCurrentUserId()).subscribe((data) => {
+      this.workExperiences = data;
     })
 
   }
@@ -92,6 +86,35 @@ export class ResumeComponent implements OnInit {
             this.alert.showToast('bottom-left', 'info', 'Delete Ok', 'Your Education was deleted')
           })
           this.educations = this.educations.filter((obj: any) => obj.id !== data.id)
+          break
+
+        case 'deleteskill':
+          this.resume.deleteSkill(data.id).subscribe((result) => {
+            this.alert.showToast('bottom-left', 'info', 'Delete Ok', 'Your Skill was deleted')
+          })
+          this.skills = this.skills.filter((obj: any) => obj.id !== data.id)
+          break
+
+        case 'deleteproject':
+          this.resume.deleteProject(data.id).subscribe((result) => {
+            this.alert.showToast('bottom-left', 'info', 'Delete Ok', 'Your Project was deleted')
+          })
+          this.projects = this.projects.filter((obj: any) => obj.id !== data.id)
+          break
+
+        case 'deleteaward':
+          this.resume.deleteAward(data.id).subscribe((result) => {
+            this.alert.showToast('bottom-left', 'info', 'Delete Ok', 'Your Award was deleted')
+          })
+          this.awards = this.awards.filter((obj: any) => obj.id !== data.id)
+          break
+
+        case 'deletewe':
+          this.resume.deleteWe(data.id).subscribe((result) => {
+            this.alert.showToast('bottom-left', 'info', 'Delete Ok', 'Your WorkExperience was deleted')
+          })
+          this.workExperiences = this.workExperiences.filter((obj: any) => obj.id !== data.id)
+          break
 
 
         default:
@@ -135,6 +158,54 @@ export class ResumeComponent implements OnInit {
           this.langs[Langpos] = info.body
           break;
 
+        case 'skill':
+          this.resume.updateSkill(info.body.id, info.body).subscribe(
+            result => {
+              this.alert.showToast('top-right', 'success', 'Update', 'Skills Updated')
+            }
+          )
+          const skillPos = this.skills.map((item) => {
+            return item.id
+          }).indexOf(info.body.id)
+          this.skills[skillPos] = info.body
+          break;
+
+        case 'project':
+          this.resume.updateProject(info.body.id, info.body).subscribe(
+            result => {
+              this.alert.showToast('top-right', 'success', 'Update', 'Projects Updated')
+            }
+          )
+          const projectPos = this.projects.map((item) => {
+            return item.id
+          }).indexOf(info.body.id)
+          this.projects[projectPos] = info.body
+          break;
+
+        case 'award':
+          this.resume.updateAward(info.body.id, info.body).subscribe(
+            result => {
+              this.alert.showToast('top-right', 'success', 'Update', 'Awards Updated')
+            }
+          )
+          const awardPos = this.awards.map((item) => {
+            return item.id
+          }).indexOf(info.body.id)
+          this.awards[awardPos] = info.body
+          break;
+
+        case 'we':
+          this.resume.updateWe(info.body.id, info.body).subscribe(
+            result => {
+              this.alert.showToast('top-right', 'success', 'Update', 'Work experiences updated')
+            }
+          )
+          const wePos = this.workExperiences.map((item) => {
+            return item.id
+          }).indexOf(info.body.id)
+          this.workExperiences[wePos] = info.body
+          break;
+
         default:
           break;
       }
@@ -157,6 +228,14 @@ export class ResumeComponent implements OnInit {
             }
           }
         )
+      }
+    })
+  }
+
+  createDialogGeneric(dialog: TemplateRef<any>, data: any) {
+    this.dialogService.open(dialog, {
+      context: {
+        data: this.skills
       }
     })
   }

@@ -1,5 +1,5 @@
 <!-- Generic Dialog -->
-<ng-template #genericDialog let-data let-ref="dialogRef">
+<ng-template #addGeneric let-data let-ref="dialogRef">
     <nb-card status="primary">
         <nb-card-header>{{ data }}</nb-card-header>
         <nb-card-body>
@@ -78,7 +78,7 @@
 
 
 
-
+<!-- Main structure -->
 <div class="row">
     <div class="col-md-12">
         <nb-card [nbSpinner]="spinner">
@@ -139,6 +139,104 @@
 
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        Your Skills:
+                        <nb-list>
+                            <nb-list-item *ngFor="let skill of skills">
+                                <div class="col-md-8">{{ skill.title }}<br>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="row">
+                                        <button (click)="openDeleteDialog(dialogDelete, skill, 'skill')" nbButton
+                                            status="danger" size="tiny">
+                                            <nb-icon icon="trash"></nb-icon>
+                                        </button>
+                                        <button (click)="openEditDialog(dialogEdit, skill, 'skill')" nbButton
+                                            status="success" size="tiny">
+                                            <nb-icon icon="edit"></nb-icon>
+                                        </button>
+                                    </div>
+                                </div>
+                            </nb-list-item>
+                        </nb-list>
+                    </div>
+                    <div class="col-md-6">
+                        Your Projects:
+                        <nb-list>
+                            <nb-list-item *ngFor="let project of projects">
+                                <div class="col-md-8">{{ project.title }}<br>
+                                    {{ project.resume }}<br>
+                                    {{ project.type }}<br>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="row">
+                                        <button (click)="openDeleteDialog(dialogDelete, project, 'project')" nbButton
+                                            status="danger" size="tiny">
+                                            <nb-icon icon="trash"></nb-icon>
+                                        </button>
+                                        <button (click)="openEditDialog(dialogEdit, project, 'project')" nbButton
+                                            status="success" size="tiny">
+                                            <nb-icon icon="edit"></nb-icon>
+                                        </button>
+                                    </div>
+                                </div>
+                            </nb-list-item>
+                        </nb-list>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        Your Awards:
+                        <nb-list>
+                            <nb-list-item *ngFor="let award of awards">
+                                <div class="col-md-8">{{ award.title }}<br>
+                                    {{ award.company }}<br>
+                                    {{ award.year }}<br>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="row">
+                                        <button (click)="openDeleteDialog(dialogDelete, award, 'award')" nbButton
+                                            status="danger" size="tiny">
+                                            <nb-icon icon="trash"></nb-icon>
+                                        </button>
+                                        <button (click)="openEditDialog(dialogEdit, award, 'award')" nbButton
+                                            status="success" size="tiny">
+                                            <nb-icon icon="edit"></nb-icon>
+                                        </button>
+                                    </div>
+                                </div>
+                            </nb-list-item>
+                        </nb-list>
+                    </div>
+                    <div class="col-md-6">
+                        Your Work Experiences:
+                        <nb-list>
+                            <nb-list-item *ngFor="let we of workExperiences">
+                                <div class="col-md-8">{{ we.title }}<br>
+                                    {{ we.company }}<br>
+                                    {{ we.resume }}<br>
+                                    {{ we.dateRange }}<br>
+
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="row">
+                                        <button (click)="openDeleteDialog(dialogDelete, we, 'we')" nbButton
+                                            status="danger" size="tiny">
+                                            <nb-icon icon="trash"></nb-icon>
+                                        </button>
+                                        <button (click)="openEditDialog(dialogEdit, we, 'we')" nbButton status="success"
+                                            size="tiny">
+                                            <nb-icon icon="edit"></nb-icon>
+                                        </button>
+                                    </div>
+                                </div>
+                            </nb-list-item>
+                        </nb-list>
+                    </div>
+
+                </div>
+
 
             </nb-card-body>
 
