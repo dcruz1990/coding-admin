@@ -27,8 +27,8 @@
             </form>
         </nb-card-body>
         <nb-card-footer>
-            <button [disabled]="!newForm.valid && !newForm.touched" nbButton
-                (click)="ref.close({ body: newForm.value,type: data.type})" status="success">Add!</button>
+            <button [disabled]="!newForm.valid" nbButton (click)="ref.close({ body: newForm.value,type: data.type})"
+                status="success">Add!</button>
         </nb-card-footer>
     </nb-card>
 </ng-template>
