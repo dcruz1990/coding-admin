@@ -1,7 +1,5 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { UserService } from 'src/app/services/user.service';
-import { AuthService } from 'src/app/services/auth.service';
+
 import { NbDialogService } from '@nebular/theme'
 import { Tag } from 'src/app/models/Tag';
 import { PostService } from 'src/app/services/post.service';
