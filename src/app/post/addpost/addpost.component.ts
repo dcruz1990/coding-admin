@@ -36,7 +36,7 @@ export class AddpostComponent implements OnInit {
   public postBody = {
     title: '',
     description: '',
-    post: '<p>Hello, world!</p>',
+    text: '<p>Hello, world!</p>',
     userid: 0,
     readingTime: 0,
     tagId: ''
@@ -65,12 +65,6 @@ export class AddpostComponent implements OnInit {
     const readingTimeAsString = readingTimeInMinutes + " min";
 
     return readingTimeInMinutes
-  }
-
-  test() {
-    this.postBody.readingTime = this.getReadingTime(this.mytext._data)
-    console.log(this.newPostForm.value)
-
   }
 
   postNow(data: any) {

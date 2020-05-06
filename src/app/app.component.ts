@@ -14,6 +14,8 @@ import { expand } from 'rxjs/operators';
 })
 export class AppComponent {
 
+  message: "Holaaaaaaaaa"
+
   constructor(private auth: AuthService) { }
   title = 'coding-admin';
 

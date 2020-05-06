@@ -6,8 +6,8 @@
             </nb-card-header>
             <nb-card-body>
                 <form #newPostForm="ngForm" (submit)="postNow(newPostForm.value)">
-                    <div class="row d-flex ">
-                        <div class="col-md-4">
+                    <div class="row ">
+                        <div class="col-md-6">
                             <input required minlength="10" #postTitle="ngModel" fullWidth name="title" id="title"
                                 type="text" nbInput status="primary" placeholder="Post title" required
                                 [(ngModel)]="postBody.title">
@@ -21,7 +21,7 @@
                                     characters long.</nb-alert>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <input required minlength="10" #postDescription="ngModel" name="description" id="descrip"
                                 type="text" nbInput status="primary" placeholder="Description" fullWidth required
                                 [(ngModel)]="postBody.description">
@@ -37,16 +37,6 @@
 
                         </div>
                         <br>
-                        <nb-select required multiple required name="tagId" [(ngModel)]="postBody.tagId"
-                            placeholder="Select Tags">
-                            <nb-option *ngFor="let tag of tags" value="{{ tag.id }}">
-                                {{ tag.title }}
-                            </nb-option>
-                        </nb-select>
-
-                        <button (click)="openAddTagDialog()" nbButton type="button" size="tiny" status="success">
-                            <nb-icon icon="plus"></nb-icon>
-                        </button>
 
 
                     </div>
@@ -60,8 +50,22 @@
                     </div>
                     <br>
                     <div class="row">
+                        <nb-select required multiple required name="tagId" [(ngModel)]="postBody.tagId"
+                            placeholder="Select Tags">
+                            <nb-option *ngFor="let tag of tags" value="{{ tag.id }}">
+                                {{ tag.title }}
+                            </nb-option>
+                        </nb-select>
+
+                        <button (click)="openAddTagDialog()" nbButton type="button" size="tiny" status="success">
+                            <nb-icon icon="plus"></nb-icon>
+                        </button>
+
+                    </div>
+                    <div class="row">
                         <div class="col-md-2">
-                            <button type="submit" nbButton (click)="test()">Post now!</button>
+                            <button [disabled]="!newPostForm.dirty || !newPostForm.valid" type="submit" nbButton
+                                status="success">Post now!</button>
                         </div>
                     </div>
                 </form>

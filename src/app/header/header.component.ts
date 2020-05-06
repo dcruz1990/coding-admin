@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { NbMediaBreakpointsService, NbMenuService, NbSidebarService, NbThemeService, } from '@nebular/theme';
 
 
 
 import { map, takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 import { UserService } from '../services/user.service'
 import { AuthService } from '../services/auth.service';
 import { AlertService } from '../services/alert.service'
@@ -18,6 +18,8 @@ import { User } from '../models/User';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+
+  @Input() messageRecived: string
 
   private destroy$: Subject<void> = new Subject<void>();
 
@@ -40,23 +42,21 @@ export class HeaderComponent implements OnInit {
     private toast: AlertService
 
   ) {
+    this.currentUser = this.auth.getUser()
 
   }
 
 
   ngOnInit() {
 
+
     this.user.getUser(this.user.getCurrentUserId()).pipe(takeUntil(this.destroy$)).subscribe((user: any) => this.currentUser = user)
 
-    // Subscribe to login status
+    // // Subscribe to login status
     this.auth.currentLoginStatus.subscribe(status => this.isLoggedIn = status)
 
-    // Read current user form localstorage
-    // this.currentUserName = this.user.getCurrentUser().fullName
-
-    // Subscribe to changes when update user
-    this.auth.currentUser.subscribe(user => this.currentUser = user)
-
+    // // Subscribe to changes when update user
+    // this.auth.currentUser.subscribe(user => this.currentUser = user)
 
     this.menuService.onItemClick().subscribe((event) => {
       this.onItemSelection(event.item.title);

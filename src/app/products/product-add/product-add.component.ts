@@ -19,7 +19,7 @@ export class ProductAddComponent implements OnInit {
 
   selected: any
 
-  productSpinner = false
+  productaddSpinner = false
 
   forUser: number
 
