@@ -7,8 +7,8 @@
                 <div class="row">
                     <div class="col-md-6" *ngFor="let item of data.props">
                         <label for="{{ item.key }}" class="label">{{ item.key  }} </label><br>
-                        <input fullWidth required minlength="4" #field="ngModel" nbInput [(ngModel)]="item.value"
-                            name="{{ item.key }}" id="item.key">
+                        <input (fullWidth)="false ? data.props.Count > 1 : true " required minlength="4"
+                            #field="ngModel" nbInput [(ngModel)]="item.value" name="{{ item.key }}" id="item.key">
 
                         <div *ngIf="field.invalid && (field.dirty || field.touched)">
                             <nb-alert *ngIf="field.errors.required" status="warning">{{ item.key }} is required.
@@ -97,8 +97,6 @@
                         <label for="language"><b>Your languages:</b></label>
                         <button nbButton status="success" (click)="createDialogGeneric(addGeneric, newlang, 'language')"
                             size="tiny">+</button>
-
-
                         <nb-list>
                             <nb-list-item *ngFor="let lang of langs">
                                 <div class="col-md-8">{{ lang.name }}</div>
@@ -112,7 +110,6 @@
                                             status="success" size="tiny">
                                             <nb-icon icon="edit"></nb-icon>
                                         </button>
-
                                     </div>
                                 </div>
                             </nb-list-item>

@@ -56,7 +56,7 @@ export class HeaderComponent implements OnInit {
     this.auth.currentLoginStatus.subscribe(status => this.isLoggedIn = status)
 
     // // Subscribe to changes when update user
-    // this.auth.currentUser.subscribe(user => this.currentUser = user)
+    this.auth.currentUser.subscribe(user => this.currentUser = user)
 
     this.menuService.onItemClick().subscribe((event) => {
       this.onItemSelection(event.item.title);

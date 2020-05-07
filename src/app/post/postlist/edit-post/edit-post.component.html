@@ -43,8 +43,11 @@
                     <br>
 
                     <div class="row ">
-                        <ckeditor #mytext name="text" data="<p>Hello, world!</p>" [(ngModel)]="post.text">
-                        </ckeditor>
+                        <div class="col-lg-12 col-md-12">
+                            <ckeditor [editor]="editEditor" #mytext name="text" (data)="post.text"
+                                [(ngModel)]="post.text">
+                            </ckeditor>
+                        </div>
                         <!-- <ckeditor [config]="{ extraPlugins: 'divarea', height: '320' }"></ckeditor> -->
                     </div>
                 </form>

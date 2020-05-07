@@ -4,6 +4,8 @@ import { NbDialogRef } from '@nebular/theme';
 import { PostService } from 'src/app/services/post.service';
 import { AlertService } from 'src/app/services/alert.service';
 
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+
 
 @Component({
   selector: 'app-edit-post',
@@ -11,6 +13,8 @@ import { AlertService } from 'src/app/services/alert.service';
   styleUrls: ['./edit-post.component.scss']
 })
 export class EditPostComponent implements OnInit {
+
+  public editEditor = ClassicEditor;
 
   editSpinner = false
 

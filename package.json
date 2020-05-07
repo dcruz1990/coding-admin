@@ -21,12 +21,13 @@
     "@angular/platform-browser-dynamic": "~8.0.0",
     "@angular/router": "~8.0.0",
     "@auth0/angular-jwt": "^4.0.0",
+    "@ckeditor/ckeditor5-angular": "^1.2.3",
+    "@ckeditor/ckeditor5-build-classic": "^19.0.0",
     "@nebular/auth": "^4.6.0",
     "@nebular/bootstrap": "^5.0.0",
     "@nebular/eva-icons": "4.6.0",
     "@nebular/theme": "^4.6.0",
     "bootstrap": "^4.4.1",
-    "ckeditor4-angular": "^1.1.0",
     "eva-icons": "^1.1.2",
     "jw-angular-pagination": "^1.1.0",
     "moment": "^2.24.0",
@@ -58,6 +59,6 @@
     "protractor": "~5.4.0",
     "ts-node": "~7.0.0",
     "tslint": "~5.15.0",
-    "typescript": "~3.4.3"
+    "typescript": "^3.8.3"
   }
 }

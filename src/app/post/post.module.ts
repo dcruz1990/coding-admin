@@ -9,7 +9,8 @@ import { JwPaginationComponent } from 'jw-angular-pagination';
 import { FormsModule } from '@angular/forms'
 
 // import { CKEditorModule } from 'ng2-ckeditor';
-import { CKEditorModule } from 'ckeditor4-angular';
+
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 import { NbAlertModule, NbSelectModule, NbBadgeModule, NbIconModule, NbTreeGridModule, NbCardModule, NbInputModule, NbButtonModule, NbSpinnerModule } from '@nebular/theme';
 import { EditPostComponent } from './postlist/edit-post/edit-post.component';

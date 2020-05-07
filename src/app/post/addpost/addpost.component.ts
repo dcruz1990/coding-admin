@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { CKEditorModule } from 'ng2-ckeditor';
+// import { CKEditorModule } from 'ng2-ckeditor';
+
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 import { AddtagComponent } from './addtag/addtag.component'
 
@@ -23,6 +25,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./addpost.component.scss']
 })
 export class AddpostComponent implements OnInit {
+
+  public Editor = ClassicEditor;
 
   now = moment().format('LLLL');
 
