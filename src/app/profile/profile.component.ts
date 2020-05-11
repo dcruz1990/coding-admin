@@ -7,6 +7,7 @@ import { AlertService } from '../services/alert.service'
 import { NgForm } from '@angular/forms';
 
 import { PhotoaddComponent } from './photoadd/photoadd.component'
+import { User } from '../models/User';
 
 @Component({
   selector: 'app-profile',
@@ -59,10 +60,11 @@ export class ProfileComponent implements OnInit {
   updateProfile(userdata: any) {
     this.updateSpinner = true;
     this.user.updateUser(this.user.getCurrentUserId(), userdata).subscribe(
-      value => {
+      (value: User) => {
         this.updateSpinner = false;
-        this.auth.changeCurrentUser(userdata);
-        localStorage.setItem('data', JSON.stringify(this.myuser))
+        this.myuser = value
+        // this.auth.changeCurrentUser(value);
+        // localStorage.setItem('data', JSON.stringify(this.myuser))
         this.alert.showToast('bottom-left', 'success', 'Profile Update!', 'Profile updated succefuly')
         this.editProfileForm.reset(this.myuser);
       },

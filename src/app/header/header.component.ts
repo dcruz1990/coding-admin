@@ -19,8 +19,6 @@ import { User } from '../models/User';
 })
 export class HeaderComponent implements OnInit {
 
-  @Input() test: Object
-
   private destroy$: Subject<void> = new Subject<void>();
 
   userPictureOnly = false;
@@ -29,7 +27,7 @@ export class HeaderComponent implements OnInit {
 
   isLoggedIn = false
 
-  currentUser: Object
+  currentUser: User
 
   userMenu = [{ title: 'Profile', icon: 'person' }, { title: 'Log out', icon: 'power-outline' }];
 
@@ -51,15 +49,10 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     
-
-    // this.user.getUser(this.user.getCurrentUserId()).pipe(takeUntil(this.destroy$)).subscribe((user: any) => this.currentUser = user)
-
     // // Subscribe to login status
     this.auth.currentLoginStatus.subscribe(status => this.isLoggedIn = status)
 
-    // // Subscribe to changes when update user
-    // this.auth.currentUser.subscribe(user => this.currentUser = user)
-
+    
     this.menuService.onItemClick().subscribe((event) => {
       this.onItemSelection(event.item.title);
     });

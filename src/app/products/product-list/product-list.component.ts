@@ -38,6 +38,7 @@ export class ProductListComponent implements OnInit {
     this.productService.getProducts(this.user.getCurrentUserId()).subscribe((data) => {
       if (data.length > 0) {
         this.products = data
+        console.log(this.products)
         this.spinner = false
       } else {
         this.toast.showToast('top-right', 'info', 'Theres no products here :(', 'Cant find any product')

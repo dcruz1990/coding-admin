@@ -76,8 +76,8 @@
                         <div class="col-sm-6">
                             <nb-select required multiple required name="requirementId" [(ngModel)]="product.requirementId"
                             placeholder="Select Tags">
-                            <nb-option *ngFor="let req of tags" value="{{ tag.id }}">
-                                {{ tag.title }}
+                            <nb-option *ngFor="let req of productRequirements" value="{{ tag.id }}">
+                                {{ req.requirement.description }}
                             </nb-option>
                         </nb-select>
                         </div>

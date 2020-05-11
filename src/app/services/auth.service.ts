@@ -17,16 +17,9 @@ export class AuthService {
 
   public currentUser: Observable<User>;
 
-
-  private test$ = new BehaviorSubject<User>(null)
-
   private isLogedIn = new BehaviorSubject(true);
 
-  private announceUser = new BehaviorSubject(Object)
-
   currentLoginStatus = this.isLogedIn.asObservable();
-
-  // currentUser = this.announceUser.asObservable();
 
   jwtHelper = new JwtHelperService();
 
@@ -56,7 +49,7 @@ export class AuthService {
           localStorage.setItem('data', JSON.stringify(user.user));
           this.currentUserSubject.next(user.user);
           this.changeCurrentLoginStatus(true)
-          // this.changeMemberPhoto(this.currentUser.photoUrl);
+          
         }
       },
       ), catchError(this.handleError)
@@ -67,7 +60,7 @@ export class AuthService {
     this.isLogedIn.next(status)
   }
 
-  public changeCurrentUser(user: User) {
+  changeCurrentUser(user: User) {
     this.currentUserSubject.next(user);
   }
 

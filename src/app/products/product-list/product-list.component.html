@@ -9,9 +9,12 @@
         <table class="table" *ngIf="products">
             <thead>
                 <tr>
-                    <th scope="col">Product Name</th>
-                    <th scope="col">Product Type</th>
-                    <th scope="col">Product Description</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Size</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Requirements</th>
+                    <th scope="col">Industry</th>
                     <th scope="col">Url</th>
                     <th scope="col">Options</th>
                 </tr>
@@ -19,8 +22,18 @@
             <tbody>
                 <tr *ngFor="let product of products" name="product">
                     <td>{{ product.name }}</td>
+                    <td>{{ product.size }}</td>
                     <td>{{ product.type }}</td>
                     <td>{{ product.productDescription}}</td>
+                    <td><div class="col" >
+                            <ul>
+                                <li *ngFor="let req of product.productRequirements">
+                                    {{ req.requirement.description }}
+                                </li>
+                            </ul>
+                        </div>
+                    </td>
+                    <td>{{ product.industry }}</td>
                     <th><a href="{{ product.url }}">Visit product</a></th>
                     <td>
                         <div class="row">
