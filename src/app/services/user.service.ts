@@ -47,9 +47,10 @@ export class UserService {
   updateUser(id: number, userdata: any) {
     // tslint:disable-next-line: object-literal-key-quotes
     return this.http.put(this.baseUrl + '/users/' + id, userdata, { headers: { 'authorization': 'Bearer ' + localStorage.getItem('token') } }).pipe(
-      map((result: any) => {
+      map((result: User) => {
         // this.auth.changeCurrentUser(result)
-        localStorage.setItem('data', result)
+        localStorage.setItem('data', JSON.stringify(result))
+        this.auth.changeCurrentUser(result)
         return result;
       }), catchError(error => {
         return throwError('Something went wrong!');

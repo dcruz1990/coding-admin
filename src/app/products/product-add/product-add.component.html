@@ -64,8 +64,23 @@
                                 </nb-select>
                             </div>
                         </div>
-
-
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="industry" class="label">Industry</label>
+                                <input required [(ngModel)]="product.industry" name="industry" type="text" nbInput fullWidth
+                                    id="industry" placeholder="Industry">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <nb-select required multiple required name="requirementId" [(ngModel)]="product.requirementId"
+                            placeholder="Select Tags">
+                            <nb-option *ngFor="let req of tags" value="{{ tag.id }}">
+                                {{ tag.title }}
+                            </nb-option>
+                        </nb-select>
+                        </div>
                     </div>
                 </form>
                 <div>

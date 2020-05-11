@@ -6,6 +6,9 @@ import { ProductService } from 'src/app/services/product.service';
 import { UserService } from 'src/app/services/user.service';
 import { AlertService } from 'src/app/services/alert.service';
 import { Router } from '@angular/router';
+import { Requirement } from 'src/app/models/Requirement';
+import { pipe } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 
 @Component({
@@ -23,12 +26,19 @@ export class ProductAddComponent implements OnInit {
 
   forUser: number
 
+  requirements: Requirement[]
+
   product: Product = {
     name: '',
     productDescription: '',
     url: '',
     type: '',
-    userId: 0
+    userId: 0,
+    clientName: '',
+    industry: '',
+    requirementId: [],
+    size: 0,
+
   }
 
   constructor(
@@ -58,6 +68,17 @@ export class ProductAddComponent implements OnInit {
       );
     }
 
+  }
+
+  newRequirement(data: Requirement) {
+    let newReq: Requirement = { 
+      description: data.description
+     }
+     this.productService.addRequirement(newReq).subscribe((result) => {
+       this.requirements.push(result)
+     }, error => {
+       console.log("error")
+     })
   }
 
 }

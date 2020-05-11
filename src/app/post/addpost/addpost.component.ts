@@ -75,6 +75,7 @@ export class AddpostComponent implements OnInit {
     data.publishedAt = this.now
     data.readingTime = this.getReadingTime(data.text)
     data.userid = this.user.getCurrentUserId()
+    
     this.postSpinner = true
     this.toPost.newPost(data).subscribe((request) => {
       this.postSpinner = false

@@ -5,6 +5,7 @@ import { Product } from '../models/Product';
 import { map, catchError } from 'rxjs/operators';
 import { UserService } from './user.service';
 import { resolve } from 'url';
+import { Requirement } from '../models/Requirement';
 
 @Injectable({
   providedIn: 'root'
@@ -74,6 +75,17 @@ export class ProductService {
         return throwError(error);
         // return error
 
+      })
+    )
+  }
+
+  addRequirement(data: Requirement): Observable<Requirement> {
+    return this.http.post<Requirement>(this.baseUrl + '/product/addRequirement', data, { headers: { 'authorization': 'Bearer ' + localStorage.getItem('token') } }).pipe(
+      map((result: Requirement) => {
+        return result;
+      }), catchError(error => {
+        return throwError(error);
+        // return error
       })
     )
   }

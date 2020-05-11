@@ -67,7 +67,7 @@ export class AuthService {
     this.isLogedIn.next(status)
   }
 
-  public changeCurrentUser(user: any) {
+  public changeCurrentUser(user: User) {
     this.currentUserSubject.next(user);
   }
 
