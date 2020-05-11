@@ -17,7 +17,7 @@ import { Subject } from 'rxjs';
 export class LoginComponent implements OnInit {
 
   userdata: any = {
-    username: '',
+    email: '',
     password: ''
   };
   currentUser: User;
@@ -28,7 +28,11 @@ export class LoginComponent implements OnInit {
   loginStatus: any
 
 
-  constructor(private auth: AuthService, private router: Router, private toast: AlertService, private activatedRouter: ActivatedRoute) { }
+  constructor(private auth: AuthService, private router: Router, private toast: AlertService, private activatedRouter: ActivatedRoute) { 
+  //   if (this.auth.currentUserValue) { 
+  //     this.router.navigate(['/profile']);
+  // }
+  }
 
   test() {
 

@@ -98,7 +98,7 @@ export class PostService {
 
   // If using the newer Backend please use /tag/all
   getAlTags(): Observable<Tag[]> {
-    return this.http.get<Tag[]>(this.baseUrl + '/tag', {
+    return this.http.get<Tag[]>(this.baseUrl + '/tag/all', {
       headers: {
         'Content-Type': 'application/json',
         // tslint:disable-next-line: object-literal-key-quotes

@@ -2,10 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { AuthService } from './services/auth.service'
 import { NbMenuItem } from '@nebular/theme';
-
-import { expand } from 'rxjs/operators';
-
-
+import { User } from './models/User';
 
 @Component({
   selector: 'app-root',
@@ -13,10 +10,14 @@ import { expand } from 'rxjs/operators';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  
+  currentUser: User
+  
+  constructor(private auth: AuthService) {
+    // this.auth.getUser().subscribe(x => this.currentUser = x)
+    console.log("me inicio")
 
-  message: "Holaaaaaaaaa"
-
-  constructor(private auth: AuthService) { }
+   }
   title = 'coding-admin';
 
   isLoggedIn: boolean;

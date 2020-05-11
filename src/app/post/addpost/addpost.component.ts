@@ -43,7 +43,7 @@ export class AddpostComponent implements OnInit {
     text: '<p>Hello, world!</p>',
     userid: 0,
     readingTime: 0,
-    tagId: ''
+    postTagId: ''
   };
 
 

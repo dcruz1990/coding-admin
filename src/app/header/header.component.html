@@ -8,9 +8,7 @@
 </div>
 
 <div class="header-container-r">
-  <!-- Esto NO se renderiza -->
-  {{ messageRecived }}
-
+  
   <nb-actions size="small">
     <!-- <nb-action class="control-item">
       <nb-search type="rotate-layout"></nb-search>
@@ -20,7 +18,7 @@
 
 
     <nb-action class="user-action" *ngIf="isLoggedIn">
-      <nb-user [name]="currentUser?.fullName" [nbContextMenu]="userMenu" [picture]="avatarUrl">
+      <nb-user [name]="currentUser?.fullname" [nbContextMenu]="userMenu" [picture]="avatarUrl">
       </nb-user>
     </nb-action>
 

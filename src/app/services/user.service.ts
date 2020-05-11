@@ -7,6 +7,7 @@ import { User } from '../models/User';
 import { map, catchError } from 'rxjs/operators';
 
 import { Post } from '../models/Post';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ import { Post } from '../models/Post';
 
 export class UserService {
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private auth: AuthService) {
 
   }
 
@@ -47,6 +48,8 @@ export class UserService {
     // tslint:disable-next-line: object-literal-key-quotes
     return this.http.put(this.baseUrl + '/users/' + id, userdata, { headers: { 'authorization': 'Bearer ' + localStorage.getItem('token') } }).pipe(
       map((result: any) => {
+        // this.auth.changeCurrentUser(result)
+        localStorage.setItem('data', result)
         return result;
       }), catchError(error => {
         return throwError('Something went wrong!');

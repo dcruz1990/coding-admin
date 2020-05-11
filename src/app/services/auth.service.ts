@@ -13,6 +13,11 @@ import { Subject, BehaviorSubject, throwError, Observable } from 'rxjs';
 })
 export class AuthService {
 
+  private currentUserSubject: BehaviorSubject<User>;
+
+  public currentUser: Observable<User>;
+
+
   private test$ = new BehaviorSubject<User>(null)
 
   private isLogedIn = new BehaviorSubject(true);
@@ -21,7 +26,7 @@ export class AuthService {
 
   currentLoginStatus = this.isLogedIn.asObservable();
 
-  currentUser = this.announceUser.asObservable();
+  // currentUser = this.announceUser.asObservable();
 
   jwtHelper = new JwtHelperService();
 
@@ -30,7 +35,15 @@ export class AuthService {
   decodedToken: any;
 
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    // Read the user from the local storage
+    this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('data')));
+    this.currentUser = this.currentUserSubject.asObservable();
+   }
+
+  public get currentUserValue(): User {
+    return this.currentUserSubject.value;
+  }
 
   login(model: any) {
     return this.http.post(this.apiUrl + 'auth/login', model).pipe(
@@ -40,10 +53,8 @@ export class AuthService {
           console.log(user.user)
           localStorage.setItem('token', user.token);
           this.decodedToken = this.jwtHelper.decodeToken(user.token);
-          this.currentUser = user.user;
-          localStorage.setItem('data', JSON.stringify(this.currentUser));
-          this.announceUser.next(user.user)
-          this.test$.next(user.user)
+          localStorage.setItem('data', JSON.stringify(user.user));
+          this.currentUserSubject.next(user.user);
           this.changeCurrentLoginStatus(true)
           // this.changeMemberPhoto(this.currentUser.photoUrl);
         }
@@ -56,8 +67,8 @@ export class AuthService {
     this.isLogedIn.next(status)
   }
 
-  changeCurrentUser(user: any) {
-    this.announceUser.next(user);
+  public changeCurrentUser(user: any) {
+    this.currentUserSubject.next(user);
   }
 
   loggedIn(): boolean {
@@ -69,6 +80,7 @@ export class AuthService {
     localStorage.removeItem('token')
     localStorage.removeItem('data')
     this.changeCurrentLoginStatus(false)
+    this.currentUserSubject.next(null);
   }
 
   handleError(error) {
@@ -84,7 +96,7 @@ export class AuthService {
   }
 
   getUser(): Observable<User> {
-    return this.test$.asObservable()
+    return this.currentUserSubject.asObservable()
   }
 
 }
