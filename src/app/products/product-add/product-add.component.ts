@@ -1,14 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
-import { NgForm } from '@angular/forms';
 import { Product } from 'src/app/models/Product';
 import { ProductService } from 'src/app/services/product.service';
 import { UserService } from 'src/app/services/user.service';
 import { AlertService } from 'src/app/services/alert.service';
 import { Router } from '@angular/router';
 import { Requirement } from 'src/app/models/Requirement';
-import { pipe } from 'rxjs';
-import { map } from 'rxjs/operators';
+
+import { NbDialogService } from '@nebular/theme';
+import { RequirementAddComponent } from './requirement-add/requirement-add.component';
 
 
 @Component({
@@ -18,6 +19,8 @@ import { map } from 'rxjs/operators';
 })
 export class ProductAddComponent implements OnInit {
 
+  public Editor = ClassicEditor;
+
   spinner = false
 
   selected: any
@@ -26,7 +29,7 @@ export class ProductAddComponent implements OnInit {
 
   forUser: number
 
-  requirements: Requirement[]
+  requirements: Requirement[] = []
 
   product: Product = {
     name: '',
@@ -36,49 +39,67 @@ export class ProductAddComponent implements OnInit {
     userId: 0,
     clientName: '',
     industry: '',
-    requirementId: [],
-    size: 0,
+    requirementId: null,
+    size: null,
+    text: '',
+    projectIntro: '',
+    shortResume: ''
 
   }
 
   constructor(
     private route: Router,
-    private productService: ProductService, private user: UserService, private toast: AlertService) { }
+    private productService: ProductService, private user: UserService, private toast: AlertService,
+    private dialogService: NbDialogService) { }
 
   ngOnInit() {
     this.product.userId = this.user.getCurrentUserId()
   }
 
-  newProduct() {
+  newProduct(reqs) {
     this.spinner = true
-    if (this.product.type === '') {
-      this.spinner = false
-      this.toast.showToast('top-right', 'danger', "You have to provide a type for your product", 'Please select a product type')
-    } else {
-      this.productService.addProduct(this.product).subscribe(
-        value => {
-          this.spinner = false;
-          this.toast.showToast('bottom-left', 'success', 'Product Added!', 'Your product was succefully added')
-          this.route.navigate(['/product/list'])
-        },
-        error => {
-          this.spinner = false;
-          this.toast.showToast('top-right', 'danger', 'There was an error', error.status + ' ' + error.statusText)
-        }
-      );
-    }
+    console.log(this.generateArrayToCreate(this.requirements))
 
+
+    // if (this.requirements.length == 0) {
+    //   let emptyreq: Requirement = {
+    //     description: "This product has no requirements",
+    //   }
+    //   this.productService.addRequirement(emptyreq).subscribe((result: Requirement) => {
+    //     let theid = result.id
+    //     emptyreq.id = theid
+
+    //   })
+    //   this.requirements.push(emptyreq)
+
+    // }
+    console.log(this.product)
+    this.productService.addProduct(this.product).subscribe(
+      value => {
+        this.spinner = false;
+        this.toast.showToast('bottom-left', 'success', 'Product Added!', 'Your product was succefully added')
+        this.route.navigate(['/product/list'])
+      },
+      error => {
+        this.spinner = false;
+        this.toast.showToast('top-right', 'danger', 'There was an error', error.status + ' ' + error.statusText)
+      }
+    );
   }
 
-  newRequirement(data: Requirement) {
-    let newReq: Requirement = { 
-      description: data.description
-     }
-     this.productService.addRequirement(newReq).subscribe((result) => {
-       this.requirements.push(result)
-     }, error => {
-       console.log("error")
-     })
+  openAddRequirementDialog() {
+    this.dialogService.open(RequirementAddComponent, { closeOnBackdropClick: true }).onClose.subscribe(
+      (data) => {
+        console.log(data)
+        this.requirements.push(data)
+      }
+    )
+  }
+
+  generateArrayToCreate(obj) {
+    return Object.keys(obj).map((key) => {
+      return { key: key, value: obj[key] }
+    }).filter((field: any) => field.key !== 'id' && field.key !== 'dateCreated' && field.key !== 'dateModified')
   }
 
 }

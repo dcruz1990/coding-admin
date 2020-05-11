@@ -13,5 +13,8 @@ export interface Product {
     size: number,
     clientName: string,
     requirementId: Requirement[],
+    text: string,
+    projectIntro: string,
+    shortResume: string
     
 }
