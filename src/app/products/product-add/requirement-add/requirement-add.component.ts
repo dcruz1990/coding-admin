@@ -13,6 +13,7 @@ import { ProductService } from 'src/app/services/product.service';
 })
 export class RequirementAddComponent implements OnInit {
 
+  spinner = false
 
   newReq: Requirement = {
     description: '',
@@ -25,6 +26,7 @@ export class RequirementAddComponent implements OnInit {
   }
 
   newRequirement() {
+    this.spinner = true
     console.log(this.newReq)
     this.productService.addRequirement(this.newReq).subscribe((result) => {
       this.dialogRef.close(result)

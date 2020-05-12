@@ -56,24 +56,20 @@ export class ProductAddComponent implements OnInit {
     this.product.userId = this.user.getCurrentUserId()
   }
 
-  newProduct(reqs) {
+  newProduct() {
+    let arr = []
     this.spinner = true
-    console.log(this.generateArrayToCreate(this.requirements))
-
-
-    // if (this.requirements.length == 0) {
-    //   let emptyreq: Requirement = {
-    //     description: "This product has no requirements",
-    //   }
-    //   this.productService.addRequirement(emptyreq).subscribe((result: Requirement) => {
-    //     let theid = result.id
-    //     emptyreq.id = theid
-
-    //   })
-    //   this.requirements.push(emptyreq)
-
-    // }
     console.log(this.product)
+    if (this.requirements.length == 0) {
+      let emptyreq: Requirement = {
+        description: "This product doesnt have any requirements"
+      }
+      this.productService.addRequirement(emptyreq).subscribe((result) => {
+        arr.push(result.id)
+        this.requirements = arr
+      })
+      this.product.requirementId = this.requirements
+    }
     this.productService.addProduct(this.product).subscribe(
       value => {
         this.spinner = false;
