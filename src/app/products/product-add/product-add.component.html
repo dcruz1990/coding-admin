@@ -101,7 +101,7 @@
                         <div class="col-md-6">
                             <label for="industry" class="label">Project Intro:</label>
                             <ckeditor [editor]="Editor" #mytext name="text" data="<p>Hello, world!</p>"
-                                [(ngModel)]="product.productIntro">
+                                [(ngModel)]="product.projectIntro">
                             </ckeditor>
                         </div>
                         <div class="col-md-6">
@@ -122,9 +122,9 @@
                 </form>
                 <br>
                 <div class="col-md-6">
-                    <button [disabled]="!addProductForm.dirty || !addProductForm.valid"
-                        (click)="newProduct(prodReq.value)" [nbSpinner]="spinner" nbSpinnerStatus="success"
-                        nbSpinnerSize="small" status="success" type="submit" nbButton>Add
+                    <button [disabled]="!addProductForm.dirty || !addProductForm.valid" (click)="newProduct()"
+                        [nbSpinner]="spinner" nbSpinnerStatus="success" nbSpinnerSize="small" status="success"
+                        type="submit" nbButton>Add
                         Product to my Portfolio</button>
                 </div>
             </nb-card-body>
